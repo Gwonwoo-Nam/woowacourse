@@ -34,14 +34,16 @@ public class Problem7 {
             if (relation.size() != 2){
                 return false;
             }
-            if (is_in_friend_size(relation.get(0)) || is_in_friend_size(relation.get(1)))
+            if (!is_in_friend_size(relation.get(0)) || !is_in_friend_size(relation.get(1)))
                 return false;
         }
         return true;
     }
-
-
-
+    private static boolean check_user_alphabet(String user_id){
+        if (!user_id.matches("^[a-z]*$"))
+            return false;
+        return true;
+    }
     private static boolean check_exceptions(String user, List<List<String>> friends, List<String> visitors) {
         if (!check_user_length(user))
             return false;
@@ -115,7 +117,7 @@ public class Problem7 {
         List<String> answer = new ArrayList<>();
         List<String> user_friends = new ArrayList<>();
         HashMap<String, Integer> friend_score = new HashMap<String, Integer>();
-        if (check_exceptions(user, friends, visitors))
+        if (!check_exceptions(user, friends, visitors))
             return List.of("");
         user_friends = find_user_friend(user, friends);
         update_relation_score(user, friends, user_friends, friend_score);
