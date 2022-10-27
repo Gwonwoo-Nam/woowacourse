@@ -12,6 +12,12 @@ public class Problem7 {
         }
         return true;
     }
+    private static boolean check_visitors_size(List<String> visitors){
+        if (visitors.size() < 0 || visitors.size() > 10000){
+            return false;
+        }
+        return true;
+    }
     private static boolean check_exceptions(String user, List<List<String>> friends, List<String> visitors) {
         if (!check_user_length(user))
             return false;
