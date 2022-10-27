@@ -7,17 +7,22 @@ public class Problem4 {
         if (word.length() < 1 || word.length() > 1000)
             return "";
         for (int i = 0; i < word.length(); i++){
-            if (word.charAt(i) >= 65 && word.charAt(i) <= 90) {
-                diff = word.charAt(i) - 65;
-                answer = answer + (char)(90 - diff);
-            }
-            else if (word.charAt(i) >= 97 && word.charAt(i) <= 122) {
-                diff = word.charAt(i) - 97;
-                answer = answer + (char)(122 - diff);
-            }
-            else
-                answer = answer + word.charAt(i);
+            answer = answer + convert_char(word.charAt(i), i);
         }
         return answer;
+    }
+
+    private static char convert_char(char word, int i) {
+        int diff;
+        if (word >= 65 && word <= 90) {
+            diff = word - 65;
+            return (char)(90 - diff);
+        }
+        else if (word >= 97 && word <= 122) {
+            diff = word - 97;
+            return (char)(122 - diff);
+        }
+        else
+            return word;
     }
 }
