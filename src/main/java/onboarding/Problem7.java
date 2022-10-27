@@ -6,6 +6,17 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Problem7 {
+    private static boolean check_exceptions(String user, List<List<String>> friends, List<String> visitors) {
+        if (check_user_length(user))
+            return false;
+        if (check_visitors_size(visitors))
+            return false;
+        if (check_friends_size(friends))
+            return false;
+        if (check_user_alphabet(user))
+            return false;
+        return true;
+    }
     private static List<String> find_user_friend(String user, List<List<String>> friends) {
         List<String> user_friend = new ArrayList<>();
         for (int i = 0; i < friends.size(); i++){
@@ -27,17 +38,7 @@ public class Problem7 {
         else
             friend_score.put(friends, point);
     }
-    public static List<String> solution(String user, List<List<String>> friends, List<String> visitors) {
-        List<String> answer = new ArrayList<>();
-        List<String> user_friends = new ArrayList<>();
-        HashMap<String, Integer> friend_score = new HashMap<String, Integer>();
-        user_friends = find_user_friend(user, friends);
-        update_relation_score(user, friends, user_friends, friend_score);
-        update_visitor_score(visitors, user_friends, friend_score);
-        sort_by_score(friend_score);
-        answer = add_name_to_answer(friend_score);
-        return answer;
-    }
+
 
     private static List<String> add_name_to_answer(HashMap<String, Integer> friend_score) {
         List<String> answer = new ArrayList<>();
@@ -65,7 +66,6 @@ public class Problem7 {
             }
         }
     }
-
     private static void update_visitor_score(List<String> visitors, List<String> user_friends, HashMap<String, Integer> friend_score) {
         for (String visitor : visitors){
             if (!user_friends.contains(visitor)) {
@@ -73,4 +73,19 @@ public class Problem7 {
             }
         }
     }
+    public static List<String> solution(String user, List<List<String>> friends, List<String> visitors) {
+        List<String> answer = new ArrayList<>();
+        List<String> user_friends = new ArrayList<>();
+        HashMap<String, Integer> friend_score = new HashMap<String, Integer>();
+        if (check_exceptions(user, friends, visitors))
+            return List.of("");
+        user_friends = find_user_friend(user, friends);
+        update_relation_score(user, friends, user_friends, friend_score);
+        update_visitor_score(visitors, user_friends, friend_score);
+        sort_by_score(friend_score);
+        answer = add_name_to_answer(friend_score);
+        return answer;
+    }
+
+
 }
