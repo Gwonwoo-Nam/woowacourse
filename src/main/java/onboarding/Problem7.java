@@ -85,6 +85,8 @@ public class Problem7 {
         for (String item : friend_score.keySet())
         {
             answer.add(item);
+            if (answer.size() >= 5)
+                return (answer);
         }
         return (answer);
     }
