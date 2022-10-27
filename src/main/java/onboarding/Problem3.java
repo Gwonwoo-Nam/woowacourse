@@ -6,16 +6,18 @@ import java.util.List;
 public class Problem3 {
     public static int num_to_clap(int number){
         List<Integer> digits = new ArrayList<Integer>();
-        int i = 0;
         int clap = 0;
 
+        int_to_digits(number, digits);
+        clap = getClap(digits, clap);
+        return clap;
+    }
+
+    private static void int_to_digits (int number, List<Integer> digits) {
         while (number > 0) {
             digits.add(number % 10); // 각 자리를 digits 배열에 저장
             number = number / 10;
-            i++;
         }
-        clap = getClap(digits, clap);
-        return clap;
     }
 
     private static int getClap(List<Integer> digits, int clap) {
