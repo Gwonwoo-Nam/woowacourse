@@ -24,6 +24,11 @@ public class Problem7 {
         }
         return true;
     }
+    private static boolean is_in_friend_size(String friend_id) {
+        if (friend_id.length() < 1 || friend_id.length() > 30)
+            return false;
+        return true;
+    }
     private static boolean check_friends_element(List<List<String>> friends){
         for (List<String> relation : friends) {
             if (relation.size() != 2){
