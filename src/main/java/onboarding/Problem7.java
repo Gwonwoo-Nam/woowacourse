@@ -8,20 +8,14 @@ import java.util.List;
 public class Problem7 {
     public static List<String> solution(String user, List<List<String>> friends, List<String> visitors) {
         List<String> answer = new ArrayList<>();
-        List<String> myfriend = new ArrayList<>();
+        List<String> user_friend = new ArrayList<>();
         HashMap<String, Integer> friend_score = new HashMap<String, Integer>();
         int value = 0;
+        user_friend = find_user_friend(user, friends);
+
         for (int i = 0; i < friends.size(); i++){
-            if (friends.get(i).get(0) == user){
-                myfriend.add(friends.get(i).get(1));
-            }
-            if (friends.get(i).get(1) == user){
-                myfriend.add(friends.get(i).get(0));
-            }
-        }
-        for (int i = 0; i < friends.size(); i++){
-            for (int j = 0; j < myfriend.size(); j++){
-                if (friends.get(i).get(0) == myfriend.get(j) && friends.get(i).get(1) != user){
+            for (int j = 0; j < user_friend.size(); j++){
+                if (friends.get(i).get(0) == user_friend.get(j) && friends.get(i).get(1) != user){
                     if (friend_score.containsKey(friends.get(i).get(1))) {
                         value = friend_score.get(friends.get(i).get(1));
                         friend_score.put(friends.get(i).get(1), value + 10);
@@ -29,7 +23,7 @@ public class Problem7 {
                     else
                         friend_score.put(friends.get(i).get(1), 10);
                 }
-                if (friends.get(i).get(1) == myfriend.get(j) && friends.get(i).get(0) != user){
+                if (friends.get(i).get(1) == user_friend.get(j) && friends.get(i).get(0) != user){
                     if (friend_score.containsKey(friends.get(i).get(0))) {
                         value = friend_score.get(friends.get(i).get(0));
                         friend_score.put(friends.get(i).get(0), value + 10);
@@ -40,7 +34,7 @@ public class Problem7 {
             }
         }
         for (String visitor : visitors){
-            if (!myfriend.contains(visitor)) {
+            if (!user_friend.contains(visitor)) {
                 if (friend_score.containsKey(visitor)) {
                     value = friend_score.get(visitor);
                     friend_score.put(visitor, value + 1);
@@ -58,5 +52,18 @@ public class Problem7 {
             answer.add(item);
         }
         return answer;
+    }
+
+    private static List<String> find_user_friend(String user, List<List<String>> friends) {
+        List<String> user_friend = new ArrayList<>();
+        for (int i = 0; i < friends.size(); i++){
+            if (friends.get(i).get(0) == user){
+                user_friend.add(friends.get(i).get(1));
+            }
+            if (friends.get(i).get(1) == user) {
+                user_friend.add(friends.get(i).get(0));
+            }
+        }
+        return (user_friend);
     }
 }

@@ -36,20 +36,6 @@ public class Problem6 {
             return false;
         return true;
     }
-    public static List<String> solution(List<List<String>> forms) {
-        List<String> answer = new ArrayList<>();
-        List<String> answer_with_repetition = new ArrayList<>();
-
-        if (!check_exceptions(forms))
-            return (List.of(""));
-        answer_with_repetition = find_answer(forms);
-        for (String email : answer_with_repetition){
-            if(!answer.contains(email))
-                answer.add(email);
-        }
-        Collections.sort(answer);
-        return answer;
-    }
 
     private static List<String> find_answer(List<List<String>> forms) {
         List<String> answer_with_repetition = new ArrayList<>();
@@ -74,5 +60,19 @@ public class Problem6 {
                 answer_with_repetition.add(forms.get(form_number).get(0));
             }
         }
+    }
+    public static List<String> solution(List<List<String>> forms) {
+        List<String> answer = new ArrayList<>();
+        List<String> answer_with_repetition = new ArrayList<>();
+
+        if (!check_exceptions(forms))
+            return (List.of(""));
+        answer_with_repetition = find_answer(forms);
+        for (String email : answer_with_repetition){
+            if(!answer.contains(email))
+                answer.add(email);
+        }
+        Collections.sort(answer);
+        return answer;
     }
 }
