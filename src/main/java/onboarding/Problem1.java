@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Problem1 {
-    public static int check_List(List<Integer> pobi, List<Integer> crong) {
-        if (pobi.size() != 2 || crong.size() != 2)// 예외처리 0 : 각 List의 사이즈는 2이다
+    public static int check_List(List<Integer> pobi) {
+        if (pobi.size() != 2)// 예외처리 0 : 각 List의 사이즈는 2이다
             return (-1);
-        if ((pobi.get(0) < 1 || pobi.get(1) > 400) || (crong.get(0) < 1 || crong.get(1) > 400)) // 예외처리 1 : Page의 범위를 넘어가는 경우
+        if (pobi.get(0) < 1 || pobi.get(1) > 400) // 예외처리 1 : Page의 범위를 넘어가는 경우
             return (-1);
-        if (pobi.get(0) % 2 == 0 || crong.get(0) % 2 == 0) // 예외처리 2 : 첫 페이지가 홀수가 아닌 경우
+        if (pobi.get(0) % 2 == 0) // 예외처리 2 : 첫 페이지가 홀수가 아닌 경우
             return (-1);
-        if (pobi.get(1) - pobi.get(0) != 1 || crong.get(1) - crong.get(0) != 1) // 예외처리 3 : 페이지가 연속이 아닌 경우
+        if (pobi.get(1) - pobi.get(0) != 1) // 예외처리 3 : 페이지가 연속이 아닌 경우
             return (-1);
         return (0);
     }
@@ -49,7 +49,7 @@ class Problem1 {
         int pobi_result;
         int crong_result;
 
-        if (check_List(pobi, crong) == -1)
+        if (check_List(pobi) == -1 || check_List(crong) == -1)
             return -1; //예외처리
         pobi_result = check_max(pobi);
         crong_result = check_max(crong);
