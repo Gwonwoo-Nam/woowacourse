@@ -6,14 +6,20 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Problem7 {
+    private static boolean check_user_length(String user){
+        if (user.length() < 1 || user.length() > 30){
+            return false;
+        }
+        return true;
+    }
     private static boolean check_exceptions(String user, List<List<String>> friends, List<String> visitors) {
-        if (check_user_length(user))
+        if (!check_user_length(user))
             return false;
-        if (check_visitors_size(visitors))
+        if (!check_visitors_size(visitors))
             return false;
-        if (check_friends_size(friends))
+        if (!check_friends_size(friends))
             return false;
-        if (check_user_alphabet(user))
+        if (!check_user_alphabet(user))
             return false;
         return true;
     }
