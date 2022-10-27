@@ -22,7 +22,8 @@ public class Problem3 {
     }
     public static int solution(int number) {
         int answer = 0;
-
+        if (number > 10000 || number < 1)
+            return (0);
         for (int i = 1; i <= number; i++)
         {
             answer += number_digits(i);
