@@ -8,19 +8,26 @@ public class Problem6 {
     private static int check_domain(String email){
         if (!email.endsWith("@email.com")) //예외처리 0 : 이메일 형식에 부합하는지
             return (-1);
-        if (email.length() < 11 || email.length() >= 20) // 예외처리 1 : 길이 11~19
+        if (email.length() < 11 || email.length() >= 20) // 예외처리 1 : email 길이 11~19
             return (-1);
+        return (0);
+    }
+    private static int check_nickname(String nickname){
+        if (!nickname.matches("^[ㄱ-ㅎ |ㅏ-ㅣ | 가-힣]*$")) // 예외처리 2 : nickname은 한글로만 구성됨
+            return (-1);
+        if (nickname.length() < 1 || nickname.length() >= 20) // 예외처리 3 : nickname 길이 1~19
+            return (-1);
+        return (0);
     }
     private static int check_email(List<List<String>> forms){
         int count = 0;
         for(List<String> items : forms) {
             count++;
-            if (check_domain(items.get(0)) == -1)
+            if (check_domain(items.get(0)) == -1 || check_nickname(items.get(1)) == -1)
                 return (-1);
         }
         if (count < 1 || count > 10000)
-            return (-1); // 예외처리 2 : 멤버의 number가 1~10000
-
+            return (-1); // 예외처리 4 : 멤버의 number가 1~10000
         return (0);
     }
     public static List<String> solution(List<List<String>> forms) {
@@ -28,7 +35,7 @@ public class Problem6 {
         List<String> answer_rep = new ArrayList<>();
         String temp = "";
         if (check_email(forms) == -1)
-            return ();
+            return (List.of(""));
         for (int i = 0; i < forms.size(); i++){
             for (int j = 0; j + 1< forms.get(i).get(1).length(); j++){
                 temp = forms.get(i).get(1).substring(j,j+2);
