@@ -5,7 +5,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class Problem6 {
-
+    private static int check_domain(String email){
+        if (!email.endsWith("@email.com")) //예외처리 0 : 이메일 형식에 부합하는지
+            return (-1);
+        if (email.length() < 11 || email.length() >= 20) // 예외처리 1 : 길이 11~19
+            return (-1);
+    }
     private static int check_email(List<List<String>> forms){
         int count = 0;
         for(List<String> items : forms) {
@@ -14,7 +19,8 @@ public class Problem6 {
                 return (-1);
         }
         if (count < 1 || count > 10000)
-            return (-1); // 예외처리 1 : 멤버의 number가 1~10000
+            return (-1); // 예외처리 2 : 멤버의 number가 1~10000
+
         return (0);
     }
     public static List<String> solution(List<List<String>> forms) {
