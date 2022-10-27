@@ -32,10 +32,8 @@ public class Problem7 {
         List<String> user_friends = new ArrayList<>();
         HashMap<String, Integer> friend_score = new HashMap<String, Integer>();
         user_friends = find_user_friend(user, friends);
-
         update_relation_score(user, friends, user_friends, friend_score);
         update_visitor_score(visitors, user_friends, friend_score);
-
         sort_by_score(friend_score);
         answer = add_name_to_answer(friend_score);
         return answer;
