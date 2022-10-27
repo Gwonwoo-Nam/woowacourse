@@ -33,6 +33,29 @@ public class Problem7 {
         HashMap<String, Integer> friend_score = new HashMap<String, Integer>();
         user_friends = find_user_friend(user, friends);
 
+        update_relation_score(user, friends, user_friends, friend_score);
+        update_visitor_score(visitors, user_friends, friend_score);
+
+        sort_by_score(friend_score);
+        answer = add_name_to_answer(friend_score);
+        return answer;
+    }
+
+    private static List<String> add_name_to_answer(HashMap<String, Integer> friend_score) {
+        List<String> answer = new ArrayList<>();
+        for (String item : friend_score.keySet())
+        {
+            answer.add(item);
+        }
+        return (answer);
+    }
+
+    private static void sort_by_score(HashMap<String, Integer> friend_score) {
+        List<String> keySetList = new ArrayList<>(friend_score.keySet());
+        Collections.sort(keySetList, (o1, o2) -> (friend_score.get(o1).compareTo(friend_score.get(o2))));
+    }
+
+    private static void update_relation_score(String user, List<List<String>> friends, List<String> user_friends, HashMap<String, Integer> friend_score) {
         for (List<String> relation : friends){
             for (String user_friend : user_friends){
                 if (relation.get(0) == user_friend && relation.get(1) != user){
@@ -43,22 +66,13 @@ public class Problem7 {
                 }
             }
         }
+    }
+
+    private static void update_visitor_score(List<String> visitors, List<String> user_friends, HashMap<String, Integer> friend_score) {
         for (String visitor : visitors){
             if (!user_friends.contains(visitor)) {
                 update_values(friend_score, visitor, 1);
             }
         }
-
-        List<String> keySetList = new ArrayList<>(friend_score.keySet());
-
-        Collections.sort(keySetList, (o1, o2) -> (friend_score.get(o1).compareTo(friend_score.get(o2))));
-
-        for (String item : friend_score.keySet())
-        {
-            answer.add(item);
-        }
-        return answer;
     }
-
-
 }
