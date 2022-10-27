@@ -18,12 +18,33 @@ public class Problem7 {
         }
         return true;
     }
+    private static boolean check_friends_size(List<List<String>> friends){
+        if (friends.size() < 1 || friends.size() > 10000){
+            return false;
+        }
+        return true;
+    }
+    private static boolean check_friends_element(List<List<String>> friends){
+        for (List<String> relation : friends) {
+            if (relation.size() != 2){
+                return false;
+            }
+            if (is_in_friend_size(relation.get(0)) || is_in_friend_size(relation.get(1)))
+                return false;
+        }
+        return true;
+    }
+
+
+
     private static boolean check_exceptions(String user, List<List<String>> friends, List<String> visitors) {
         if (!check_user_length(user))
             return false;
         if (!check_visitors_size(visitors))
             return false;
         if (!check_friends_size(friends))
+            return false;
+        if (!check_friends_element(friends))
             return false;
         if (!check_user_alphabet(user))
             return false;
