@@ -47,6 +47,11 @@ class Problem1 {
             return -1; //예외처리
         pobi_result = check_max(pobi);
         crong_result = check_max(crong);
+        answer = getAnswer(pobi_result, crong_result);
+        return answer;
+    }
+    private static int getAnswer(int pobi_result, int crong_result) {
+        int answer;
         if (pobi_result > crong_result)
             answer = 1;
         else if (pobi_result == crong_result)
