@@ -37,16 +37,7 @@ public class Problem6 {
         if (check_email(forms) == -1)
             return (List.of(""));
         for (int i = 0; i < forms.size(); i++){
-            for (int j = 0; j + 1< forms.get(i).get(1).length(); j++){
-                temp = forms.get(i).get(1).substring(j,j+2);
-                for (int k = i + 1; k < forms.size(); k++){
-                    if (forms.get(k).get(1).contains(temp)) {
-                        temp = forms.get(k).get(0);
-                        answer_rep.add(forms.get(k).get(0));
-                        answer_rep.add(forms.get(i).get(0));
-                    }
-                }
-            }
+            get_two_letters(forms, answer_rep, i);
         }
         for (String email : answer_rep){
             if(!answer.contains(email))
@@ -54,5 +45,22 @@ public class Problem6 {
         }
         Collections.sort(answer);
         return answer;
+    }
+
+    private static void get_two_letters(List<List<String>> forms, List<String> answer_rep, int i) {
+        String temp;
+        for (int j = 0; j + 1< forms.get(i).get(1).length(); j++){
+            temp = forms.get(i).get(1).substring(j,j+2);
+            add_answer(forms, answer_rep, temp, i);
+        }
+    }
+
+    private static void add_answer(List<List<String>> forms, List<String> answer_rep, String temp, int i) {
+        for (int k = i + 1; k < forms.size(); k++){
+            if (forms.get(k).get(1).contains(temp)) {
+                answer_rep.add(forms.get(k).get(0));
+                answer_rep.add(forms.get(i).get(0));
+            }
+        }
     }
 }
