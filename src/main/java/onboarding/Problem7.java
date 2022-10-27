@@ -1,9 +1,6 @@
 package onboarding;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Problem7 {
     private static boolean check_user_length(String user){
@@ -39,6 +36,12 @@ public class Problem7 {
         }
         return true;
     }
+    private static boolean check_friends_repetition(List<List<String>> friends){
+        HashSet<List<String>> friendsSet = new HashSet<>(friends);
+        if (friendsSet.size() != friends.size())
+            return false;
+        return true;
+    }
     private static boolean check_user_alphabet(String user_id){
         if (!user_id.matches("^[a-z]*$"))
             return false;
@@ -54,6 +57,8 @@ public class Problem7 {
         if (!check_friends_element(friends))
             return false;
         if (!check_user_alphabet(user))
+            return false;
+        if (!check_friends_repetition(friends))
             return false;
         return true;
     }
@@ -80,9 +85,9 @@ public class Problem7 {
     }
 
 
-    private static List<String> add_name_to_answer(HashMap<String, Integer> friend_score) {
+    private static List<String> add_name_to_answer(List<String> friend_score) {
         List<String> answer = new ArrayList<>();
-        for (String item : friend_score.keySet())
+        for (String item : friend_score)
         {
             answer.add(item);
             if (answer.size() >= 5)
@@ -91,9 +96,27 @@ public class Problem7 {
         return (answer);
     }
 
-    private static void sort_by_score(HashMap<String, Integer> friend_score) {
-        List<String> keySetList = new ArrayList<>(friend_score.keySet());
-        Collections.sort(keySetList, (o1, o2) -> (friend_score.get(o1).compareTo(friend_score.get(o2))));
+    private static List<String> sort_by_score(HashMap<String, Integer> friend_score) {
+        List<Map.Entry<String, Integer>> key_val_List = new LinkedList<>(friend_score.entrySet()); //linked list에 저장
+        Collections.sort(key_val_List, new Comparator<Map.Entry<String, Integer>>(){
+        @Override
+        public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+            if (o1.getValue() > o2.getValue()) {
+                return -1;
+            } else if (o1.getValue() < o2.getValue()) {
+                return 1;
+            } else {
+                return o1.getKey().compareTo(o2.getKey());
+            }
+        }
+        });
+        List<String> sortedMap = new ArrayList<>();
+        for (Iterator<Map.Entry<String, Integer>> iter = key_val_List.iterator(); iter.hasNext();){
+            Map.Entry<String, Integer> entry = iter.next();
+            sortedMap.add(entry.getKey());
+            }
+        System.out.println(sortedMap);
+        return sortedMap;
     }
 
     private static void update_relation_score(String user, List<List<String>> friends, List<String> user_friends, HashMap<String, Integer> friend_score) {
@@ -118,14 +141,15 @@ public class Problem7 {
     public static List<String> solution(String user, List<List<String>> friends, List<String> visitors) {
         List<String> answer = new ArrayList<>();
         List<String> user_friends = new ArrayList<>();
-        HashMap<String, Integer> friend_score = new HashMap<String, Integer>();
+        HashMap<String, Integer> friend_score = new HashMap<>();
+        answer = List.of("");
         if (!check_exceptions(user, friends, visitors))
             return List.of("");
         user_friends = find_user_friend(user, friends);
         update_relation_score(user, friends, user_friends, friend_score);
         update_visitor_score(visitors, user_friends, friend_score);
-        sort_by_score(friend_score);
-        answer = add_name_to_answer(friend_score);
+        answer = sort_by_score(friend_score);
+        answer = add_name_to_answer(answer);
         return answer;
     }
 
