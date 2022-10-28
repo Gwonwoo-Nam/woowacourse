@@ -115,7 +115,6 @@ public class Problem7 {
             Map.Entry<String, Integer> entry = iter.next();
             sortedMap.add(entry.getKey());
             }
-        System.out.println(sortedMap);
         return sortedMap;
     }
 
