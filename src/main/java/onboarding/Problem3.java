@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Problem3 {
+    private static boolean check_number_range(int number) {
+        if (number > 10000 || number < 1)
+            return false;
+        return true;
+    }
     public static int num_to_clap(int number){
         List<Integer> digits = new ArrayList<Integer>();
         int clap = 0;
@@ -28,13 +33,16 @@ public class Problem3 {
         return clap;
     }
 
+
     public static int solution(int number) {
         int answer = 0;
 
-        if (number > 10000 || number < 1)
+        if (!check_number_range(number))
             return (0);
         for (int i = 1; i <= number; i++)
             answer += num_to_clap(i);
         return answer;
     }
+
+
 }
