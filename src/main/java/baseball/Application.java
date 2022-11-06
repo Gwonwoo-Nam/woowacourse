@@ -43,6 +43,25 @@ public class Application {
         }
     }
 
+    public class ResultPrinter {
+        private static void printNothing() {
+
+        }
+
+        private static void printBall() {
+
+        }
+
+        private static void printStrike() {
+
+        }
+
+        private static void printEndOfLine() {
+
+        }
+
+    }
+
     public static void main(String[] args) {
 
 
