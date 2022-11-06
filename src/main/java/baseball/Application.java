@@ -31,7 +31,11 @@ public class Application {
                 throw new IllegalArgumentException("Please Enter Different Number.");
             }
         }
-
+        private void isThreeDigits() {
+            if (userNumber.size() != 3) {
+                throw new IllegalArgumentException("Please Enter 3 digits.");
+            }
+        }
 
     }
 /*
