@@ -53,18 +53,19 @@ public class Application {
             }
         }
     }
-/*
+
     public class ComputerAnswer {
+        public static List<Integer> computerNumber = new ArrayList<>();
         private static void createRandomAnswer() {
-
+            while (computerNumber.size() < 3) {
+                int randomNumber = Randoms.pickNumberInRange(1, 9);
+                if (!computerNumber.contains(randomNumber)) {
+                    computerNumber.add(randomNumber);
+                }
+            }
         }
-
-        private static void saveComputerAnswer() {
-
-        }
-
     }
-
+/*
     public class StrikeBallCounter {
 
         private static void compareAnswers() {
