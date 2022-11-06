@@ -31,9 +31,17 @@ public class Application {
                 throw new IllegalArgumentException("Please Enter Different Number.");
             }
         }
-        private void isThreeDigits() {
+        private void isInSize() {
             if (userNumber.size() != 3) {
                 throw new IllegalArgumentException("Please Enter 3 digits.");
+            }
+        }
+
+        private void isNumber() {
+            for (int number : userNumber) {
+                if (userNumber.get(number) > '9' || userNumber.get(number) < '0') {
+                    throw new IllegalArgumentException("Please Enter number.");
+                }
             }
         }
 
@@ -101,7 +109,8 @@ public class Application {
         MyAnswer.readFromUser();
         System.out.println(MyAnswer.getUserAnswer().get(0)); //동작 확인
         MyAnswer.isDifferentNumber();
-        MyAnswer.isThreeDigits();
+        MyAnswer.isInSize();
+        MyAnswer.isNumber();
 
         // TODO: 프로그램 구현
     }
