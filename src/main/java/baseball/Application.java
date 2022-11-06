@@ -25,7 +25,22 @@ public class Application {
         private static void saveComputerAnswer() {
 
         }
-        
+
+    }
+
+    public class StrikeBallCounter {
+
+        private static void compareAnswers() {
+
+        }
+
+        private static void isStrike() {
+
+        }
+
+        private static void isBall() {
+
+        }
     }
 
     public static void main(String[] args) {
