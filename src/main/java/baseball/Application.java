@@ -10,19 +10,18 @@ import camp.nextstep.edu.missionutils.Randoms;
 public class Application {
     public static class UserAnswer { // public type이어야하는지 확인
 
-        public static List<Integer> userNumberInt = new ArrayList<>();
-        public static List<Integer> readFromUser() { //static type, private 확인
+        public static List<Integer> userNumber = new ArrayList<>();
+        public static void readFromUser() { //static type, private 확인
             String userNumberString = Console.readLine(); //String으로 저장
             //List<Integer> userNumberInt = new ArrayList<>();
             for (int i = 0; i < userNumberString.length(); i++) {
-                userNumberInt.add((int)(userNumberString.charAt(i) - '0'));
+                userNumber.add((int)(userNumberString.charAt(i) - '0'));
             }
-            return userNumberInt;
         }
 
-        /*public static List<Integer> getUserAnswer() {
+        public static List<Integer> getUserAnswer() {
             return userNumber;
-        }*/
+        }
 
         private void isDifferentNumber() {
 
@@ -88,8 +87,8 @@ public class Application {
 */
     public static void main(String[] args) {
         UserAnswer MyAnswer = new UserAnswer();
-        //MyAnswer.readFromUser();
-        System.out.println(MyAnswer.readFromUser().get(0)); //동작 확인
+        MyAnswer.readFromUser();
+        System.out.println(MyAnswer.getUserAnswer().get(0)); //동작 확인
 
 
         // TODO: 프로그램 구현
