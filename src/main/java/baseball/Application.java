@@ -54,15 +54,18 @@ public class Application {
         }
     }
 
-    public class ComputerAnswer {
+    public static class ComputerAnswer {
         public static List<Integer> computerNumber = new ArrayList<>();
-        private static void createRandomAnswer() {
+        public static void createRandomAnswer() {
             while (computerNumber.size() < 3) {
                 int randomNumber = Randoms.pickNumberInRange(1, 9);
                 if (!computerNumber.contains(randomNumber)) {
                     computerNumber.add(randomNumber);
                 }
             }
+        }
+        public static List<Integer> getComputerAnswer() {
+            return computerNumber;
         }
     }
 /*
@@ -120,6 +123,10 @@ public class Application {
         MyAnswer.isNumber();
         MyAnswer.toIntegerList();
         System.out.println(MyAnswer.getUserAnswer().get(0)); //동작 확인
+
+        ComputerAnswer ComAnswer = new ComputerAnswer();
+        ComAnswer.createRandomAnswer();
+        System.out.println(ComAnswer.getComputerAnswer().get(1));
 
         // TODO: 프로그램 구현
     }
