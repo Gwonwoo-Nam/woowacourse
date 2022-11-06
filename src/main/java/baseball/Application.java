@@ -13,12 +13,11 @@ public class Application {
     public static class UserAnswer { // public type이어야하는지 확인
 
         public static List<Integer> userNumber = new ArrayList<>();
+        public static String userNumberString;
         public static void readFromUser() { //static type, private 확인
-            String userNumberString = Console.readLine(); //String으로 저장
+            userNumberString = Console.readLine(); //String으로 저장
             //List<Integer> userNumberInt = new ArrayList<>();
-            for (int i = 0; i < userNumberString.length(); i++) {
-                userNumber.add((int)(userNumberString.charAt(i) - '0'));
-            }
+
         }
 
         public static List<Integer> getUserAnswer() {
@@ -26,24 +25,28 @@ public class Application {
         }
 
         private void isDifferentNumber() {
-            Set<Integer> userNumberWithoutRedundancy = new HashSet<>(userNumber);
-            if (userNumber.size() != userNumberWithoutRedundancy.size()) {
+            Set<Character> userNumberWithoutRedundancy = new HashSet<>();
+            for (int i = 0; i < userNumberString.length(); i++) {
+                userNumberWithoutRedundancy.add(userNumberString.charAt(i));
+            }
+            if (userNumberString.length() != userNumberWithoutRedundancy.size()) {
                 throw new IllegalArgumentException("Please Enter Different Number.");
             }
         }
         private void isInSize() {
-            if (userNumber.size() != 3) {
+            if (userNumberString.length() != 3) {
                 throw new IllegalArgumentException("Please Enter 3 digits.");
             }
         }
 
         private void isNumber() {
-            for (int number : userNumber) {
-                if (userNumber.get(number) > '9' || userNumber.get(number) < '0') {
+            for (int i = 0; i < userNumberString.length(); i++) {
+                if (userNumberString.charAt(i) > '9' || userNumberString.charAt(i) < '0') {
                     throw new IllegalArgumentException("Please Enter number.");
                 }
             }
         }
+
 
     }
 /*
@@ -107,10 +110,11 @@ public class Application {
     public static void main(String[] args) {
         UserAnswer MyAnswer = new UserAnswer();
         MyAnswer.readFromUser();
-        System.out.println(MyAnswer.getUserAnswer().get(0)); //동작 확인
         MyAnswer.isDifferentNumber();
         MyAnswer.isInSize();
         MyAnswer.isNumber();
+        MyAnswer.toIntegerList();
+        System.out.println(MyAnswer.getUserAnswer().get(0)); //동작 확인
 
         // TODO: 프로그램 구현
     }
