@@ -43,7 +43,19 @@ public class Application {
         }
     }
 
+    public class StrikeBallCountProcesser {
+        private static void getCount() {
+
+        }
+
+        private static void sendcount() {
+
+        }
+    }
+
     public class ResultPrinter {
+
+
         private static void printNothing() {
 
         }
