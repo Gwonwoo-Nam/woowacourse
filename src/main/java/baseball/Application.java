@@ -3,7 +3,7 @@ package baseball;
 import java.util.List;
 
 public class Application {
-    public class user_answer{
+    public class UserAnswer{
         private static void read(){
 
         }
@@ -12,7 +12,14 @@ public class Application {
 
         }
 
+        private static void IsDifferentNumber(){
+
+        }
+        
+
     }
+
+
 
     public static void main(String[] args) {
 
