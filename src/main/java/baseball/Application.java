@@ -1,22 +1,33 @@
 package baseball;
 
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.List;
+import camp.nextstep.edu.missionutils.Console;
+import camp.nextstep.edu.missionutils.Randoms;
+
 
 public class Application {
     public class UserAnswer { // public type이어야하는지 확인
-        private static void readFromUser() { //static type, private 확인
+        public List<Integer> userNumberInt = new ArrayList<>();
+        public void readFromUser() { //static type, private 확인
+            String userNumberString = Console.readLine(); //String으로 저장
+            //List<Integer> userNumberInt = new ArrayList<>();
+            for (int i = 0; i < userNumberString.length(); i++) {
+                userNumberInt.add((int)userNumberString.charAt(i));
+            }
+            //return userNumberInt;
+        }
+
+        private void saveUserAnswer() {
 
         }
 
-        private static void saveUserAnswer() {
-
-        }
-
-        private static void isDifferentNumber() {
+        private void isDifferentNumber() {
 
         }
     }
-
+/*
     public class ComputerAnswer {
         private static void createRandomAnswer() {
 
@@ -73,9 +84,10 @@ public class Application {
         }
 
     }
-
+*/
     public static void main(String[] args) {
-
+        UserAnswer MyAnswer = new UserAnswer();
+        MyAnswer.readFromUser();
 
 
         // TODO: 프로그램 구현
