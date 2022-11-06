@@ -47,7 +47,11 @@ public class Application {
             }
         }
 
-
+        public static void toIntegerList() {
+            for (int i = 0; i < userNumberString.length(); i++) {
+                userNumber.add((int) (userNumberString.charAt(i) - '0'));
+            }
+        }
     }
 /*
     public class ComputerAnswer {
