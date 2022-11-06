@@ -2,7 +2,9 @@ package baseball;
 
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 
@@ -24,8 +26,13 @@ public class Application {
         }
 
         private void isDifferentNumber() {
-
+            Set<Integer> userNumberWithoutRedundancy = new HashSet<>(userNumber);
+            if (userNumber.size() != userNumberWithoutRedundancy.size()) {
+                throw new IllegalArgumentException("Please Enter Different Number.");
+            }
         }
+
+
     }
 /*
     public class ComputerAnswer {
@@ -54,7 +61,7 @@ public class Application {
         }
     }
 
-    public class StrikeBallCountProcesser {
+    public class StrikeBallCountProcessor {
         private static void getCount() {
 
         }
@@ -89,7 +96,8 @@ public class Application {
         UserAnswer MyAnswer = new UserAnswer();
         MyAnswer.readFromUser();
         System.out.println(MyAnswer.getUserAnswer().get(0)); //동작 확인
-
+        MyAnswer.isDifferentNumber();
+        MyAnswer.isThreeDigits();
 
         // TODO: 프로그램 구현
     }
