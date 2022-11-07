@@ -132,7 +132,12 @@ public class Application {
             private static void printNothing() {
                 System.out.println("낫싱");
             }
+            private static void printBall() {
+                System.out.print(StrikeBallCounter.getBallCount() + "볼");
+            }
 
+            
+            }
 
 
         }
