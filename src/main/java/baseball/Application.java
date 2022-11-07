@@ -68,22 +68,22 @@ public class Application {
             return computerNumber;
         }
     }
-/*
-    public class StrikeBallCounter {
 
-        private static void compareAnswers() {
+    public static class StrikeBallCounter {
+        public static int strikeCount = 0;
+        public static int ballCount = 0;
 
+        private static void compareAnswers(List<Integer> userAnswer, List<Integer> computerAnswer) {
+            for (int index = 0; index < computerAnswer.size(); index++) {
+                if (computerAnswer.contains(userAnswer.get(index))){
+                    isStrike(userAnswer.get(index), computerAnswer.get(index));
+                    isBall(userAnswer.get(index), computerAnswer.get(index));
+                }
+            }
         }
 
-        private static void isStrike() {
-
-        }
-
-        private static void isBall() {
-
-        }
     }
-
+/*
     public class StrikeBallCountProcessor {
         private static void getCount() {
 
@@ -126,7 +126,7 @@ public class Application {
 
         ComputerAnswer ComAnswer = new ComputerAnswer();
         ComAnswer.createRandomAnswer();
-        System.out.println(ComAnswer.getComputerAnswer().get(1));
+        System.out.println(comAnswer.getComputerAnswer().get(1));
 
         // TODO: 프로그램 구현
     }
