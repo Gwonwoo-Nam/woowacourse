@@ -65,7 +65,7 @@ public class Application {
     public static class ComputerAnswer {
         public static List<Integer> computerNumber = new ArrayList<>();
 
-        public void createRandomAnswer() {
+        public static void createRandomAnswer() {
             while (computerNumber.size() < 3) {
                 int randomNumber = Randoms.pickNumberInRange(1, 9);
                 if (!computerNumber.contains(randomNumber)) {
