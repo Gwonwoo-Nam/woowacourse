@@ -141,9 +141,9 @@ public class Application {
                 System.out.print(StrikeBallCounter.getStrikeCount() + "스트라이크");
             }
 
-
-
-
+            private static void printEndOfLine() {
+                System.out.println();
+            }
         }
     public static void main(String[] args) {
 
