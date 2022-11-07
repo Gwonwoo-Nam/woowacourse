@@ -1,9 +1,7 @@
 package baseball;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+
 import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 
@@ -73,9 +71,6 @@ public class Application {
         public static List<Integer> getComputerAnswer() {
             return computerNumber;
         }
-        private static void clear() {
-            computerNumber.clear();
-        }
     }
 
     public static class StrikeBallCounter {
@@ -92,13 +87,13 @@ public class Application {
         }
 
         private static void isStrike(Integer userNumber, Integer computerNumber) {
-            if (userNumber == computerNumber) {
+            if (Objects.equals(userNumber, computerNumber)) {
                 strikeCount++;
             }
         }
 
         private static void isBall(Integer userNumber, Integer computerNumber) {
-            if (userNumber != computerNumber) {
+            if (!Objects.equals(userNumber, computerNumber)) {
                 ballCount++;
             }
         }
@@ -205,14 +200,12 @@ public class Application {
         List<Integer> userAnswer;
         ComputerAnswer ComAnswer = new ComputerAnswer();
         UserAnswer MyAnswer = new UserAnswer();
-
         GameRestarter.printStartMessage();
-        System.out.println("숫자 야구 게임을 시작합니다.");
         while (GameRestarter.restartGame(restartFlag)) {
+            computerAnswer = getComputerAnswer(ComAnswer);
             while (StrikeBallCounter.getStrikeCount() != 3) {
                 StrikeBallCounter.clear();
                 userAnswer = getUserAnswer(MyAnswer);
-                computerAnswer = getComputerAnswer(ComAnswer);
                 StrikeBallCounter.compareAnswers(userAnswer, computerAnswer);
                 ballCount = StrikeBallCounter.getBallCount();
                 strikeCount = StrikeBallCounter.getStrikeCount();
@@ -221,7 +214,6 @@ public class Application {
             }
             StrikeBallCounter.clear();
             computerAnswer.clear();
-
             GameRestarter.printEndMessage();
             restartFlag = GameRestarter.getRestartFlag();
             if (GameRestarter.endGame(restartFlag)) {
@@ -229,7 +221,6 @@ public class Application {
             }
         }
     }
-
 
     private static List<Integer> getComputerAnswer(ComputerAnswer ComAnswer) {
         ComAnswer.createRandomAnswer();
