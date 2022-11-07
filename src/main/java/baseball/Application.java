@@ -117,8 +117,8 @@ public class Application {
         }
     }
 
-    public static class StrikeBallCountProcessor {
-        private static void process(int ballCount, int strikeCount) {
+    public static class ProcessorPrinter {
+        private static void processAndPrint(int ballCount, int strikeCount) {
             if (ballCount != 0 && strikeCount != 0) {
                 bothStrikeBall();
             } else if (strikeCount != 0) {
@@ -177,6 +177,9 @@ public class Application {
             System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
             System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
         }
+        private static void printStartMessage() {
+            System.out.println("숫자 야구 게임을 시작합니다.");
+        }
         private static String getRestartFlag() {
             restartFlag = Console.readLine();
             return restartFlag;
@@ -199,24 +202,21 @@ public class Application {
         int strikeCount = 0;
         String restartFlag = "1";
         List<Integer> computerAnswer = new ArrayList<>();
-        List<Integer> userAnswer = new ArrayList<>();
+        List<Integer> userAnswer;
         ComputerAnswer ComAnswer = new ComputerAnswer();
         UserAnswer MyAnswer = new UserAnswer();
 
+        GameRestarter.printStartMessage();
         System.out.println("숫자 야구 게임을 시작합니다.");
         while (GameRestarter.restartGame(restartFlag)) {
             while (StrikeBallCounter.getStrikeCount() != 3) {
                 StrikeBallCounter.clear();
-
-                userAnswer = getInput(MyAnswer);
-
-                ComAnswer.createRandomAnswer();
-                computerAnswer = ComAnswer.getComputerAnswer();
-
+                userAnswer = getUserAnswer(MyAnswer);
+                computerAnswer = getComputerAnswer(ComAnswer);
                 StrikeBallCounter.compareAnswers(userAnswer, computerAnswer);
                 ballCount = StrikeBallCounter.getBallCount();
                 strikeCount = StrikeBallCounter.getStrikeCount();
-                StrikeBallCountProcessor.process(ballCount, strikeCount);
+                ProcessorPrinter.processAndPrint(ballCount, strikeCount);
                 MyAnswer.clear();
             }
             StrikeBallCounter.clear();
@@ -230,7 +230,13 @@ public class Application {
         }
     }
 
-    private static List<Integer> getInput(UserAnswer MyAnswer) {
+
+    private static List<Integer> getComputerAnswer(ComputerAnswer ComAnswer) {
+        ComAnswer.createRandomAnswer();
+        return ComAnswer.getComputerAnswer();
+    }
+
+    private static List<Integer> getUserAnswer(UserAnswer MyAnswer) {
         MyAnswer.readFromUser();
         MyAnswer.isDifferentNumber();
         MyAnswer.isInSize();
