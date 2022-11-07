@@ -7,18 +7,24 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 
 public class Application {
-    public static class UserAnswer { // public type이어야하는지 확인
+    public static class UserAnswer {
 
         public static List<Integer> userNumber = new ArrayList<>();
         public static String userNumberString;
 
-        public static void readFromUser() { //static type, private 확인
+        public static void readFromUser() {
             System.out.print("숫자를 입력해주세요 : ");
             userNumberString = Console.readLine();
         }
 
         public static List<Integer> getUserAnswer() {
             return userNumber;
+        }
+
+        private void isEmpty() {
+            if (userNumberString.length() == 0) {
+                throw new IllegalArgumentException("Please Enter number.");
+            }
         }
 
         private void isDifferentNumber() {
@@ -45,13 +51,13 @@ public class Application {
             }
         }
 
-        public static void toIntegerList() {
+        public void toIntegerList() {
             for (int i = 0; i < userNumberString.length(); i++) {
                 userNumber.add((int) (userNumberString.charAt(i) - '0'));
             }
         }
 
-        public static void clear() {
+        public void clear() {
             userNumber.clear();
         }
     }
@@ -59,7 +65,7 @@ public class Application {
     public static class ComputerAnswer {
         public static List<Integer> computerNumber = new ArrayList<>();
 
-        public static void createRandomAnswer() {
+        public void createRandomAnswer() {
             while (computerNumber.size() < 3) {
                 int randomNumber = Randoms.pickNumberInRange(1, 9);
                 if (!computerNumber.contains(randomNumber)) {
@@ -68,7 +74,7 @@ public class Application {
             }
         }
 
-        public static List<Integer> getComputerAnswer() {
+        public List<Integer> getComputerAnswer() {
             return computerNumber;
         }
     }
@@ -196,7 +202,7 @@ public class Application {
         int ballCount = 0;
         int strikeCount = 0;
         String restartFlag = "1";
-        List<Integer> computerAnswer = new ArrayList<>();
+        List<Integer> computerAnswer;
         List<Integer> userAnswer;
         ComputerAnswer ComAnswer = new ComputerAnswer();
         UserAnswer MyAnswer = new UserAnswer();
@@ -229,6 +235,7 @@ public class Application {
 
     private static List<Integer> getUserAnswer(UserAnswer MyAnswer) {
         MyAnswer.readFromUser();
+        MyAnswer.isEmpty();
         MyAnswer.isDifferentNumber();
         MyAnswer.isInSize();
         MyAnswer.isNumber();
