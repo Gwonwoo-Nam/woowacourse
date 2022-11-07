@@ -1,6 +1,5 @@
 package baseball;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -118,77 +117,83 @@ public class Application {
         }
     }
 
-        public static class StrikeBallCountProcessor {
-            private static void process(int ballCount, int strikeCount) {
-                if (ballCount != 0 && strikeCount != 0) {
-                    bothStrikeBall();
-                } else if (strikeCount != 0) {
-                    onlyStrike();
-                } else if (ballCount != 0) {
-                    onlyBall();
-                } else {
-                    nothing();
-                }
-            }
-            private static void nothing() {
-                ResultPrinter.printNothing();
-            }
-
-            private static void onlyBall() {
-                ResultPrinter.printBall();
-                ResultPrinter.printEndOfLine();
-            }
-
-            private static void onlyStrike() {
-                ResultPrinter.printStrike();
-                ResultPrinter.printEndOfLine();
-            }
-
-            private static void bothStrikeBall() {
-                ResultPrinter.printBall();
-                ResultPrinter.printSpace();
-                ResultPrinter.printStrike();
-                ResultPrinter.printEndOfLine();
-            }
-
-        }
-
-        public static class ResultPrinter {
-            private static void printNothing() {
-                System.out.println("낫싱");
-            }
-            private static void printBall() {
-                System.out.print(StrikeBallCounter.getBallCount() + "볼");
-            }
-
-            private static void printStrike() {
-                System.out.print(StrikeBallCounter.getStrikeCount() + "스트라이크");
-            }
-            private static void printSpace() {
-                System.out.print(" ");
-            }
-            private static void printEndOfLine() {
-                System.out.println();
+    public static class StrikeBallCountProcessor {
+        private static void process(int ballCount, int strikeCount) {
+            if (ballCount != 0 && strikeCount != 0) {
+                bothStrikeBall();
+            } else if (strikeCount != 0) {
+                onlyStrike();
+            } else if (ballCount != 0) {
+                onlyBall();
+            } else {
+                nothing();
             }
         }
-
-        public static class GameRestarter {
-            public static String restartFlag = "1";
-            private static void printEndMessage() {
-                System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-                System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-            }
-            private static String getRestartFlag() {
-                restartFlag = Console.readLine();
-                return restartFlag;
-            }
-            private static boolean endGame(String restartFlag) {
-                if (restartFlag.equals("2")) {
-                    return true;
-                }
-                return false;
-            }
+        private static void nothing() {
+            ResultPrinter.printNothing();
         }
+
+        private static void onlyBall() {
+            ResultPrinter.printBall();
+            ResultPrinter.printEndOfLine();
+        }
+
+        private static void onlyStrike() {
+            ResultPrinter.printStrike();
+            ResultPrinter.printEndOfLine();
+        }
+
+        private static void bothStrikeBall() {
+            ResultPrinter.printBall();
+            ResultPrinter.printSpace();
+            ResultPrinter.printStrike();
+            ResultPrinter.printEndOfLine();
+        }
+
+    }
+
+    public static class ResultPrinter {
+        private static void printNothing() {
+            System.out.println("낫싱");
+        }
+        private static void printBall() {
+            System.out.print(StrikeBallCounter.getBallCount() + "볼");
+        }
+
+        private static void printStrike() {
+            System.out.print(StrikeBallCounter.getStrikeCount() + "스트라이크");
+        }
+        private static void printSpace() {
+            System.out.print(" ");
+        }
+        private static void printEndOfLine() {
+            System.out.println();
+        }
+    }
+
+    public static class GameRestarter {
+        public static String restartFlag = "1";
+        private static void printEndMessage() {
+            System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+            System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+        }
+        private static String getRestartFlag() {
+            restartFlag = Console.readLine();
+            return restartFlag;
+        }
+        private static boolean endGame(String restartFlag) {
+            if (restartFlag.equals("2")) {
+                return true;
+            }
+            return false;
+        }
+        private static boolean restartGame(String restartFlag) {
+            if (restartFlag.equals("1")) {
+                return true;
+            }
+            return false;
+        }
+    }
     public static void main(String[] args) {
         int ballCount = 0;
         int strikeCount = 0;
@@ -197,18 +202,13 @@ public class Application {
         List<Integer> userAnswer = new ArrayList<>();
         ComputerAnswer ComAnswer = new ComputerAnswer();
         UserAnswer MyAnswer = new UserAnswer();
-        //GameRestarter gameRestarter = new GameRestarter();
 
         System.out.println("숫자 야구 게임을 시작합니다.");
         while (GameRestarter.restartGame(restartFlag)) {
             while (StrikeBallCounter.getStrikeCount() != 3) {
                 StrikeBallCounter.clear();
-                MyAnswer.readFromUser();
-                MyAnswer.isDifferentNumber();
-                MyAnswer.isInSize();
-                MyAnswer.isNumber();
-                MyAnswer.toIntegerList();
-                userAnswer = MyAnswer.getUserAnswer();
+
+                userAnswer = getInput(MyAnswer);
 
                 ComAnswer.createRandomAnswer();
                 computerAnswer = ComAnswer.getComputerAnswer();
@@ -228,6 +228,15 @@ public class Application {
                 return ;
             }
         }
+    }
+
+    private static List<Integer> getInput(UserAnswer MyAnswer) {
+        MyAnswer.readFromUser();
+        MyAnswer.isDifferentNumber();
+        MyAnswer.isInSize();
+        MyAnswer.isNumber();
+        MyAnswer.toIntegerList();
+        return MyAnswer.getUserAnswer();
     }
 
 
