@@ -136,8 +136,12 @@ public class Application {
                 System.out.print(StrikeBallCounter.getBallCount() + "볼");
             }
 
-            
+
+            private static void printStrike() {
+                System.out.print(StrikeBallCounter.getStrikeCount() + "스트라이크");
             }
+
+
 
 
         }
