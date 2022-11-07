@@ -115,20 +115,27 @@ public class Application {
         }
     }
 
-    /*
-        public class StrikeBallCountProcessor {
-            private static void getCount() {
-
+        public static class StrikeBallCountProcessor {
+            private static void getCount(int ballCount, int strikeCount) {
+                if (ballCount != 0 && strikeCount != 0) {
+                    ResultPrinter.printBall();
+                    ResultPrinter.printSpace();
+                    ResultPrinter.printStrike();
+                    ResultPrinter.printEndOfLine();
+                } else if (ballCount == 0) {
+                    ResultPrinter.printStrike();
+                    ResultPrinter.printEndOfLine();
+                } else if (strikeCount == 0) {
+                    ResultPrinter.printBall();
+                    ResultPrinter.printEndOfLine();
+                } else {
+                    ResultPrinter.printNothing();
+                }
             }
 
-            private static void sendcount() {
+        }
 
-            }
-        }*/
-
-        public class ResultPrinter {
-
-
+        public static class ResultPrinter {
             private static void printNothing() {
                 System.out.println("낫싱");
             }
@@ -136,32 +143,30 @@ public class Application {
                 System.out.print(StrikeBallCounter.getBallCount() + "볼");
             }
 
-
             private static void printStrike() {
                 System.out.print(StrikeBallCounter.getStrikeCount() + "스트라이크");
             }
-
+            private static void printSpace() {
+                System.out.print(" ");
+            }
             private static void printEndOfLine() {
                 System.out.println();
             }
         }
     public static void main(String[] args) {
-
-        System.out.println("숫자 야구 게임을 시작합니다.");
-        /*for (Integer number : UserAnswer.getUserAnswer()) {
-            System.out.println(number);
-        }*/
-
-        ComputerAnswer ComAnswer = new ComputerAnswer();
-        ComAnswer.createRandomAnswer();
-
-        System.out.println("Computer Answer");
+        /*System.out.println("Computer Answer");
         for (Integer number : ComAnswer.getComputerAnswer()) {
             System.out.println(number);
-        }
-
-
+        }*/
+        int ballCount = 0;
+        int strikeCount = 0;
+        List<Integer> computerAnswer = new ArrayList<>();
+        List<Integer> userAnswer = new ArrayList<>();
+        ComputerAnswer ComAnswer = new ComputerAnswer();
+        ComAnswer.createRandomAnswer();
         UserAnswer MyAnswer = new UserAnswer();
+
+        System.out.println("숫자 야구 게임을 시작합니다.");
         while (StrikeBallCounter.getStrikeCount() != 3){
             StrikeBallCounter.clear();
             MyAnswer.readFromUser();
@@ -169,12 +174,18 @@ public class Application {
             MyAnswer.isInSize();
             MyAnswer.isNumber();
             MyAnswer.toIntegerList();
-            StrikeBallCounter.compareAnswers(MyAnswer.getUserAnswer(), ComAnswer.getComputerAnswer());
-            System.out.println(StrikeBallCounter.getBallCount() + "볼 ");
-            System.out.println(StrikeBallCounter.getStrikeCount() + "스트라이크");
+
+            userAnswer = MyAnswer.getUserAnswer();
+            computerAnswer = ComAnswer.getComputerAnswer();
+            StrikeBallCounter.compareAnswers(userAnswer, computerAnswer);
+            ballCount = StrikeBallCounter.getBallCount();
+            strikeCount = StrikeBallCounter.getStrikeCount();
+            System.out.println(ballCount + "볼 ");
+            System.out.println(strikeCount + "스트라이크");
             MyAnswer.clear();
 
         }
-
+        System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
     }
 }
