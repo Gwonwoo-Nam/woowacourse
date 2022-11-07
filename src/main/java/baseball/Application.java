@@ -14,6 +14,7 @@ public class Application {
 
         public static List<Integer> userNumber = new ArrayList<>();
         public static String userNumberString;
+
         public static void readFromUser() { //static type, private 확인
             System.out.print("숫자를 입력해주세요 : ");
             userNumberString = Console.readLine();
@@ -32,6 +33,7 @@ public class Application {
                 throw new IllegalArgumentException("Please Enter Different Number.");
             }
         }
+
         private void isInSize() {
             if (userNumberString.length() != 3) {
                 throw new IllegalArgumentException("Please Enter 3 digits.");
@@ -51,10 +53,15 @@ public class Application {
                 userNumber.add((int) (userNumberString.charAt(i) - '0'));
             }
         }
+
+        public static void clear() {
+            userNumber.clear();
+        }
     }
 
     public static class ComputerAnswer {
         public static List<Integer> computerNumber = new ArrayList<>();
+
         public static void createRandomAnswer() {
             while (computerNumber.size() < 3) {
                 int randomNumber = Randoms.pickNumberInRange(1, 9);
@@ -63,6 +70,7 @@ public class Application {
                 }
             }
         }
+
         public static List<Integer> getComputerAnswer() {
             return computerNumber;
         }
@@ -74,12 +82,13 @@ public class Application {
 
         private static void compareAnswers(List<Integer> userAnswer, List<Integer> computerAnswer) {
             for (int index = 0; index < computerAnswer.size(); index++) {
-                if (computerAnswer.contains(userAnswer.get(index))){
+                if (computerAnswer.contains(userAnswer.get(index))) {
                     isStrike(userAnswer.get(index), computerAnswer.get(index));
                     isBall(userAnswer.get(index), computerAnswer.get(index));
                 }
             }
         }
+
         private static void isStrike(Integer userNumber, Integer computerNumber) {
             if (userNumber == computerNumber) {
                 strikeCount++;
@@ -100,49 +109,45 @@ public class Application {
             return ballCount;
         }
     }
-/*
-    public class StrikeBallCountProcessor {
-        private static void getCount() {
 
+    /*
+        public class StrikeBallCountProcessor {
+            private static void getCount() {
+
+            }
+
+            private static void sendcount() {
+
+            }
         }
 
-        private static void sendcount() {
+        public class ResultPrinter {
+
+
+            private static void printNothing() {
+
+            }
+
+            private static void printBall() {
+
+            }
+
+            private static void printStrike() {
+
+            }
+
+            private static void printEndOfLine() {
+
+            }
 
         }
-    }
-
-    public class ResultPrinter {
-
-
-        private static void printNothing() {
-
-        }
-
-        private static void printBall() {
-
-        }
-
-        private static void printStrike() {
-
-        }
-
-        private static void printEndOfLine() {
-
-        }
-
-    }
-*/
+    */
     public static void main(String[] args) {
-        UserAnswer MyAnswer = new UserAnswer();
-        MyAnswer.readFromUser();
-        MyAnswer.isDifferentNumber();
-        MyAnswer.isInSize();
-        MyAnswer.isNumber();
-        MyAnswer.toIntegerList();
+
         System.out.println("숫자 야구 게임을 시작합니다.");
-        for (Integer number : UserAnswer.getUserAnswer()) {
+        /*for (Integer number : UserAnswer.getUserAnswer()) {
             System.out.println(number);
-        }
+        }*/
 
         ComputerAnswer ComAnswer = new ComputerAnswer();
         ComAnswer.createRandomAnswer();
@@ -152,9 +157,20 @@ public class Application {
             System.out.println(number);
         }
 
-        StrikeBallCounter.compareAnswers(MyAnswer.getUserAnswer(), ComAnswer.getComputerAnswer());
-        System.out.println("Strike : " + StrikeBallCounter.getStrikeCount());
-        System.out.println("Ball : " + StrikeBallCounter.getBallCount());
-        // TODO: 프로그램 구현
+
+        UserAnswer MyAnswer = new UserAnswer();
+        while (StrikeBallCounter.getStrikeCount() != 3){
+            MyAnswer.readFromUser();
+            MyAnswer.isDifferentNumber();
+            MyAnswer.isInSize();
+            MyAnswer.isNumber();
+            MyAnswer.toIntegerList();
+            StrikeBallCounter.compareAnswers(MyAnswer.getUserAnswer(), ComAnswer.getComputerAnswer());
+            System.out.println(StrikeBallCounter.getBallCount() + "볼 ");
+            System.out.println(StrikeBallCounter.getStrikeCount() + "스트라이크");
+            MyAnswer.getUserAnswer().clear();
+
+        }
+
     }
 }
