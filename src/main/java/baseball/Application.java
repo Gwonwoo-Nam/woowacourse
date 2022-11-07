@@ -124,29 +124,18 @@ public class Application {
             private static void sendcount() {
 
             }
-        }
+        }*/
 
         public class ResultPrinter {
 
 
             private static void printNothing() {
-
+                System.out.println("낫싱");
             }
 
-            private static void printBall() {
 
-            }
-
-            private static void printStrike() {
-
-            }
-
-            private static void printEndOfLine() {
-
-            }
 
         }
-    */
     public static void main(String[] args) {
 
         System.out.println("숫자 야구 게임을 시작합니다.");
