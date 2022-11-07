@@ -120,14 +120,18 @@ public class Application {
                 if (ballCount != 0 && strikeCount != 0) {
                     bothStrikeBall();
                 } else if (ballCount == 0) {
-                    ResultPrinter.printStrike();
-                    ResultPrinter.printEndOfLine();
+                    onlyStrike();
                 } else if (strikeCount == 0) {
                     ResultPrinter.printBall();
                     ResultPrinter.printEndOfLine();
                 } else {
                     ResultPrinter.printNothing();
                 }
+            }
+
+            private static void onlyStrike() {
+                ResultPrinter.printStrike();
+                ResultPrinter.printEndOfLine();
             }
 
             private static void bothStrikeBall() {
