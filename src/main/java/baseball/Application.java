@@ -81,7 +81,17 @@ public class Application {
                 }
             }
         }
+        private static void isStrike(Integer userNumber, Integer computerNumber) {
+            if (userNumber == computerNumber) {
+                strikeCount++;
+            }
+        }
 
+        private static void isBall(Integer userNumber, Integer computerNumber) {
+            if (userNumber != computerNumber) {
+                ballCount++;
+            }
+        }
     }
 /*
     public class StrikeBallCountProcessor {
@@ -126,7 +136,9 @@ public class Application {
 
         ComputerAnswer ComAnswer = new ComputerAnswer();
         ComAnswer.createRandomAnswer();
-        System.out.println(comAnswer.getComputerAnswer().get(1));
+        System.out.println(ComAnswer.getComputerAnswer().get(1));
+
+        StrikeBallCounter.compareAnswers(MyAnswer.getUserAnswer(), ComAnswer.getComputerAnswer());
 
         // TODO: 프로그램 구현
     }
