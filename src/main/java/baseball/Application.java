@@ -174,27 +174,33 @@ public class Application {
 
         public static class GameRestarter {
             public static String restartFlag = "1";
-                private static void printEndMessage() {
-                    System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-                    System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-                }
-            private static void getRestartFlag() {
+            private static void printEndMessage() {
                 System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
                 System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
             }
-
+            private static String getRestartFlag() {
+                restartFlag = Console.readLine();
+                return restartFlag;
+            }
+            private static boolean endGame(String restartFlag) {
+                if (restartFlag.equals("2")) {
+                    return true;
+                }
+                return false;
+            }
         }
     public static void main(String[] args) {
         int ballCount = 0;
         int strikeCount = 0;
+        String restartFlag = "1";
         List<Integer> computerAnswer = new ArrayList<>();
         List<Integer> userAnswer = new ArrayList<>();
         ComputerAnswer ComAnswer = new ComputerAnswer();
         UserAnswer MyAnswer = new UserAnswer();
-        GameRestarter gameRestarter = new GameRestarter();
+        //GameRestarter gameRestarter = new GameRestarter();
 
         System.out.println("숫자 야구 게임을 시작합니다.");
-        while (GameRestarter.restartFlag.equals("1")) {
+        while (GameRestarter.restartGame(restartFlag)) {
             while (StrikeBallCounter.getStrikeCount() != 3) {
                 StrikeBallCounter.clear();
                 MyAnswer.readFromUser();
@@ -215,11 +221,14 @@ public class Application {
             }
             StrikeBallCounter.clear();
             computerAnswer.clear();
+
             GameRestarter.printEndMessage();
-            restartOrEndGame = Console.readLine();
-            if (restartOrEndGame.equals("2")) {
+            restartFlag = GameRestarter.getRestartFlag();
+            if (GameRestarter.endGame(restartFlag)) {
                 return ;
             }
         }
     }
+
+
 }
