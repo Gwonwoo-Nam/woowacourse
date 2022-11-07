@@ -87,7 +87,15 @@ public class Application {
             }
         }
 
+        private static void isBall(Integer userNumber, Integer computerNumber) {
+            if (userNumber != computerNumber) {
+                ballCount++;
+            }
+        }
 
+        private static int getStrikeCount() {
+            return strikeCount;
+        }
     }
 /*
     public class StrikeBallCountProcessor {
