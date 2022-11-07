@@ -122,11 +122,15 @@ public class Application {
                 } else if (ballCount == 0) {
                     onlyStrike();
                 } else if (strikeCount == 0) {
-                    ResultPrinter.printBall();
-                    ResultPrinter.printEndOfLine();
+                    onlyBall();
                 } else {
                     ResultPrinter.printNothing();
                 }
+            }
+
+            private static void onlyBall() {
+                ResultPrinter.printBall();
+                ResultPrinter.printEndOfLine();
             }
 
             private static void onlyStrike() {
