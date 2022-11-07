@@ -116,12 +116,9 @@ public class Application {
     }
 
         public static class StrikeBallCountProcessor {
-            private static void getCount(int ballCount, int strikeCount) {
+            private static void process(int ballCount, int strikeCount) {
                 if (ballCount != 0 && strikeCount != 0) {
-                    ResultPrinter.printBall();
-                    ResultPrinter.printSpace();
-                    ResultPrinter.printStrike();
-                    ResultPrinter.printEndOfLine();
+                    bothStrikeBall();
                 } else if (ballCount == 0) {
                     ResultPrinter.printStrike();
                     ResultPrinter.printEndOfLine();
@@ -131,6 +128,13 @@ public class Application {
                 } else {
                     ResultPrinter.printNothing();
                 }
+            }
+
+            private static void bothStrikeBall() {
+                ResultPrinter.printBall();
+                ResultPrinter.printSpace();
+                ResultPrinter.printStrike();
+                ResultPrinter.printEndOfLine();
             }
 
         }
