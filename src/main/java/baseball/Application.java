@@ -119,13 +119,16 @@ public class Application {
             private static void process(int ballCount, int strikeCount) {
                 if (ballCount != 0 && strikeCount != 0) {
                     bothStrikeBall();
-                } else if (ballCount == 0) {
+                } else if (strikeCount != 0) {
                     onlyStrike();
-                } else if (strikeCount == 0) {
+                } else if (ballCount != 0) {
                     onlyBall();
                 } else {
-                    ResultPrinter.printNothing();
+                    nothing();
                 }
+            }
+            private static void nothing() {
+                ResultPrinter.printNothing();
             }
 
             private static void onlyBall() {
@@ -166,10 +169,6 @@ public class Application {
             }
         }
     public static void main(String[] args) {
-        /*System.out.println("Computer Answer");
-        for (Integer number : ComAnswer.getComputerAnswer()) {
-            System.out.println(number);
-        }*/
         int ballCount = 0;
         int strikeCount = 0;
         List<Integer> computerAnswer = new ArrayList<>();
@@ -192,10 +191,8 @@ public class Application {
             StrikeBallCounter.compareAnswers(userAnswer, computerAnswer);
             ballCount = StrikeBallCounter.getBallCount();
             strikeCount = StrikeBallCounter.getStrikeCount();
-            System.out.println(ballCount + "볼 ");
-            System.out.println(strikeCount + "스트라이크");
+            StrikeBallCountProcessor.process(ballCount, strikeCount);
             MyAnswer.clear();
-
         }
         System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
         System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
