@@ -42,7 +42,7 @@ public class Application {
 
         private void isNumber() {
             for (int i = 0; i < userNumberString.length(); i++) {
-                if (userNumberString.charAt(i) > '9' || userNumberString.charAt(i) < '0') {
+                if (userNumberString.charAt(i) > '9' || userNumberString.charAt(i) < '1') {
                     throw new IllegalArgumentException("Please Enter number.");
                 }
             }
@@ -73,6 +73,9 @@ public class Application {
 
         public static List<Integer> getComputerAnswer() {
             return computerNumber;
+        }
+        private static void clear() {
+            computerNumber.clear();
         }
     }
 
@@ -168,33 +171,55 @@ public class Application {
                 System.out.println();
             }
         }
+
+        public static class GameRestarter {
+            public static String restartFlag = "1";
+                private static void printEndMessage() {
+                    System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+                    System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+                }
+            private static void getRestartFlag() {
+                System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+                System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+            }
+
+        }
     public static void main(String[] args) {
         int ballCount = 0;
         int strikeCount = 0;
         List<Integer> computerAnswer = new ArrayList<>();
         List<Integer> userAnswer = new ArrayList<>();
         ComputerAnswer ComAnswer = new ComputerAnswer();
-        ComAnswer.createRandomAnswer();
         UserAnswer MyAnswer = new UserAnswer();
+        GameRestarter gameRestarter = new GameRestarter();
 
         System.out.println("숫자 야구 게임을 시작합니다.");
-        while (StrikeBallCounter.getStrikeCount() != 3){
-            StrikeBallCounter.clear();
-            MyAnswer.readFromUser();
-            MyAnswer.isDifferentNumber();
-            MyAnswer.isInSize();
-            MyAnswer.isNumber();
-            MyAnswer.toIntegerList();
+        while (GameRestarter.restartFlag.equals("1")) {
+            while (StrikeBallCounter.getStrikeCount() != 3) {
+                StrikeBallCounter.clear();
+                MyAnswer.readFromUser();
+                MyAnswer.isDifferentNumber();
+                MyAnswer.isInSize();
+                MyAnswer.isNumber();
+                MyAnswer.toIntegerList();
+                userAnswer = MyAnswer.getUserAnswer();
 
-            userAnswer = MyAnswer.getUserAnswer();
-            computerAnswer = ComAnswer.getComputerAnswer();
-            StrikeBallCounter.compareAnswers(userAnswer, computerAnswer);
-            ballCount = StrikeBallCounter.getBallCount();
-            strikeCount = StrikeBallCounter.getStrikeCount();
-            StrikeBallCountProcessor.process(ballCount, strikeCount);
-            MyAnswer.clear();
+                ComAnswer.createRandomAnswer();
+                computerAnswer = ComAnswer.getComputerAnswer();
+
+                StrikeBallCounter.compareAnswers(userAnswer, computerAnswer);
+                ballCount = StrikeBallCounter.getBallCount();
+                strikeCount = StrikeBallCounter.getStrikeCount();
+                StrikeBallCountProcessor.process(ballCount, strikeCount);
+                MyAnswer.clear();
+            }
+            StrikeBallCounter.clear();
+            computerAnswer.clear();
+            GameRestarter.printEndMessage();
+            restartOrEndGame = Console.readLine();
+            if (restartOrEndGame.equals("2")) {
+                return ;
+            }
         }
-        System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-        System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
     }
 }
