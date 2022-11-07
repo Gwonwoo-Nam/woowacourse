@@ -87,11 +87,7 @@ public class Application {
             }
         }
 
-        private static void isBall(Integer userNumber, Integer computerNumber) {
-            if (userNumber != computerNumber) {
-                ballCount++;
-            }
-        }
+
     }
 /*
     public class StrikeBallCountProcessor {
