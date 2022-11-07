@@ -15,9 +15,8 @@ public class Application {
         public static List<Integer> userNumber = new ArrayList<>();
         public static String userNumberString;
         public static void readFromUser() { //static type, private 확인
-            userNumberString = Console.readLine(); //String으로 저장
-            //List<Integer> userNumberInt = new ArrayList<>();
-
+            System.out.print("숫자를 입력해주세요 : ");
+            userNumberString = Console.readLine();
         }
 
         public static List<Integer> getUserAnswer() {
@@ -96,6 +95,10 @@ public class Application {
         private static int getStrikeCount() {
             return strikeCount;
         }
+
+        private static int getBallCount() {
+            return ballCount;
+        }
     }
 /*
     public class StrikeBallCountProcessor {
@@ -136,14 +139,22 @@ public class Application {
         MyAnswer.isInSize();
         MyAnswer.isNumber();
         MyAnswer.toIntegerList();
-        System.out.println(MyAnswer.getUserAnswer().get(0)); //동작 확인
+        System.out.println("숫자 야구 게임을 시작합니다.");
+        for (Integer number : UserAnswer.getUserAnswer()) {
+            System.out.println(number);
+        }
 
         ComputerAnswer ComAnswer = new ComputerAnswer();
         ComAnswer.createRandomAnswer();
-        System.out.println(ComAnswer.getComputerAnswer().get(1));
+
+        System.out.println("Computer Answer");
+        for (Integer number : ComAnswer.getComputerAnswer()) {
+            System.out.println(number);
+        }
 
         StrikeBallCounter.compareAnswers(MyAnswer.getUserAnswer(), ComAnswer.getComputerAnswer());
-
+        System.out.println("Strike : " + StrikeBallCounter.getStrikeCount());
+        System.out.println("Ball : " + StrikeBallCounter.getBallCount());
         // TODO: 프로그램 구현
     }
 }
