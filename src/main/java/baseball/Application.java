@@ -108,6 +108,11 @@ public class Application {
         private static int getBallCount() {
             return ballCount;
         }
+
+        private static void clear() {
+            strikeCount = 0;
+            ballCount = 0;
+        }
     }
 
     /*
@@ -160,6 +165,7 @@ public class Application {
 
         UserAnswer MyAnswer = new UserAnswer();
         while (StrikeBallCounter.getStrikeCount() != 3){
+            StrikeBallCounter.clear();
             MyAnswer.readFromUser();
             MyAnswer.isDifferentNumber();
             MyAnswer.isInSize();
@@ -168,7 +174,7 @@ public class Application {
             StrikeBallCounter.compareAnswers(MyAnswer.getUserAnswer(), ComAnswer.getComputerAnswer());
             System.out.println(StrikeBallCounter.getBallCount() + "볼 ");
             System.out.println(StrikeBallCounter.getStrikeCount() + "스트라이크");
-            MyAnswer.getUserAnswer().clear();
+            MyAnswer.clear();
 
         }
 
