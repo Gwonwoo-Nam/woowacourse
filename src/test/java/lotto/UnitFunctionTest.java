@@ -3,6 +3,7 @@ package lotto;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumberGenerator;
+import lotto.domain.WinningCounter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -136,6 +137,24 @@ class UnitFunctionTest {
                     lottoNumberGenerator.sortAscending();
                     assertThat(lottoNumberGenerator.getNumbers())
                             .isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6)
+                            );
+                }
+        );
+    }
+
+    @DisplayName("구매 로또 번호가 당첨 번호에서 겹치는 횟수를 카운트한다.")
+    @Test
+    void countWinningTest() {
+        assertSimpleTest(() -> {
+                    List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 5, 7, 6);
+                    List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+                    List<Integer> countNormalBonus = new ArrayList<>();
+                    WinningCounter winningCounter = new WinningCounter();
+                    winningCounter.countWinning(lottoNumbers, winningNumbers);
+                    countNormalBonus.add(winningCounter.getNormal_count());
+                    countNormalBonus.add(winningCounter.getBonus_count());
+                    assertThat(countNormalBonus)
+                            .isEqualTo(Arrays.asList(5,1)
                             );
                 }
         );

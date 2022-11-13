@@ -6,6 +6,8 @@ import java.util.List;
 import java.lang.Integer;
 import camp.nextstep.edu.missionutils.Console;
 import lotto.domain.LottoNumberGenerator;
+import lotto.domain.LottoRank;
+import lotto.domain.WinningCounter;
 
 public class Application {
     public static void main(String[] args) {
@@ -29,6 +31,14 @@ public class Application {
         lottoManager.readWinningNumbers();
         lottoManager.readBonusNumber();
         winningNumbers = lottoManager.getWinningNumbers();
+
+        // Lotto 정답 비교
+        for (int currentCount = 0; currentCount < lottoCount; currentCount++) {
+            WinningCounter winningCounter = new WinningCounter();
+            winningCounter.countWinning(lotto[currentCount].getLottoNumbers(), winningNumbers);
+            System.out.println("Bonus Count : "+winningCounter.getBonus_count());
+            System.out.println("normal Count : "+winningCounter.getNormal_count());
+        }
 
         // TODO: 프로그램 구현
     }
