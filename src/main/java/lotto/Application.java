@@ -24,9 +24,9 @@ public class Application {
         lottoNumber = lottoNumberGenerator.getNumbers();
 
         Lotto lotto = new Lotto(lottoNumber);
-        for (int i = 0; i<6; i++) {
-            System.out.println(lotto.getLottoNumbers().get(i));
-        }
+
+        Output output = new Output();
+        output.printLottoNumbers(lottoNumber);
 
 
         // TODO: 프로그램 구현
