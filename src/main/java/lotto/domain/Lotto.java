@@ -11,18 +11,14 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public void generate() {
-        List<Integer> numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6);
-    }
-
-    public List<Integer> getLotto() {
-        return numbers;
-    }
-
     private void validate(List<Integer> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException();
         }
+    }
+
+    public List<Integer> getLottoNumbers() {
+        return numbers;
     }
 
     // TODO: 추가 기능 구현

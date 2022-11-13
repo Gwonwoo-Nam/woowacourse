@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.lang.Integer;
 import camp.nextstep.edu.missionutils.Console;
+import lotto.domain.LottoNumberGenerator;
 
 public class Application {
     public static void main(String[] args) {
@@ -15,13 +16,14 @@ public class Application {
         input.readWinningNumbers();
         input.readBonusNumber();
         winningNumbers = input.getWinningNumbers();
-/*
+
         List<Integer> lottoNumber = new ArrayList<>();
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+        lottoNumber = lottoNumberGenerator.generate();
         Lotto lotto = new Lotto(lottoNumber);
-        lotto.generate();
         for (int i = 0; i<6; i++) {
-            System.out.println(lotto.getLotto().get(i));
-        }*/
+            System.out.println(lotto.getLottoNumbers().get(i));
+        }
 
 
         // TODO: 프로그램 구현
