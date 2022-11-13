@@ -101,10 +101,11 @@ class UnitFunctionTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
+
     @DisplayName("당첨 번호 배열과 중복되는 번호인지 검증한다.")
     @Test
     void validateRepetitionTest() {
-        List<Integer> winningNumbers = Arrays.asList(1,2,3,4,5,6);
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         final int SAME_NUMBER = 6;
         Input input = new Input();
         assertThatThrownBy(() -> input.validateRepetition(winningNumbers, SAME_NUMBER))
@@ -123,14 +124,18 @@ class UnitFunctionTest {
                 .hasMessageContaining("[ERROR]");
     }
 
+    //Random Number Generate Test
     @DisplayName("구매 로또 번호를 오름차순으로 정렬한다.")
     @Test
     void sortAscendingTest() {
-        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-        lottoNumberGenerator.sortAscending();
-        lottoNumberGenerator.generate();
-        assertSimpleTest(() -> lottoNumberGenerator.sortAscending())
-                .
-
+        assertSimpleTest(() -> {
+                    LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+                    lottoNumberGenerator.setNumbers(Arrays.asList(3, 2, 1, 5, 6, 4));
+                    lottoNumberGenerator.sortAscending();
+                    assertThat(lottoNumberGenerator.getNumbers())
+                            .isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6)
+                            );
+                }
+        );
     }
 }

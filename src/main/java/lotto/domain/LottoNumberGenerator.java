@@ -8,8 +8,11 @@ import java.util.List;
 
 public class LottoNumberGenerator {
     private List<Integer> numbers;
+    public void setNumbers(List<Integer> setNumbers) {
+        numbers = setNumbers;
+    }
     public void generate() {
-        numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6);
+        setNumbers(Randoms.pickUniqueNumbersInRange(1, 45, 6));
     }
     public void sortAscending() {
         int[] numberList = new int[numbers.size()];
