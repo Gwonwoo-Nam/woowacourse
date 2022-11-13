@@ -1,10 +1,12 @@
 package lotto;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import javax.swing.*;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
@@ -24,11 +26,11 @@ class UnitFunctionTest {
     void readPurchaseAmountTest() {
         assertSimpleTest(
                 () -> {
-                    Input input = new Input();
+                    LottoManager lottoManager = new LottoManager();
                     System.setIn(new ByteArrayInputStream("8000".getBytes()));
                     OutputStream out = new ByteArrayOutputStream();
                     System.setOut(new PrintStream(out));
-                    input.readPurchaseAmount();
+                    lottoManager.readPurchaseAmount();
 
                     assertThat(out.toString()).contains(
                             "8개를 구매했습니다."
@@ -43,10 +45,10 @@ class UnitFunctionTest {
         assertSimpleTest(
                 () -> {
                     String actualInput = "1,2,3,4,5,6";
-                    Input input = new Input();
+                    LottoManager lottoManager = new LottoManager();
                     System.setIn(new ByteArrayInputStream(actualInput.getBytes()));
-                    input.readWinningNumbers();
-                    assertThat(input.getWinningNumbers())
+                    lottoManager.readWinningNumbers();
+                    assertThat(lottoManager.getWinningNumbers())
                             .containsExactly(1, 2, 3, 4, 5, 6
                             );
                 }
@@ -60,11 +62,11 @@ class UnitFunctionTest {
                 () -> {
                     String actualInput = "42";
                     final int BONUS_INDEX = 6;
-                    Input input = new Input();
+                    LottoManager lottoManager = new LottoManager();
                     System.setIn(new ByteArrayInputStream(actualInput.getBytes()));
-                    input.readBonusNumber();
+                    lottoManager.readBonusNumber();
 
-                    assertThat(input.getWinningNumbers())
+                    assertThat(lottoManager.getWinningNumbers())
                             .contains(42
                             );
                 }
@@ -75,8 +77,8 @@ class UnitFunctionTest {
     @Test
     void validatePurchaseInputTest() {
         String purchaseInput = "72,000";
-        Input input = new Input();
-        assertThatThrownBy(() -> input.validatePurchaseAmount(purchaseInput))
+        LottoManager lottoManager = new LottoManager();
+        assertThatThrownBy(() -> lottoManager.validatePurchaseAmount(purchaseInput))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
@@ -86,8 +88,8 @@ class UnitFunctionTest {
     void validateWinningInputTest() {
         String winningInput = "1,2,3,4,5,6,";
         final int WINNING_INPUT_LENGTH = 6;
-        Input input = new Input();
-        assertThatThrownBy(() -> input.validateInputPattern(winningInput, WINNING_INPUT_LENGTH))
+        LottoManager lottoManager = new LottoManager();
+        assertThatThrownBy(() -> lottoManager.validateInputPattern(winningInput, WINNING_INPUT_LENGTH))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
@@ -96,8 +98,8 @@ class UnitFunctionTest {
     @Test
     void validateEachNumberTest() {
         String winningNumber = "46";
-        Input input = new Input();
-        assertThatThrownBy(() -> input.validateEachNumber(winningNumber))
+        LottoManager lottoManager = new LottoManager();
+        assertThatThrownBy(() -> lottoManager.validateEachNumber(winningNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
@@ -107,8 +109,8 @@ class UnitFunctionTest {
     void validateRepetitionTest() {
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         final int SAME_NUMBER = 6;
-        Input input = new Input();
-        assertThatThrownBy(() -> input.validateRepetition(winningNumbers, SAME_NUMBER))
+        LottoManager lottoManager = new LottoManager();
+        assertThatThrownBy(() -> lottoManager.validateRepetition(winningNumbers, SAME_NUMBER))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
@@ -118,8 +120,8 @@ class UnitFunctionTest {
     void validateBonusInputTest() {
         String winningInput = "7,";
         final int WINNING_BONUS_LENGTH = 1;
-        Input input = new Input();
-        assertThatThrownBy(() -> input.validateInputPattern(winningInput, WINNING_BONUS_LENGTH))
+        LottoManager lottoManager = new LottoManager();
+        assertThatThrownBy(() -> lottoManager.validateInputPattern(winningInput, WINNING_BONUS_LENGTH))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }

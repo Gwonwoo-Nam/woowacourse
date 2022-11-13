@@ -6,12 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.lang.IllegalArgumentException;
 
-public class Input {
-    public List<Integer> winningNumbers = new ArrayList<>();
-
+public class LottoManager {
+    private List<Integer> winningNumbers = new ArrayList<>();
+    private int lottoCount = 0;
     public List<Integer> getWinningNumbers() {
         return winningNumbers;
     }
+    public int getLottoCount() {
+        return lottoCount;
+    }
+
 
     public void readPurchaseAmount() {
         final String INPUT_AMOUNT_MESSAGE = "구입금액을 입력해 주세요.";
@@ -19,10 +23,11 @@ public class Input {
         final int LOTTO_PRICE = 1000;
         System.out.println(INPUT_AMOUNT_MESSAGE);
         String purchaseInput = Console.readLine();
+        System.out.println();
         validatePurchaseAmount(purchaseInput);
 
         int purchaseAmount = Integer.parseInt(purchaseInput);
-        int lottoCount = purchaseAmount / LOTTO_PRICE;
+        lottoCount = purchaseAmount / LOTTO_PRICE;
         System.out.println(lottoCount + PURCHASE_MESSAGE);
     }
 
@@ -36,6 +41,7 @@ public class Input {
     public void readWinningNumbers() {
         final String INPUT_WINNING_NUMBER_MESSAGE = "당첨 번호를 입력해 주세요.";
         final int WINNING_INPUT_LENGTH = 6;
+        System.out.println();
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
         String winningInput = Console.readLine();
         validateInputPattern(winningInput, WINNING_INPUT_LENGTH);
@@ -57,6 +63,7 @@ public class Input {
         final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 번호를 입력해 주세요.";
         final int BONUS_INPUT_LENGTH = 1;
         Integer bonusNumber;
+        System.out.println();
         System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
         String bonusInput = Console.readLine();
         validateInputPattern(bonusInput, BONUS_INPUT_LENGTH);

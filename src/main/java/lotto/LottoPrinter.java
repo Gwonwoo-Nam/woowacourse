@@ -2,8 +2,8 @@ package lotto;
 
 import java.util.List;
 
-public class Output {
+public class LottoPrinter {
     public void printLottoNumbers(List<Integer> lottoNumber) {
-        System.out.print(lottoNumber);
+        System.out.println(lottoNumber);
     }
 }
