@@ -1,16 +1,17 @@
 package lotto;
 
 import camp.nextstep.edu.missionutils.Console;
-import lotto.domain.Lotto;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.IllegalArgumentException;
 
-import static java.lang.Boolean.TRUE;
-
 public class Input {
+    public List<Integer> winningNumbers = new ArrayList<>();
 
+    public List<Integer> getWinningNumbers() {
+        return winningNumbers;
+    }
 
     public void readPurchaseAmount() {
         final String INPUT_AMOUNT_MESSAGE = "구입금액을 입력해 주세요.";
@@ -32,25 +33,42 @@ public class Input {
         }
     }
 
-    public List<Integer> readWinningNumbers() {
+    public void readWinningNumbers() {
         final String INPUT_WINNING_NUMBER_MESSAGE = "당첨 번호를 입력해 주세요.";
+        final int WINNING_INPUT_LENGTH = 6;
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
         String winningInput = Console.readLine();
-        validateWinningInput(winningInput);
+        validateInputPattern(winningInput, WINNING_INPUT_LENGTH);
 
         String[] winningInputSplit = winningInput.split(",");
-        List<Integer> winningNumbers = new ArrayList<>();
         for (String number : winningInputSplit) {
             validateEachNumber(number);
+            validateRepetition(winningNumbers, Integer.valueOf(number));
             winningNumbers.add(Integer.valueOf(number));
         }
-        return winningNumbers;
     }
 
-    public void validateWinningInput(String winningNumberInput) {
-        final int INPUT_LENGTH = 6;
-        final String INPUT_PATTERN = "[0-9]*,".repeat(INPUT_LENGTH - 1)+"[0-9]*";
-        if (!winningNumberInput.matches(INPUT_PATTERN)) {
+    public void validateRepetition(List<Integer> winningNumbers, Integer number) {
+        if (winningNumbers.contains(number))
+            throw new IllegalArgumentException("[ERROR] 중복되지 않는 번호를 입력해주세요.");
+    }
+
+    public void readBonusNumber() {
+        final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 번호를 입력해 주세요.";
+        final int BONUS_INPUT_LENGTH = 1;
+        Integer bonusNumber;
+        System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
+        String bonusInput = Console.readLine();
+        validateInputPattern(bonusInput, BONUS_INPUT_LENGTH);
+        validateEachNumber(bonusInput);
+        bonusNumber = Integer.valueOf(bonusInput);
+        validateRepetition(winningNumbers, bonusNumber);
+        winningNumbers.add(bonusNumber);
+    }
+
+    public void validateInputPattern(String Input, int inputLength) {
+        final String INPUT_PATTERN = "[0-9]*,".repeat(inputLength - 1)+"[0-9]*";
+        if (!Input.matches(INPUT_PATTERN)) {
             throw new IllegalArgumentException("[ERROR] 입력 형식에 맞게 숫자를 입력해주세요.");
         }
     }

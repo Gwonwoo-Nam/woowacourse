@@ -8,6 +8,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 
@@ -43,9 +44,27 @@ class UnitFunctionTest {
                     String actualInput = "1,2,3,4,5,6";
                     Input input = new Input();
                     System.setIn(new ByteArrayInputStream(actualInput.getBytes()));
-
-                    assertThat(input.readWinningNumbers())
+                    input.readWinningNumbers();
+                    assertThat(input.getWinningNumbers())
                             .containsExactly(1, 2, 3, 4, 5, 6
+                            );
+                }
+        );
+    }
+
+    @DisplayName("보너스 번호를 입력 받는다.")
+    @Test
+    void readBonusNumbersTest() {
+        assertSimpleTest(
+                () -> {
+                    String actualInput = "42";
+                    final int BONUS_INDEX = 6;
+                    Input input = new Input();
+                    System.setIn(new ByteArrayInputStream(actualInput.getBytes()));
+                    input.readBonusNumber();
+
+                    assertThat(input.getWinningNumbers())
+                            .contains(42
                             );
                 }
         );
@@ -60,12 +79,14 @@ class UnitFunctionTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
+
     @DisplayName("로또 당첨 번호의 입력 pattern을 검증한다.")
     @Test
     void validateWinningInputTest() {
         String winningInput = "1,2,3,4,5,6,";
+        final int WINNING_INPUT_LENGTH = 6;
         Input input = new Input();
-        assertThatThrownBy(() -> input.validateWinningInput(winningInput))
+        assertThatThrownBy(() -> input.validateInputPattern(winningInput, WINNING_INPUT_LENGTH))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
@@ -76,6 +97,27 @@ class UnitFunctionTest {
         String winningNumber = "46";
         Input input = new Input();
         assertThatThrownBy(() -> input.validateEachNumber(winningNumber))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR]");
+    }
+    @DisplayName("당첨 번호 배열과 중복되는 번호인지 검증한다.")
+    @Test
+    void validateRepetitionTest() {
+        List<Integer> winningNumbers = Arrays.asList(1,2,3,4,5,6);
+        final int SAME_NUMBER = 6;
+        Input input = new Input();
+        assertThatThrownBy(() -> input.validateRepetition(winningNumbers, SAME_NUMBER))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR]");
+    }
+
+    @DisplayName("보너스 당첨 번호의 입력 pattern을 검증한다.")
+    @Test
+    void validateBonusInputTest() {
+        String winningInput = "7,";
+        final int WINNING_BONUS_LENGTH = 1;
+        Input input = new Input();
+        assertThatThrownBy(() -> input.validateInputPattern(winningInput, WINNING_BONUS_LENGTH))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
