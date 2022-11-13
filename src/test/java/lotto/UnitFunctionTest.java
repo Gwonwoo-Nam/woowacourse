@@ -1,6 +1,7 @@
 package lotto;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import lotto.domain.LottoNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -120,5 +121,16 @@ class UnitFunctionTest {
         assertThatThrownBy(() -> input.validateInputPattern(winningInput, WINNING_BONUS_LENGTH))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
+    }
+
+    @DisplayName("구매 로또 번호를 오름차순으로 정렬한다.")
+    @Test
+    void sortAscendingTest() {
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+        lottoNumberGenerator.sortAscending();
+        lottoNumberGenerator.generate();
+        assertSimpleTest(() -> lottoNumberGenerator.sortAscending())
+                .
+
     }
 }

@@ -19,7 +19,10 @@ public class Application {
 
         List<Integer> lottoNumber = new ArrayList<>();
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-        lottoNumber = lottoNumberGenerator.generate();
+        lottoNumberGenerator.generate();
+        lottoNumberGenerator.sortAscending();
+        lottoNumber = lottoNumberGenerator.getNumbers();
+
         Lotto lotto = new Lotto(lottoNumber);
         for (int i = 0; i<6; i++) {
             System.out.println(lotto.getLottoNumbers().get(i));
