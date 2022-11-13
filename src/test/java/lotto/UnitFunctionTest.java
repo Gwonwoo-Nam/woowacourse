@@ -53,10 +53,29 @@ class UnitFunctionTest {
 
     @DisplayName("로또 구입 금액의 입력 pattern을 검증한다.")
     @Test
-    void validateWinningInput() {
-        String winningInput = "1,2,3,4,5,6";
+    void validatePurchaseInputTest() {
+        String purchaseInput = "72,000";
+        Input input = new Input();
+        assertThatThrownBy(() -> input.validatePurchaseAmount(purchaseInput))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR]");
+    }
+    @DisplayName("로또 당첨 번호의 입력 pattern을 검증한다.")
+    @Test
+    void validateWinningInputTest() {
+        String winningInput = "1,2,3,4,5,6,";
         Input input = new Input();
         assertThatThrownBy(() -> input.validateWinningInput(winningInput))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR]");
+    }
+
+    @DisplayName("로또 당첨 번호의 숫자 범위를 검증한다.")
+    @Test
+    void validateEachNumberTest() {
+        String winningNumber = "46";
+        Input input = new Input();
+        assertThatThrownBy(() -> input.validateEachNumber(winningNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }

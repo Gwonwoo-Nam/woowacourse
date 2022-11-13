@@ -18,10 +18,18 @@ public class Input {
         final int LOTTO_PRICE = 1000;
         System.out.println(INPUT_AMOUNT_MESSAGE);
         String purchaseInput = Console.readLine();
+        validatePurchaseAmount(purchaseInput);
 
         int purchaseAmount = Integer.parseInt(purchaseInput);
         int lottoCount = purchaseAmount / LOTTO_PRICE;
         System.out.println(lottoCount + PURCHASE_MESSAGE);
+    }
+
+    public void validatePurchaseAmount(String purchaseInput) {
+        final String INPUT_PATTERN = "[0-9]*";
+        if (!purchaseInput.matches(INPUT_PATTERN)) {
+            throw new IllegalArgumentException("[ERROR] 구매 금액에 숫자만 입력해주세요.");
+        }
     }
 
     public List<Integer> readWinningNumbers() {
@@ -41,7 +49,7 @@ public class Input {
 
     public void validateWinningInput(String winningNumberInput) {
         final int INPUT_LENGTH = 6;
-        final String INPUT_PATTERN = "[0-9]*,".repeat(INPUT_LENGTH - 1)+"[0-9]";
+        final String INPUT_PATTERN = "[0-9]*,".repeat(INPUT_LENGTH - 1)+"[0-9]*";
         if (!winningNumberInput.matches(INPUT_PATTERN)) {
             throw new IllegalArgumentException("[ERROR] 입력 형식에 맞게 숫자를 입력해주세요.");
         }
