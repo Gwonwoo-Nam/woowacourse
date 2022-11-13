@@ -11,6 +11,8 @@ public class Application {
         input.readPurchaseAmount();
         input.readWinningNumbers();
 
+
+
         // TODO: 프로그램 구현
     }
 }
