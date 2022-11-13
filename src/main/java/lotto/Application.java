@@ -7,14 +7,8 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
-        System.out.println("구입금액을 입력해 주세요.");
-        String ReadpurchaseAmount = Console.readLine();
-        int purchaseAmount = Integer.parseInt(ReadpurchaseAmount);
-
-        final int LOTTO_PRICE = 1000;
-        int lottoCount = purchaseAmount / LOTTO_PRICE;
-
-        System.out.printf("%d개를 구매했습니다.", lottoCount);
+        Input input = new Input();
+        input.readPurchaseAmount();
 
         // TODO: 프로그램 구현
     }
