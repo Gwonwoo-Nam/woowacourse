@@ -21,10 +21,6 @@ public class LottoManager {
         return lottoCount;
     }
 
-    public int getPurchaseAmount() {
-        return purchaseAmount;
-    }
-
     public void readPurchaseAmount() {
         final int LOTTO_PRICE = 1000;
 
@@ -55,7 +51,7 @@ public class LottoManager {
     public void readBonusNumber() {
         final int BONUS_INPUT_LENGTH = 1;
         Integer bonusNumber;
-        lottoPrinter.printBonusNumberMessage();
+        lottoPrinter.printGetBonusNumberMessage();
         String bonusInput = Console.readLine();
         validateInputPattern(bonusInput, BONUS_INPUT_LENGTH);
         validateNumberRange(bonusInput);
