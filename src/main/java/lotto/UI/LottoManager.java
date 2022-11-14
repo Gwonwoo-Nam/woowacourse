@@ -1,4 +1,4 @@
-package lotto;
+package lotto.UI;
 
 import camp.nextstep.edu.missionutils.Console;
 
@@ -66,14 +66,14 @@ public class LottoManager {
 
     private void validatePurchaseUnit(int LOTTO_PRICE) {
         if (purchaseAmount % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException(lottoPrinter.UNVALID_PURCHASE_AMOUNT_ERROR);
+            throw new IllegalArgumentException(lottoPrinter.INVALID_PURCHASE_AMOUNT_ERROR);
         }
     }
 
     private void validatePurchasePattern(String purchaseInput) {
         final String INPUT_PATTERN = "[0-9]*";
         if (!purchaseInput.matches(INPUT_PATTERN)) {
-            throw new IllegalArgumentException(lottoPrinter.UNVALID_PURCHASE_PATTERN_ERROR);
+            throw new IllegalArgumentException(lottoPrinter.INVALID_PURCHASE_PATTERN_ERROR);
         }
     }
 

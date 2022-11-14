@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.LottoNumberGenerator;
 import lotto.domain.WinningCounter;
+import lotto.UI.LottoManager;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -71,7 +72,6 @@ class UnitFunctionTest {
         );
     }
 
-    //Random Number Generate Test
     @DisplayName("구매 로또 번호를 오름차순으로 정렬한다.")
     @Test
     void sortAscendingTest() {
@@ -88,17 +88,27 @@ class UnitFunctionTest {
 
     @DisplayName("구매 로또 번호가 당첨 번호에서 겹치는 횟수를 카운트한다.")
     @Test
-    void countWinningTest() {
+    void countNormalWinningTest() {
         assertSimpleTest(() -> {
                     List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 5, 7, 6);
                     List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
-                    List<Integer> countNormalBonus = new ArrayList<>();
                     WinningCounter winningCounter = new WinningCounter();
-                    winningCounter.countWinning(lottoNumbers, winningNumbers);
-                    countNormalBonus.add(winningCounter.getNormal_count());
-                    countNormalBonus.add(winningCounter.getBonus_count());
-                    assertThat(countNormalBonus)
-                            .isEqualTo(Arrays.asList(5,1)
+                    assertThat(winningCounter.countWinningNormal(lottoNumbers, winningNumbers))
+                            .isEqualTo(5
+                            );
+                }
+        );
+    }
+
+    @DisplayName("구매 로또 번호가 보너스 번호와 겹치는 횟수를 카운트한다.")
+    @Test
+    void countBonusWinningTest() {
+        assertSimpleTest(() -> {
+                    List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 5, 7, 6);
+                    List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+                    WinningCounter winningCounter = new WinningCounter();
+                    assertThat(winningCounter.countWinningBonus(lottoNumbers, winningNumbers))
+                            .isEqualTo(1
                             );
                 }
         );

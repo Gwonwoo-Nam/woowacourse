@@ -1,4 +1,4 @@
-package lotto;
+package lotto.UI;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.List;
 import lotto.domain.LottoRank;
 
 public class LottoPrinter {
-    public final String UNVALID_PURCHASE_AMOUNT_ERROR = "[ERROR] 구매 금액은 1,000원 단위로 입력해주세요.";
-    public final String UNVALID_PURCHASE_PATTERN_ERROR = "[ERROR] 구매 금액에 숫자만 입력해주세요.";
+    public final String INVALID_PURCHASE_AMOUNT_ERROR = "[ERROR] 구매 금액은 1,000원 단위로 입력해주세요.";
+    public final String INVALID_PURCHASE_PATTERN_ERROR = "[ERROR] 구매 금액에 숫자만 입력해주세요.";
     public final String WINNING_NUMBERS_REPETITION_ERROR = "[ERROR] 중복되지 않는 번호를 입력해주세요.";
     public final String WINNING_NUMBERS_PATTERN_ERROR = "[ERROR] 입력 형식에 맞게 숫자를 입력해주세요.";
     public final String WINNING_NUMBER_RANGE_ERROR = "[ERROR] 1~45 범위 내의 숫자를 입력해주세요.";

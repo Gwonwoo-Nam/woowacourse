@@ -1,8 +1,13 @@
-package lotto;
+package lotto.Controller;
 
-import lotto.domain.*;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumberGenerator;
+import lotto.domain.LottoRank;
+import lotto.domain.WinningCounter;
+import lotto.domain.ProfitManager;
+import lotto.UI.LottoManager;
+import lotto.UI.LottoPrinter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
@@ -14,16 +19,12 @@ public class LottoGame {
         LottoManager lottoManager = new LottoManager();
         lottoManager.readPurchaseAmount();
         lottoCount = lottoManager.getLottoCount();
-        //개수만큼 로또 생성
         Lotto[] lotto = new Lotto[lottoCount];
         generateLotto(lottoCount, lotto);
-        //winning number 저장
         lottoManager.readWinningNumbers();
         lottoManager.readBonusNumber();
         winningNumbers = lottoManager.getWinningNumbers();
-        // Lotto 정답 비교
         LottoRank[] rankBoard = getRankBoard(lotto);
-        // Lotto Rank 출력
         showLottoRankBoard(rankBoard);
         showLottoProfitResult(lottoCount, rankBoard);
     }
@@ -32,15 +33,14 @@ public class LottoGame {
         LottoRank[] rankBoard = LottoRank.values();
         for (int currentCount = 0; currentCount < lottoCount; currentCount++) {
             WinningCounter winningCounter = new WinningCounter();
-            winningCounter.countWinning(lotto[currentCount].getLottoNumbers(), winningNumbers);
-            updateRankBoard(rankBoard, winningCounter);
+            int normalCount = winningCounter.countWinningNormal(lotto[currentCount].getLottoNumbers(), winningNumbers);
+            int bonusCount = winningCounter.countWinningBonus(lotto[currentCount].getLottoNumbers(), winningNumbers);
+            updateRankBoard(rankBoard, winningCounter, normalCount, bonusCount);
         }
         return rankBoard;
     }
 
-    private static void updateRankBoard(LottoRank[] rankBoard, WinningCounter winningCounter) {
-        int normalCount = winningCounter.getNormal_count();
-        int bonusCount = winningCounter.getBonus_count();
+    private static void updateRankBoard(LottoRank[] rankBoard, WinningCounter winningCounter, int normalCount, int bonusCount) {
         for (LottoRank rank : rankBoard) {
             if (rank.checkThirdPlace(normalCount, bonusCount)) {
                 break;
