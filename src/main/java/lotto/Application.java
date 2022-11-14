@@ -43,9 +43,8 @@ public class Application {
             int normalCount = winningCounter.getNormal_count();
             int bonusCount = winningCounter.getBonus_count();
 
-
             for (LottoRank rank : values) {
-                if (rank.checkSecondPlace(normalCount, bonusCount)) {
+                if (rank.checkThirdPlace(normalCount, bonusCount)) {
                     break ;
                 }
                     rank.findMatchingRank(normalCount);
