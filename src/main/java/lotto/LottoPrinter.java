@@ -18,7 +18,6 @@ public class LottoPrinter {
 
     public void printWinningResult(LottoRank lottoRank) {
         DecimalFormat decimalFormat = new DecimalFormat("###,###");
-
         System.out.print(lottoRank.getNormalCount() + "개 일치");
         if (lottoRank.name() == "SECOND") {
             System.out.print(", 보너스 볼 일치");
@@ -50,14 +49,22 @@ public class LottoPrinter {
         final String INPUT_AMOUNT_MESSAGE = "구입금액을 입력해 주세요.";
         System.out.println(INPUT_AMOUNT_MESSAGE);
     }
+
     public void printPurchaseCompletionMessage(int lottoCount) {
         final String PURCHASE_MESSAGE = "개를 구매했습니다.";
         System.out.println(lottoCount + PURCHASE_MESSAGE);
     }
+
     public void printGetWinningNumberMessage() {
         final String INPUT_WINNING_NUMBER_MESSAGE = "당첨 번호를 입력해 주세요.";
         System.out.println();
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
+    }
+
+    public void printStatisticMessage() {
+        System.out.println();
+        System.out.println("당첨 통계");
+        System.out.println("---");
     }
 
 }
