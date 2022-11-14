@@ -1,10 +1,6 @@
 package lotto.Controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumberGenerator;
-import lotto.domain.LottoRank;
-import lotto.domain.WinningCounter;
-import lotto.domain.ProfitManager;
+import lotto.domain.*;
 import lotto.UI.LottoManager;
 import lotto.UI.LottoPrinter;
 

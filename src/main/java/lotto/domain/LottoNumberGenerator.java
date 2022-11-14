@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class LottoNumberGenerator {
 
+public class LottoNumberGenerator {
     public List<Integer> generate() {
         return (Randoms.pickUniqueNumbersInRange(1, 45, 6));
     }

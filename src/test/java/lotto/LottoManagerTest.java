@@ -14,7 +14,7 @@ import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@DisplayName("LottoMangager 클래스")
+@DisplayName("LottoManager 클래스")
 @Nested
 class LottoManagerTest {
     @DisplayName("readPurchaseAmount 메소드는")
