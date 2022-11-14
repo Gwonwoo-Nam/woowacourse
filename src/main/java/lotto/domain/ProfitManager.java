@@ -3,9 +3,9 @@ package lotto.domain;
 public class ProfitManager {
     private int totalEarning = 0;
 
-    public void sumEarning(LottoRank lottorank) {
-        if (lottorank.getWinningCount() != 0)
-            totalEarning += lottorank.getWinningPrice() * lottorank.getWinningCount();
+    public void sumEarning(LottoRank lottoRank) {
+        if (lottoRank.getWinningCount() != 0)
+            totalEarning += lottoRank.getWinningPrice() * lottoRank.getWinningCount();
     }
 
     public double calculate(int purchaseAmount) {

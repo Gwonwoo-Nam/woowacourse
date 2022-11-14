@@ -74,9 +74,8 @@ public class LottoGame {
         for (int currentCount = 0; currentCount < lottoCount; currentCount++) {
             List<Integer> lottoNumber;
             LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-            lottoNumberGenerator.generate();
-            lottoNumberGenerator.sortAscending();
-            lottoNumber = lottoNumberGenerator.getNumbers();
+            lottoNumber = lottoNumberGenerator.generate();
+            lottoNumber = lottoNumberGenerator.sortAscending(lottoNumber);
             lotto[currentCount] = new Lotto(lottoNumber);
             lottoPrinter.printLottoNumbers(lottoNumber);
         }

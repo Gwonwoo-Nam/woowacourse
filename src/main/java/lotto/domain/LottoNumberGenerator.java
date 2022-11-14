@@ -7,21 +7,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LottoNumberGenerator {
-    private List<Integer> numbers;
 
-    public void setNumbers(List<Integer> setNumbers) {
-        numbers = setNumbers;
+    public List<Integer> generate() {
+        return (Randoms.pickUniqueNumbersInRange(1, 45, 6));
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
-    }
-
-    public void generate() {
-        setNumbers(Randoms.pickUniqueNumbersInRange(1, 45, 6));
-    }
-
-    public void sortAscending() {
+    public List<Integer> sortAscending(List<Integer> numbers) {
         int[] numberList = new int[numbers.size()];
         for (int index = 0; index < numbers.size(); index++) {
             numberList[index] = numbers.get(index);
@@ -33,6 +24,7 @@ public class LottoNumberGenerator {
             sortedNumbers.add(number);
         }
         numbers = sortedNumbers;
+        return numbers;
     }
 
 }

@@ -11,7 +11,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 
@@ -77,9 +76,7 @@ class UnitFunctionTest {
     void sortAscendingTest() {
         assertSimpleTest(() -> {
                     LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-                    lottoNumberGenerator.setNumbers(Arrays.asList(3, 2, 1, 5, 6, 4));
-                    lottoNumberGenerator.sortAscending();
-                    assertThat(lottoNumberGenerator.getNumbers())
+                    assertThat(lottoNumberGenerator.sortAscending(Arrays.asList(3, 2, 1, 5, 6, 4)))
                             .isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6)
                             );
                 }
