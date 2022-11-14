@@ -21,12 +21,16 @@
 
 ### LottoPrinter
 - [O] 구매 로또 번호를 출력한다.
-- [ ] 당첨 내역을 출력한다.
+- [O] 당첨 내역을 출력한다.
 - [ ] 수익률을 출력한다.
+
+### LottoRank
+- [O] 당첨 배열에 맞는 Count를 증가시킨다.
+  - [O] 2등은 BonusCount가 1, NormalCount가 5일때 증가시킨다.
+  - [O] 나머지 등수는 NormalCount로 증가시킨다.
 
 ### WinningCounter
 - [O] 구매 로또 번호가 당첨 번호에서 겹치는 횟수를 카운트한다.
-- [ ] 당첨 배열에 맞는 Count를 증가시킨다.
 
 ### ProfitCalculator
 - [ ] 수익률을 계산하여 소수점 둘째 자리에서 반올림한다.
