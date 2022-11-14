@@ -79,7 +79,7 @@ class UnitFunctionTest {
     void validatePurchaseInputTest() {
         String purchaseInput = "72,000";
         LottoManager lottoManager = new LottoManager();
-        assertThatThrownBy(() -> lottoManager.validatePurchaseAmount(purchaseInput))
+        assertThatThrownBy(() -> lottoManager.validatePurchasePattern(purchaseInput))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
@@ -100,7 +100,7 @@ class UnitFunctionTest {
     void validateEachNumberTest() {
         String winningNumber = "46";
         LottoManager lottoManager = new LottoManager();
-        assertThatThrownBy(() -> lottoManager.validateEachNumber(winningNumber))
+        assertThatThrownBy(() -> lottoManager.validateNumberRange(winningNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }

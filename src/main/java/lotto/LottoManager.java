@@ -30,17 +30,23 @@ public class LottoManager {
         System.out.println(INPUT_AMOUNT_MESSAGE);
         String purchaseInput = Console.readLine();
         System.out.println();
-        validatePurchaseAmount(purchaseInput);
-
+        validatePurchasePattern(purchaseInput);
+        validatePurchaseUnit(LOTTO_PRICE);
         purchaseAmount = Integer.parseInt(purchaseInput);
         lottoCount = purchaseAmount / LOTTO_PRICE;
+
         System.out.println(lottoCount + PURCHASE_MESSAGE);
     }
+    public void validatePurchaseUnit(int LOTTO_PRICE) {
+        if (purchaseAmount % LOTTO_PRICE != 0) {
+            LottoPrinter.printErrorMessage(LottoPrinter.UNVALID_PURCHASE_AMOUNT_ERROR);
+        }
+    }
 
-    public void validatePurchaseAmount(String purchaseInput) {
+    public void validatePurchasePattern(String purchaseInput) {
         final String INPUT_PATTERN = "[0-9]*";
         if (!purchaseInput.matches(INPUT_PATTERN)) {
-            throw new IllegalArgumentException("[ERROR] 구매 금액에 숫자만 입력해주세요.");
+            LottoPrinter.printErrorMessage(LottoPrinter.UNVALID_PURCHASE_PATTERN_ERROR);
         }
     }
 
@@ -54,7 +60,7 @@ public class LottoManager {
 
         String[] winningInputSplit = winningInput.split(",");
         for (String number : winningInputSplit) {
-            validateEachNumber(number);
+            validateNumberRange(number);
             validateRepetition(winningNumbers, Integer.valueOf(number));
             winningNumbers.add(Integer.valueOf(number));
         }
@@ -62,7 +68,7 @@ public class LottoManager {
 
     public void validateRepetition(List<Integer> winningNumbers, Integer number) {
         if (winningNumbers.contains(number))
-            throw new IllegalArgumentException("[ERROR] 중복되지 않는 번호를 입력해주세요.");
+            LottoPrinter.printErrorMessage(LottoPrinter.WINNING_NUMBERS_REPETITION_ERROR);
     }
 
     public void readBonusNumber() {
@@ -73,7 +79,7 @@ public class LottoManager {
         System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
         String bonusInput = Console.readLine();
         validateInputPattern(bonusInput, BONUS_INPUT_LENGTH);
-        validateEachNumber(bonusInput);
+        validateNumberRange(bonusInput);
         bonusNumber = Integer.valueOf(bonusInput);
         validateRepetition(winningNumbers, bonusNumber);
         winningNumbers.add(bonusNumber);
@@ -82,13 +88,13 @@ public class LottoManager {
     public void validateInputPattern(String Input, int inputLength) {
         final String INPUT_PATTERN = "[0-9]*,".repeat(inputLength - 1) + "[0-9]*";
         if (!Input.matches(INPUT_PATTERN)) {
-            throw new IllegalArgumentException("[ERROR] 입력 형식에 맞게 숫자를 입력해주세요.");
+            LottoPrinter.printErrorMessage(LottoPrinter.WINNING_NUMBERS_PATTERN_ERROR);
         }
     }
 
-    public void validateEachNumber(String number) {
+    public void validateNumberRange(String number) {
         if (Integer.valueOf(number) > 45 || Integer.valueOf(number) < 1) {
-            throw new IllegalArgumentException("[ERROR] 1~45 범위 내의 숫자를 입력해주세요.");
+            LottoPrinter.printErrorMessage(LottoPrinter.WINNING_NUMBER_RANGE_ERROR);
         }
     }
 }
