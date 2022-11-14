@@ -1,15 +1,12 @@
 package lotto;
 
-import lotto.domain.Lotto;
+import lotto.domain.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.Integer;
 
 import camp.nextstep.edu.missionutils.Console;
-import lotto.domain.LottoNumberGenerator;
-import lotto.domain.LottoRank;
-import lotto.domain.WinningCounter;
 
 public class Application {
     public static void main(String[] args) {
@@ -49,8 +46,18 @@ public class Application {
                 }
                     rank.findMatchingRank(normalCount);
             }
+
         }
-        lottoPrinter.printWinningResult(values);
+        // Lotto Rank 출력
+        for (LottoRank rank : values) {
+            lottoPrinter.printWinningResult(rank);
+        }
+        ProfitManager profitManager = new ProfitManager();
+        for (LottoRank rank : values) {
+            profitManager.sumEarning(rank);
+        }
+        double totalProfit = profitManager.calculate(lottoManager.getPurchaseAmount());
+        lottoPrinter.printProfit(totalProfit);
         // TODO: 프로그램 구현
     }
 }

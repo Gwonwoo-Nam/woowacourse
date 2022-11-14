@@ -9,13 +9,19 @@ import java.lang.IllegalArgumentException;
 public class LottoManager {
     private List<Integer> winningNumbers = new ArrayList<>();
     private int lottoCount = 0;
+    private int purchaseAmount = 0;
+
     public List<Integer> getWinningNumbers() {
         return winningNumbers;
     }
+
     public int getLottoCount() {
         return lottoCount;
     }
 
+    public int getPurchaseAmount() {
+        return purchaseAmount;
+    }
 
     public void readPurchaseAmount() {
         final String INPUT_AMOUNT_MESSAGE = "구입금액을 입력해 주세요.";
@@ -26,7 +32,7 @@ public class LottoManager {
         System.out.println();
         validatePurchaseAmount(purchaseInput);
 
-        int purchaseAmount = Integer.parseInt(purchaseInput);
+        purchaseAmount = Integer.parseInt(purchaseInput);
         lottoCount = purchaseAmount / LOTTO_PRICE;
         System.out.println(lottoCount + PURCHASE_MESSAGE);
     }
@@ -74,11 +80,12 @@ public class LottoManager {
     }
 
     public void validateInputPattern(String Input, int inputLength) {
-        final String INPUT_PATTERN = "[0-9]*,".repeat(inputLength - 1)+"[0-9]*";
+        final String INPUT_PATTERN = "[0-9]*,".repeat(inputLength - 1) + "[0-9]*";
         if (!Input.matches(INPUT_PATTERN)) {
             throw new IllegalArgumentException("[ERROR] 입력 형식에 맞게 숫자를 입력해주세요.");
         }
     }
+
     public void validateEachNumber(String number) {
         if (Integer.valueOf(number) > 45 || Integer.valueOf(number) < 1) {
             throw new IllegalArgumentException("[ERROR] 1~45 범위 내의 숫자를 입력해주세요.");
