@@ -13,26 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("LottoNumberGenerator 클래스")
 @Nested
 public class LottoNumberGeneratorTest {
-    /*@DisplayName("generate 메소드는")
-    @Nested
-    class Describe_generate {
-        @DisplayName("호출 시")
-        @Nested
-        class Context_with_Generated_Numbers {
-            @DisplayName("1~45 범위의 숫자 6개의 배열을 반환한다.")
-            @Test
-            void generateTest() {
-                assertSimpleTest(() -> {
-                            LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-                            assertThat(lottoNumberGenerator.generate())
-                                    .isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6)
-                                    );
-                        }
-                );
-            }
-        }
-    }*/
-
     @DisplayName("sortAscending 메소드는")
     @Nested
     class Describe_sortAscending {
