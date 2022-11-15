@@ -1,15 +1,13 @@
 package lotto;
 
+import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.lang.reflect.Field;
 import lotto.domain.LottoRank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-
-import java.lang.reflect.Field;
-import java.util.Arrays;
-
-import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
-import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("LottoRank 클래스")
 @Nested
@@ -42,6 +40,7 @@ public class LottoRankTest {
             }
         }
     }
+
     @DisplayName("checkThirdPlace 메소드는")
     @Nested
     class Describe_checkThirdPlace {

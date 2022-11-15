@@ -1,10 +1,10 @@
-package lotto.UI;
+package lotto.view;
 
 import camp.nextstep.edu.missionutils.Console;
-
+import java.lang.IllegalArgumentException;
 import java.util.ArrayList;
 import java.util.List;
-import java.lang.IllegalArgumentException;
+
 
 public class LottoManager {
     private List<Integer> winningNumbers = new ArrayList<>();
@@ -22,23 +22,23 @@ public class LottoManager {
     }
 
     public void readPurchaseAmount() {
-        final int LOTTO_PRICE = 1000;
+        final int lottoPrice = 1000;
 
         lottoPrinter.printPurchaseAmountMessage();
         String purchaseInput = Console.readLine();
         System.out.println();
         validatePurchasePattern(purchaseInput);
         purchaseAmount = Integer.parseInt(purchaseInput);
-        validatePurchaseUnit(LOTTO_PRICE);
-        lottoCount = purchaseAmount / LOTTO_PRICE;
+        validatePurchaseUnit(lottoPrice);
+        lottoCount = purchaseAmount / lottoPrice;
         lottoPrinter.printPurchaseCompletionMessage(lottoCount);
     }
 
     public void readWinningNumbers() {
-        final int WINNING_INPUT_LENGTH = 6;
+        final int winningInputLength = 6;
         lottoPrinter.printGetWinningNumberMessage();
         String winningInput = Console.readLine();
-        validateInputPattern(winningInput, WINNING_INPUT_LENGTH);
+        validateInputPattern(winningInput, winningInputLength);
         String[] winningInputSplit = winningInput.split(",");
         for (String number : winningInputSplit) {
             validateNumberRange(number);
@@ -49,39 +49,40 @@ public class LottoManager {
 
 
     public void readBonusNumber() {
-        final int BONUS_INPUT_LENGTH = 1;
-        Integer bonusNumber;
+        final int bonusInputLength = 1;
+        final Integer bonusNumber;
         lottoPrinter.printGetBonusNumberMessage();
         String bonusInput = Console.readLine();
-        validateInputPattern(bonusInput, BONUS_INPUT_LENGTH);
+        validateInputPattern(bonusInput, bonusInputLength);
         validateNumberRange(bonusInput);
         bonusNumber = Integer.valueOf(bonusInput);
         validateRepetition(winningNumbers, bonusNumber);
         winningNumbers.add(bonusNumber);
     }
 
-    private void validatePurchaseUnit(int LOTTO_PRICE) {
-        if (purchaseAmount % LOTTO_PRICE != 0) {
+    private void validatePurchaseUnit(int lottoPrice) {
+        if (purchaseAmount % lottoPrice != 0) {
             throw new IllegalArgumentException(lottoPrinter.INVALID_PURCHASE_AMOUNT_ERROR);
         }
     }
 
     private void validatePurchasePattern(String purchaseInput) {
-        final String INPUT_PATTERN = "[0-9]*";
-        if (!purchaseInput.matches(INPUT_PATTERN)) {
+        final String inputPattern = "[0-9]*";
+        if (!purchaseInput.matches(inputPattern)) {
             throw new IllegalArgumentException(lottoPrinter.INVALID_PURCHASE_PATTERN_ERROR);
         }
     }
 
     private void validateRepetition(List<Integer> winningNumbers, Integer number) {
-        if (winningNumbers.contains(number))
+        if (winningNumbers.contains(number)) {
             throw new IllegalArgumentException(lottoPrinter.WINNING_NUMBERS_REPETITION_ERROR);
+        }
     }
 
 
-    private void validateInputPattern(String Input, int inputLength) {
-        final String INPUT_PATTERN = "[0-9]*,".repeat(inputLength - 1) + "[0-9]*";
-        if (!Input.matches(INPUT_PATTERN)) {
+    private void validateInputPattern(String input, int inputLength) {
+        final String inputPattern = "[0-9]*,".repeat(inputLength - 1) + "[0-9]*";
+        if (!input.matches(inputPattern)) {
             throw new IllegalArgumentException(lottoPrinter.WINNING_NUMBERS_PATTERN_ERROR);
         }
     }

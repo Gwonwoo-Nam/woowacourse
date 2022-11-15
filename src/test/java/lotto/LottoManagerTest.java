@@ -1,18 +1,17 @@
 package lotto;
 
-import lotto.UI.LottoManager;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
-
-import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import lotto.view.LottoManager;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 
 @DisplayName("LottoManager 클래스")
 @Nested
@@ -160,7 +159,6 @@ class LottoManagerTest {
                 assertSimpleTest(
                         () -> {
                             String actualInput = "42";
-                            final int BONUS_INDEX = 6;
                             LottoManager lottoManager = new LottoManager();
                             System.setIn(new ByteArrayInputStream(actualInput.getBytes()));
                             lottoManager.readBonusNumber();

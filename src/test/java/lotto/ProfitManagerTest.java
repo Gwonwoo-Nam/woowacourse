@@ -1,14 +1,13 @@
 package lotto;
 
+import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import lotto.domain.LottoRank;
 import lotto.domain.ProfitManager;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-
-
-import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
-import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("ProfitManager 클래스")
 @Nested

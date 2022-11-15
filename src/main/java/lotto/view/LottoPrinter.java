@@ -1,39 +1,42 @@
-package lotto.UI;
+package lotto.view;
 
 import java.text.DecimalFormat;
 import java.util.List;
-
 import lotto.domain.LottoRank;
 
 public class LottoPrinter {
-    public final String INVALID_PURCHASE_AMOUNT_ERROR = "[ERROR] 구매 금액은 1,000원 단위로 입력해주세요.";
-    public final String INVALID_PURCHASE_PATTERN_ERROR = "[ERROR] 구매 금액에 숫자만 입력해주세요.";
-    public final String WINNING_NUMBERS_REPETITION_ERROR = "[ERROR] 중복되지 않는 번호를 입력해주세요.";
-    public final String WINNING_NUMBERS_PATTERN_ERROR = "[ERROR] 입력 형식에 맞게 숫자를 입력해주세요.";
-    public final String WINNING_NUMBER_RANGE_ERROR = "[ERROR] 1~45 범위 내의 숫자를 입력해주세요.";
+    public static final String INVALID_PURCHASE_AMOUNT_ERROR = "[ERROR] 구매 금액은 1,000원 단위로 입력해주세요.";
+    public static final String INVALID_PURCHASE_PATTERN_ERROR = "[ERROR] 구매 금액에 숫자만 입력해주세요.";
+    public static final String WINNING_NUMBERS_REPETITION_ERROR = "[ERROR] 중복되지 않는 번호를 입력해주세요.";
+    public static final String WINNING_NUMBERS_PATTERN_ERROR = "[ERROR] 입력 형식에 맞게 숫자를 입력해주세요.";
+    public static final String WINNING_NUMBER_RANGE_ERROR = "[ERROR] 1~45 범위 내의 숫자를 입력해주세요.";
 
-    public final int PERCENT_CONSTANT = 100;
+    public static final int PERCENT_CONSTANT = 100;
+
     public void printPurchaseAmountMessage() {
-        final String INPUT_AMOUNT_MESSAGE = "구입금액을 입력해 주세요.";
-        System.out.println(INPUT_AMOUNT_MESSAGE);
+        final String inputAmountMessage = "구입금액을 입력해 주세요.";
+        System.out.println(inputAmountMessage);
     }
+
     public void printLottoNumbers(List<Integer> lottoNumber) {
         System.out.println(lottoNumber);
     }
+
     public void printPurchaseCompletionMessage(int lottoCount) {
-        final String PURCHASE_MESSAGE = "개를 구매했습니다.";
-        System.out.println(lottoCount + PURCHASE_MESSAGE);
+        final String purchaseMessage = "개를 구매했습니다.";
+        System.out.println(lottoCount + purchaseMessage);
     }
 
     public void printGetWinningNumberMessage() {
-        final String INPUT_WINNING_NUMBER_MESSAGE = "당첨 번호를 입력해 주세요.";
+        final String inputWinningNumberMessage = "당첨 번호를 입력해 주세요.";
         System.out.println();
-        System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
+        System.out.println(inputWinningNumberMessage);
     }
+
     public void printGetBonusNumberMessage() {
-        final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 번호를 입력해 주세요.";
+        final String inputBonusNumberMessage = "보너스 번호를 입력해 주세요.";
         System.out.println();
-        System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
+        System.out.println(inputBonusNumberMessage);
     }
 
     public void printStatisticMessage() {

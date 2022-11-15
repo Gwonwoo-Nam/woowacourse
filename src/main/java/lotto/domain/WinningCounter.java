@@ -8,7 +8,7 @@ public class WinningCounter {
     public int countWinningNormal(List<Integer> lottoNumbers, List<Integer> winningNumbers) {
         int normalCount = 0;
         for (Integer number : lottoNumbers) {
-            if (winningNumbers.subList(0,6).contains(number)) {
+            if (winningNumbers.subList(0, 6).contains(number)) {
                 normalCount++;
             }
         }
