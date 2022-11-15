@@ -1,14 +1,16 @@
 package lotto.domain;
 
 public class ProfitManager {
-    private int totalEarning = 0;
+    private final int NO_EARNING = 0;
 
-    public void sumEarning(LottoRank lottoRank) {
+    public int calculateEarning(LottoRank lottoRank) {
         if (lottoRank.getWinningCount() != 0)
-            totalEarning += lottoRank.getWinningPrice() * lottoRank.getWinningCount();
+            return (lottoRank.getWinningPrice() * lottoRank.getWinningCount());
+        return NO_EARNING;
     }
 
-    public double calculate(int purchaseAmount) {
+
+    public double calculateProfit(int purchaseAmount, int totalEarning) {
         double totalProfit;
         totalProfit = ((double)totalEarning / (double)purchaseAmount);
         return totalProfit;

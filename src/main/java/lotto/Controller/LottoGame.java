@@ -31,12 +31,12 @@ public class LottoGame {
             WinningCounter winningCounter = new WinningCounter();
             int normalCount = winningCounter.countWinningNormal(lotto[currentCount].getLottoNumbers(), winningNumbers);
             int bonusCount = winningCounter.countWinningBonus(lotto[currentCount].getLottoNumbers(), winningNumbers);
-            updateRankBoard(rankBoard, winningCounter, normalCount, bonusCount);
+            updateRankBoard(rankBoard, normalCount, bonusCount);
         }
         return rankBoard;
     }
 
-    private static void updateRankBoard(LottoRank[] rankBoard, WinningCounter winningCounter, int normalCount, int bonusCount) {
+    private static void updateRankBoard(LottoRank[] rankBoard, int normalCount, int bonusCount) {
         for (LottoRank rank : rankBoard) {
             if (rank.checkThirdPlace(normalCount, bonusCount)) {
                 break;
@@ -45,10 +45,10 @@ public class LottoGame {
         }
     }
 
-    private static LottoPrinter showLottoRankBoard(LottoRank[] values) {
+    private static LottoPrinter showLottoRankBoard(LottoRank[] RankBoard) {
         LottoPrinter lottoPrinter = new LottoPrinter();
         lottoPrinter.printStatisticMessage();
-        for (LottoRank rank : values) {
+        for (LottoRank rank : RankBoard) {
             lottoPrinter.printWinningResult(rank);
         }
         return lottoPrinter;
@@ -57,11 +57,12 @@ public class LottoGame {
     private static void showLottoProfitResult(int lottoCount, LottoRank[] values) {
         LottoPrinter lottoPrinter = new LottoPrinter();
         ProfitManager profitManager = new ProfitManager();
+        int totalEarning = 0;
         for (LottoRank rank : values) {
-            profitManager.sumEarning(rank);
+            totalEarning += profitManager.calculateEarning(rank);
         }
         int purchaseAmount = lottoCount * LOTTO_PRICE;
-        double totalProfit = profitManager.calculate(purchaseAmount);
+        double totalProfit = profitManager.calculateProfit(purchaseAmount, totalEarning);
         lottoPrinter.printProfit(totalProfit);
     }
 
