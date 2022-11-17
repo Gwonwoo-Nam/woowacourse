@@ -31,11 +31,12 @@ public class InputView {
      */
     public String readMoving() {
         final String bridgeMoving = Console.readLine();
-        validateBridgeMoving(input);
+        validateBridgeMoving(bridgeMoving);
 
         return bridgeMoving;
     }
-    private void validateBridgeMoving(String input){
+
+    private void validateBridgeMoving(String input) {
         final String movingRegex = "^[UD]$";
         if (!input.matches(movingRegex)) {
             throw new IllegalArgumentException("[ERROR] U 혹은 D를 입력해주세요.");
@@ -47,6 +48,16 @@ public class InputView {
      * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
      */
     public String readGameCommand() {
-        return null;
+        final String gameCommand = Console.readLine();
+        validateGameCommand(gameCommand);
+
+        return gameCommand;
+    }
+
+    private void validateGameCommand(String gameCommand) {
+        final String gameCommandRegex = "^[RQ]$";
+        if (!gameCommand.matches(gameCommandRegex)) {
+            throw new IllegalArgumentException("[ERROR] R 혹은 Q를 입력해주세요.");
+        }
     }
 }
