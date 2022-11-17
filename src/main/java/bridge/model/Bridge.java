@@ -1,2 +1,5 @@
-package bridge.model;public class Bridge {
+package bridge.model;
+
+public class Bridge {
+
 }
