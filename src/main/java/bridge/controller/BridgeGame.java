@@ -1,5 +1,6 @@
 package bridge.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,9 +8,8 @@ import java.util.List;
  */
 public class BridgeGame {
     private final List<String> bridge;
-    private List<String> userBridge;
-    private int currentBridgeIndex = 0;
-    BridgeGame (List<String> bridge) {
+    private List<String> userBridge = new ArrayList<>();
+    public BridgeGame(List<String> bridge) {
         this.bridge = bridge;
     }
 
@@ -20,7 +20,8 @@ public class BridgeGame {
      */
     public boolean move(int currentBridgeIndex, String userBridgeType) {
         userBridge.add(userBridgeType);
-        if (bridge.get(currentBridgeIndex) == userBridgeType) {
+        String currentBridgeType = bridge.get(currentBridgeIndex);
+        if (userBridgeType.equals(currentBridgeType)) {
             return true;
         }
         return false;
@@ -31,6 +32,16 @@ public class BridgeGame {
      * <p>
      * 재시작을 위해 필요한 메서드의 반환 타입(return type), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      */
-    public void retry() {
+    public List<String> retry() {
+        //userBridge.add(userBridgeType);
+        return userBridge;
+    }
+
+    public void clear() {
+        userBridge.clear();
+    }
+
+    public List<String> getUserBridge() {
+        return userBridge;
     }
 }
