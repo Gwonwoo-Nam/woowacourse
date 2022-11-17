@@ -10,11 +10,20 @@ public class InputView {
     /**
      * 다리의 길이를 입력받는다.
      */
-    public int readBridgeSize() {
-
-        final int bridgeSize = Integer.parseInt(Console.readLine());
+    public int readBridgeSize() throws IllegalArgumentException {
+        final int bridgeSize;
+        final String input = Console.readLine();
+        validate(input);
+        bridgeSize = Integer.parseInt(input);
 
         return bridgeSize;
+    }
+
+    private void validate(String input) {
+        final String numberRangeRegex = "^[3-9]{1}$|^[1]{1}[0-9]{1}$|^[2]{1}[0]{1}$";
+        if (!input.matches(numberRangeRegex)) {
+            throw new IllegalArgumentException("[ERROR] 3~20 범위의 숫자를 입력해주세요.");
+        }
     }
 
     /**
