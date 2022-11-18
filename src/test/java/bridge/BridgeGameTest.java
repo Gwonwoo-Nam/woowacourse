@@ -26,7 +26,7 @@ public class BridgeGameTest {
             void moveTest() {
                 BridgeGame bridgeGame = new BridgeGame(List.of("UDUDD"));
                 boolean checkMove;
-                checkMove = bridgeGame.move(0, "U");
+                checkMove = bridgeGame.move( "U");
                 assertThat(checkMove).isEqualTo(true);
             }
         }

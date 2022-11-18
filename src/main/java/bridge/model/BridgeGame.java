@@ -9,6 +9,7 @@ import java.util.List;
 public class BridgeGame {
     private final List<String> bridge;
     private int retrialNumber = 1;
+    private int bridgeIndex = 0;
     private List<String> userBridge = new ArrayList<>();
     public BridgeGame(List<String> bridge) {
         this.bridge = bridge;
@@ -19,10 +20,11 @@ public class BridgeGame {
      * <p>
      * 이동을 위해 필요한 메서드의 반환 타입(return type), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      */
-    public boolean move(int currentBridgeIndex, String userBridgeType) {
+    public boolean move(String userBridgeType) {
         userBridge.add(userBridgeType);
-        String currentBridgeType = bridge.get(currentBridgeIndex);
+        String currentBridgeType = bridge.get(bridgeIndex);
         if (userBridgeType.equals(currentBridgeType)) {
+            bridgeIndex++;
             return true;
         }
         return false;
@@ -42,11 +44,10 @@ public class BridgeGame {
 
     public void retry(String userBridgeType) {
         retrialNumber++;
+        userBridge.clear();
+        bridgeIndex = 0;
     }
 
-    public void clear() {
-        userBridge.clear();
-    }
 
     public List<String> getUserBridge() {
         return userBridge;
@@ -54,4 +55,8 @@ public class BridgeGame {
     public int getRetrialNumber() {
         return retrialNumber;
     }
+    public int getBridgeIndex() {
+        return bridgeIndex;
+    }
+
 }

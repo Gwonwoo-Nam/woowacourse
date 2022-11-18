@@ -5,6 +5,7 @@
 - Controller
 - BridgeGameController
 - [O] : Game을 진행시킨다.
+  - [ ] : 
 
 - BridgeMaker
 - [O] : 다리 길이마다 이동 가능한 칸을 랜덤으로 저장하여 Bridge 배열로 리턴한다.
