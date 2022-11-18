@@ -58,10 +58,41 @@ public class BridgeGameController {
         /**
          * 최종 결과 출력
          */
-        outputView.printResult(bridgeGame.getRetrialNumber(), true, Collections.unmodifiableList(bridgeGame.getUserBridge()));
-
+        showResult(bridgeGame);
     }
 
+    private void startGame() {
+        OutputView outputView = new OutputView();
+        outputView.printStartMessage();
+    }
+
+    private int getBridgeLength() {
+        OutputView outputView = new OutputView();
+        InputView inputView = new InputView();
+
+        outputView.printInputBridgeLengthMessage();
+        final int bridgeSize = inputView.readBridgeSize();
+
+        return bridgeSize;
+    }
+    private List<String> generateBridge (int bridgeSize) {
+        BridgeRandomNumberGenerator bridgeRandomNumberGenerator = new BridgeRandomNumberGenerator();
+        BridgeMaker bridgeMaker = new BridgeMaker(bridgeRandomNumberGenerator);
+
+        final List<String> bridge = bridgeMaker.makeBridge(bridgeSize);
+
+        return bridge;
+    }
+
+    private String getInputMove() {
+        OutputView outputView = new OutputView();
+        InputView inputView = new InputView();
+
+        outputView.printInputMoveMessage();
+        String userBridgeType = inputView.readMoving();
+
+        return userBridgeType;
+    }
     private boolean makeCorrectMove(BridgeGame bridgeGame, String userBridgeType) {
         OutputView outputView = new OutputView();
 
@@ -83,38 +114,13 @@ public class BridgeGameController {
         return gameCommand;
     }
 
-    private List<String> generateBridge (int bridgeSize) {
-        BridgeRandomNumberGenerator bridgeRandomNumberGenerator = new BridgeRandomNumberGenerator();
-        BridgeMaker bridgeMaker = new BridgeMaker(bridgeRandomNumberGenerator);
-
-        final List<String> bridge = bridgeMaker.makeBridge(bridgeSize);
-
-        return bridge;
-    }
-
-    private int getBridgeLength() {
+    private static void showResult(BridgeGame bridgeGame) {
         OutputView outputView = new OutputView();
-        InputView inputView = new InputView();
 
-        outputView.printInputBridgeLengthMessage();
-        final int bridgeSize = inputView.readBridgeSize();
+        int retrialNumber = bridgeGame.getRetrialNumber();
+        List<String> userBridge = Collections.unmodifiableList(bridgeGame.getUserBridge());
 
-        return bridgeSize;
-    }
-
-    private void startGame() {
-        OutputView outputView = new OutputView();
-        outputView.printStartMessage();
-    }
-
-    private String getInputMove() {
-        OutputView outputView = new OutputView();
-        InputView inputView = new InputView();
-
-        outputView.printInputMoveMessage();
-        String userBridgeType = inputView.readMoving();
-
-        return userBridgeType;
+        outputView.printResult(retrialNumber, true, userBridge);
     }
 
 }
