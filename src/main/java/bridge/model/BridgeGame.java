@@ -8,6 +8,7 @@ import java.util.List;
  */
 public class BridgeGame {
     private final List<String> bridge;
+    private int retrialNumber = 1;
     private List<String> userBridge = new ArrayList<>();
     public BridgeGame(List<String> bridge) {
         this.bridge = bridge;
@@ -32,9 +33,15 @@ public class BridgeGame {
      * <p>
      * 재시작을 위해 필요한 메서드의 반환 타입(return type), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      */
-    public List<String> retry() {
-        //userBridge.add(userBridgeType);
-        return userBridge;
+    public void moveFail(String userBridgeType) {
+        String failFlag = "F";
+
+        userBridge.remove(userBridge.size()-1);
+        userBridge.add(userBridgeType+failFlag);
+    }
+
+    public void retry(String userBridgeType) {
+        retrialNumber++;
     }
 
     public void clear() {
@@ -43,5 +50,8 @@ public class BridgeGame {
 
     public List<String> getUserBridge() {
         return userBridge;
+    }
+    public int getRetrialNumber() {
+        return retrialNumber;
     }
 }
