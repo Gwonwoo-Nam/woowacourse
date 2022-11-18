@@ -11,6 +11,8 @@ public class BridgeGame {
     private int retrialNumber = 1;
     private int bridgeIndex = 0;
     private int bridgeSize = 0;
+
+    private boolean gameSuccess = true;
     private List<String> userBridge = new ArrayList<>();
     public BridgeGame(List<String> bridge) {
         this.bridge = bridge;
@@ -45,10 +47,18 @@ public class BridgeGame {
         userBridge.add(userBridgeType+failFlag);
     }
 
-    public void retry(String userBridgeType) {
-        retrialNumber++;
-        userBridge.clear();
-        bridgeIndex = 0;
+    public void retry(String gameCommand) {
+        if (gameCommand.equals("R")) {
+            retrialNumber++;
+            userBridge.clear();
+            bridgeIndex = 0;
+        }
+    }
+
+    public boolean succeed() {
+        boolean bridgeCompleteCondition = (bridgeIndex < bridgeSize);
+        boolean quitCondition = (gameSuccess == true);
+        return (bridgeCompleteCondition && quitCondition);
     }
 
 
@@ -58,14 +68,14 @@ public class BridgeGame {
     public int getRetrialNumber() {
         return retrialNumber;
     }
-    public int getBridgeIndex() {
-        return bridgeIndex;
+
+    public boolean getGameSuccess() {
+        return gameSuccess;
     }
 
-    public int getBridgeSize() {
-        return bridgeSize;
+    public void setGameSuccess(String gameCommand) {
+        if (gameCommand.equals("Q")) {
+            gameSuccess = false;
+        }
     }
-
-
-
 }

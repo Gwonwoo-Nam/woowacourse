@@ -10,49 +10,32 @@ import java.util.Collections;
 import java.util.List;
 
 public class BridgeGameController {
+
     private InputView inputView;
     private OutputView outputView;
     private BridgeGame bridgeGame;
-    public BridgeGameController () {
+
+    public BridgeGameController() {
         inputView = new InputView();
         outputView = new OutputView();
     }
-    public void run () {
-        startGame();
-        final int bridgeSize = getBridgeLength(); // decideBridgeSize
-        bridgeGame = new BridgeGame(generateBridge(bridgeSize)); //generateBridge
-        boolean isSuccess = playGame(); //playGame
-        displayResult(isSuccess);
-    }
 
-    private boolean playGame () {
-        String userBridgeType;
-        while (bridgeGame.getBridgeIndex() < bridgeGame.getBridgeSize()) {
-            userBridgeType = getInputMove();
-            if (makeCorrectMove(userBridgeType)) {
-                continue;
-            }
-
-            String gameCommand = makeWrongMove(userBridgeType);
-            if (isQuit(gameCommand)) {
-                return false;
-            }
-            bridgeGame.retry(userBridgeType);
-        }
-        return true;
-    }
-
-    private void startGame() {
+    public void run() {
         outputView.printStartMessage();
+        final int bridgeSize = decideBridgeLength();
+        bridgeGame = new BridgeGame(generateBridge(bridgeSize));
+        crossBridge();
+        displayResult();
     }
 
-    private int getBridgeLength() {
+    private int decideBridgeLength() {
         outputView.printInputBridgeLengthMessage();
         final int bridgeSize = inputView.readBridgeSize();
 
         return bridgeSize;
     }
-    private List<String> generateBridge (int bridgeSize) {
+
+    private List<String> generateBridge(int bridgeSize) {
         BridgeRandomNumberGenerator bridgeRandomNumberGenerator = new BridgeRandomNumberGenerator();
         BridgeMaker bridgeMaker = new BridgeMaker(bridgeRandomNumberGenerator);
 
@@ -61,39 +44,47 @@ public class BridgeGameController {
         return bridge;
     }
 
-    private String getInputMove() {
-        outputView.printInputMoveMessage();
-        String userBridgeType = inputView.readMoving();
-
-        return userBridgeType;
-    }
-    private boolean makeCorrectMove(String userBridgeType) {
-        if (bridgeGame.move(userBridgeType)) {
-            outputView.printMap(bridgeGame.getUserBridge());
-            return true;
+    private void crossBridge() {
+        while (bridgeGame.succeed()) {
+            String direction = chooseDirection();
+            makeMove(direction);
         }
-        return false;
     }
 
-    private String makeWrongMove(String userBridgeType) {
-        //bridgeGame.moveFail(userBridgeType);
-        outputView.printMap(Collections.unmodifiableList(bridgeGame.getUserBridge()));
-        outputView.printInputRetrialMessage();
-        String gameCommand = inputView.readGameCommand();
-        return gameCommand;
-    }
-    private boolean isQuit(String gameCommand) {
-        boolean isQuit = gameCommand.equals("Q");
+    private String chooseDirection() {
+        outputView.printInputMoveMessage();
+        String direction = inputView.readMoving();
 
-        return isQuit;
+        return direction;
     }
 
+    private void makeMove(String direction) {
+        boolean moveSuccess = bridgeGame.move(direction);
+        moveSuccess(moveSuccess);
+        moveFail(moveSuccess);
+    }
 
-    private void displayResult(boolean isSuccess) {
+    private void moveSuccess(boolean moveSuccess) {
+        if (moveSuccess) {
+            outputView.printMap(Collections.unmodifiableList(bridgeGame.getUserBridge()));
+        }
+    }
+
+    private void moveFail(boolean moveSuccess) {
+        if (!moveSuccess) {
+            outputView.printMap(Collections.unmodifiableList(bridgeGame.getUserBridge()));
+            outputView.printInputRetrialMessage();
+            String gameCommand = inputView.readGameCommand();
+            bridgeGame.retry(gameCommand);
+            bridgeGame.setGameSuccess(gameCommand);
+        }
+    }
+
+    private void displayResult() {
         int retrialNumber = bridgeGame.getRetrialNumber();
+        boolean gameSuccess = bridgeGame.getGameSuccess();
         List<String> userBridge = Collections.unmodifiableList(bridgeGame.getUserBridge());
 
-        outputView.printResult(retrialNumber, isSuccess, userBridge);
+        outputView.printResult(retrialNumber, gameSuccess, userBridge);
     }
-
 }
