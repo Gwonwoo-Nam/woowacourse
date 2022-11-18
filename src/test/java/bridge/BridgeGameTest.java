@@ -1,14 +1,10 @@
 package bridge;
 
-import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInRangeTest;
-import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Lists.newArrayList;
 
 import org.junit.jupiter.api.DisplayName;
-import bridge.controller.BridgeGame;
-import bridge.controller.BridgeMaker;
-import camp.nextstep.edu.missionutils.test.NsTest;
+import bridge.model.BridgeGame;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Nested;

@@ -1,9 +1,11 @@
 package bridge.controller;
 
 import bridge.BridgeRandomNumberGenerator;
+import bridge.model.BridgeGame;
 import bridge.view.InputView;
 import bridge.view.OutputView;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class BridgeGameController {
@@ -38,17 +40,22 @@ public class BridgeGameController {
                 bridgeIndex++;
                 continue;
             }
-
+            bridgeGame.moveFail(userBridgeType);
+            //틀린 경우
+            outputView.printMap(Collections.unmodifiableList(bridgeGame.getUserBridge()));
             outputView.printInputRetrialMessage();
             String gameCommand = inputView.readGameCommand();
-            if (gameCommand.equals("Q")) {
-                //userBridge = bridgeGame.retry();
-                break;
-            }//Q인경우
+
+            if (gameCommand.equals("Q")) { //Quit 하는 경우
+                outputView.printResult(bridgeGame.getRetrialNumber(), false, Collections.unmodifiableList(bridgeGame.getUserBridge()));
+                return ;
+            }
+            //Retry 인경우
+            bridgeGame.retry(userBridgeType);
             bridgeGame.clear();
             bridgeIndex = 0;
-
         }
+        outputView.printResult(bridgeGame.getRetrialNumber(), true, Collections.unmodifiableList(bridgeGame.getUserBridge()));
 
     }
 
