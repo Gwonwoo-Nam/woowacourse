@@ -11,55 +11,33 @@ import java.util.List;
 
 public class BridgeGameController {
     public void run () {
-        /**
-         * 게임 시작 메시지
-         */
         startGame();
-        OutputView outputView = new OutputView();
-        /**
-         * Bridge 입력 메시지 출력과, Bridge Length를 입력받는다.
-         */
+
         final int bridgeSize = getBridgeLength();
-        /**
-         * Bridge 정답 배열을 생성하여 bridgeGame 객체에 저장한다.
-         */
+
         BridgeGame bridgeGame = new BridgeGame(generateBridge(bridgeSize));
 
         String userBridgeType;
 
         while (bridgeGame.getBridgeIndex() < bridgeSize) {
-            /**
-             * 이동할 칸을 User로부터 입력받는다.
-             */
             userBridgeType = getInputMove();
-            /**
-             * 정답 칸으로 움직인 경우
-             */
 
             if (makeCorrectMove(bridgeGame, userBridgeType)) {
                 continue;
             }
-            /**
-             * 오답 칸으로 움직인 경우
-             */
+
             String gameCommand = makeWrongMove(bridgeGame, userBridgeType);
-            /**
-             * Game을 Quit하는 경우
-             */
-            if (gameCommand.equals("Q")) {
-                outputView.printResult(bridgeGame.getRetrialNumber(), false, Collections.unmodifiableList(bridgeGame.getUserBridge()));
+
+            if (isQuit(gameCommand)) {
+                showResult(bridgeGame, false);
                 return ;
             }
-            /**
-             * Game을 Retry하는 경우
-             */
             bridgeGame.retry(userBridgeType);
         }
-        /**
-         * 최종 결과 출력
-         */
-        showResult(bridgeGame);
+        showResult(bridgeGame, true);
     }
+
+
 
     private void startGame() {
         OutputView outputView = new OutputView();
@@ -113,14 +91,20 @@ public class BridgeGameController {
         String gameCommand = inputView.readGameCommand();
         return gameCommand;
     }
+    private boolean isQuit(String gameCommand) {
+        boolean isQuit = gameCommand.equals("Q");
 
-    private static void showResult(BridgeGame bridgeGame) {
+        return isQuit;
+    }
+
+
+    private static void showResult(BridgeGame bridgeGame, boolean isSuccess) {
         OutputView outputView = new OutputView();
 
         int retrialNumber = bridgeGame.getRetrialNumber();
         List<String> userBridge = Collections.unmodifiableList(bridgeGame.getUserBridge());
 
-        outputView.printResult(retrialNumber, true, userBridge);
+        outputView.printResult(retrialNumber, isSuccess, userBridge);
     }
 
 }
