@@ -22,24 +22,20 @@ public class BridgeGameProcessor {
         }
     }
 
-    private String chooseDirection() {
+    public String chooseDirection() {
         outputView.printInputMoveMessage();
         String direction = inputView.readMoving();
 
         return direction;
     }
 
-    private void makeMove(String direction) {
+    public void makeMove(String direction) {
         boolean moveSuccess = bridgeGame.move(direction);
 
-        moveSuccess();
+        outputView.printMap(Collections.unmodifiableList(bridgeGame.getUserBridge()));
         if (moveSuccess == false) {
             moveFail();
         }
-    }
-
-    private void moveSuccess() {
-        outputView.printMap(Collections.unmodifiableList(bridgeGame.getUserBridge()));
     }
 
     private void moveFail() {

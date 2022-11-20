@@ -1,6 +1,7 @@
 package bridge.model;
 
 import bridge.BridgeNumberGenerator;
+import bridge.BridgeRandomNumberGenerator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,9 +30,8 @@ public class BridgeMaker {
         return bridge;
     }
 
-    public String createShape(double randomNumber) {
-        final double HALF_POINT = 0.5;
-        if (randomNumber >= HALF_POINT) {
+    public String createShape(int randomNumber) {
+        if (randomNumber == 1) {
             return "U";
         }
         return "D";
