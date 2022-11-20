@@ -9,14 +9,10 @@ import java.util.List;
 public class BridgeGame {
     private final List<String> bridge;
     private int retrialNumber = 1;
-    private int bridgeIndex = 0;
-    private int bridgeSize = 0;
-
     private boolean gameSuccess = true;
     private List<String> userBridge = new ArrayList<>();
     public BridgeGame(List<String> bridge) {
         this.bridge = bridge;
-        this.bridgeSize = bridge.size();
     }
 
     /**
@@ -25,14 +21,19 @@ public class BridgeGame {
      * 이동을 위해 필요한 메서드의 반환 타입(return type), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      */
     public boolean move(String userBridgeType) {
-        userBridge.add(userBridgeType);
-        String currentBridgeType = bridge.get(bridgeIndex);
-        if (userBridgeType.equals(currentBridgeType)) {
-            bridgeIndex++;
+        int bridgeIndex = userBridge.size();
+        String correctBridgeType = bridge.get(bridgeIndex);
+        if (userBridgeType.equals(correctBridgeType)) {
+            userBridge.add(userBridgeType);
             return true;
         }
         addFailFlag(userBridgeType);
         return false;
+    }
+
+    private void addFailFlag(String userBridgeType) {
+        final String failFlag = "F";
+        userBridge.add(userBridgeType+failFlag);
     }
 
     /**
@@ -40,23 +41,16 @@ public class BridgeGame {
      * <p>
      * 재시작을 위해 필요한 메서드의 반환 타입(return type), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      */
-    private void addFailFlag(String userBridgeType) {
-        String failFlag = "F";
-
-        userBridge.remove(userBridge.size()-1);
-        userBridge.add(userBridgeType+failFlag);
-    }
 
     public void retry(String gameCommand) {
         if (gameCommand.equals("R")) {
             retrialNumber++;
             userBridge.clear();
-            bridgeIndex = 0;
         }
     }
 
     public boolean succeed() {
-        boolean bridgeCompleteCondition = (bridgeIndex < bridgeSize);
+        boolean bridgeCompleteCondition = (userBridge.size() < bridge.size());
         boolean quitCondition = (gameSuccess == true);
         return (bridgeCompleteCondition && quitCondition);
     }
@@ -73,7 +67,7 @@ public class BridgeGame {
         return gameSuccess;
     }
 
-    public void setGameSuccess(String gameCommand) {
+    public void giveUp(String gameCommand) {
         if (gameCommand.equals("Q")) {
             gameSuccess = false;
         }

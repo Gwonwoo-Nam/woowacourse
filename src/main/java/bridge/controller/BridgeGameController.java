@@ -15,6 +15,7 @@ public class BridgeGameController {
     private OutputView outputView;
     private BridgeGame bridgeGame;
 
+
     public BridgeGameController() {
         inputView = new InputView();
         outputView = new OutputView();
@@ -24,7 +25,8 @@ public class BridgeGameController {
         outputView.printStartMessage();
         final int bridgeSize = decideBridgeLength();
         bridgeGame = new BridgeGame(generateBridge(bridgeSize));
-        crossBridge();
+        BridgeGameProcessor bridgeGameProcessor = new BridgeGameProcessor(bridgeGame);
+        bridgeGameProcessor.crossBridge();
         displayResult();
     }
 
@@ -44,41 +46,6 @@ public class BridgeGameController {
         return bridge;
     }
 
-    private void crossBridge() {
-        while (bridgeGame.succeed()) {
-            String direction = chooseDirection();
-            makeMove(direction);
-        }
-    }
-
-    private String chooseDirection() {
-        outputView.printInputMoveMessage();
-        String direction = inputView.readMoving();
-
-        return direction;
-    }
-
-    private void makeMove(String direction) {
-        boolean moveSuccess = bridgeGame.move(direction);
-        moveSuccess(moveSuccess);
-        moveFail(moveSuccess);
-    }
-
-    private void moveSuccess(boolean moveSuccess) {
-        if (moveSuccess) {
-            outputView.printMap(Collections.unmodifiableList(bridgeGame.getUserBridge()));
-        }
-    }
-
-    private void moveFail(boolean moveSuccess) {
-        if (!moveSuccess) {
-            outputView.printMap(Collections.unmodifiableList(bridgeGame.getUserBridge()));
-            outputView.printInputRetrialMessage();
-            String gameCommand = inputView.readGameCommand();
-            bridgeGame.retry(gameCommand);
-            bridgeGame.setGameSuccess(gameCommand);
-        }
-    }
 
     private void displayResult() {
         int retrialNumber = bridgeGame.getRetrialNumber();
