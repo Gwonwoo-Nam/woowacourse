@@ -41,7 +41,7 @@ public class BridgeGameController {
         BridgeRandomNumberGenerator bridgeRandomNumberGenerator = new BridgeRandomNumberGenerator();
         BridgeMaker bridgeMaker = new BridgeMaker(bridgeRandomNumberGenerator);
 
-        final List<String> bridge = bridgeMaker.make(bridgeSize);
+        final List<String> bridge = bridgeMaker.makeBridge(bridgeSize);
 
         return bridge;
     }

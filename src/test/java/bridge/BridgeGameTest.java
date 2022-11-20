@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Nested;
 
 @DisplayName("BridgeGame 클래스")
 @Nested
-public class BridgeGameTest {
+class BridgeGameTest {
 
     SoftAssertions softAssertions = new SoftAssertions();
 
