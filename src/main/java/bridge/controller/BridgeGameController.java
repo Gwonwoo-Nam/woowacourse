@@ -30,24 +30,24 @@ public class BridgeGameController {
         displayResult();
     }
 
-    private int decideBridgeLength() {
+    public int decideBridgeLength() {
         outputView.printInputBridgeLengthMessage();
         final int bridgeSize = inputView.readBridgeSize();
 
         return bridgeSize;
     }
 
-    private List<String> generateBridge(int bridgeSize) {
+    public List<String> generateBridge(int bridgeSize) {
         BridgeRandomNumberGenerator bridgeRandomNumberGenerator = new BridgeRandomNumberGenerator();
         BridgeMaker bridgeMaker = new BridgeMaker(bridgeRandomNumberGenerator);
 
-        final List<String> bridge = bridgeMaker.makeBridge(bridgeSize);
+        final List<String> bridge = bridgeMaker.make(bridgeSize);
 
         return bridge;
     }
 
 
-    private void displayResult() {
+    public void displayResult() {
         int retrialNumber = bridgeGame.getRetrialNumber();
         boolean gameSuccess = bridgeGame.getGameSuccess();
         List<String> userBridge = Collections.unmodifiableList(bridgeGame.getUserBridge());
