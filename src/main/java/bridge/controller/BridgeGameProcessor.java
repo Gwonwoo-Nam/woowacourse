@@ -16,7 +16,7 @@ public class BridgeGameProcessor {
     }
 
     public void crossBridge() {
-        while (bridgeGame.succeed()) {
+        while (bridgeGame.isNotOver()) {
             String direction = chooseDirection();
             makeMove(direction);
         }

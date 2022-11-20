@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class BridgeGame {
     private final List<String> bridge;
-    private int retrialNumber = 1;
+    private int trialNumber = 1;
     private boolean gameSuccess = true;
     private List<String> userBridge = new ArrayList<>();
     public BridgeGame(List<String> bridge) {
@@ -44,12 +44,12 @@ public class BridgeGame {
 
     public void retry(String gameCommand) {
         if (gameCommand.equals("R")) {
-            retrialNumber++;
+            trialNumber++;
             userBridge.clear();
         }
     }
 
-    public boolean succeed() {
+    public boolean isNotOver() {
         boolean bridgeCompleteCondition = (userBridge.size() < bridge.size());
         boolean quitCondition = (gameSuccess == true);
         return (bridgeCompleteCondition && quitCondition);
@@ -60,7 +60,7 @@ public class BridgeGame {
         return userBridge;
     }
     public int getRetrialNumber() {
-        return retrialNumber;
+        return trialNumber;
     }
 
     public boolean getGameSuccess() {
