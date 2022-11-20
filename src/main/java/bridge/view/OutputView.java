@@ -13,12 +13,12 @@ public class OutputView {
     }
 
     public void printInputBridgeLengthMessage () {
-        GameMessages inputBridgeLengthMessage = GameMessages.INPUT_BRIDGE_LENGTH_MESSAGE;
+        GameMessages inputBridgeLengthMessage = GameMessages.DECIDE_BRIDGE_LENGTH_MESSAGE;
         inputBridgeLengthMessage.println();
     }
 
     public void printInputMoveMessage () {
-        GameMessages inputMoveMessage = GameMessages.INPUT_MOVE_MESSAGE;
+        GameMessages inputMoveMessage = GameMessages.CHOOSE_DIRECTION_MESSAGE;
         inputMoveMessage.println();
     }
 
