@@ -21,9 +21,10 @@ class BridgeGameControllerTest {
     @DisplayName("decideBridgeLength 메소드는")
     @Nested
     class Describe_decideBridgeLength {
+
         @DisplayName("다리의 길이를 입력받는다.")
         @Test
-        void decideBridgeLengthTest () {
+        void decideBridgeLengthTest() {
             SoftAssertions softAssertions = new SoftAssertions();
 
             BridgeGameController bridgeGameController = new BridgeGameController();
@@ -37,20 +38,24 @@ class BridgeGameControllerTest {
     @DisplayName("generateBridge 메소드는")
     @Nested
     class Describe_generateBridge {
+
         @DisplayName("다리의 길이를 입력받아 다리를 생성한다.")
         @Test
-        void generateBridgeTest () {
+        void generateBridgeTest() {
             TestBridgeGameController testBridgeGameController = new TestBridgeGameController();
             List<String> bridge = testBridgeGameController.generateBridge(7);
 
-            assertThat(bridge).isEqualTo(List.of("U","D","U","D","U","D","U"));
+            assertThat(bridge).isEqualTo(List.of("U", "D", "U", "D", "U", "D", "U"));
         }
 
     }
+
     class TestBridgeGameController extends BridgeGameController {
+
         @Override
         public List<String> generateBridge(int bridgeSize) {
-            TestNumberGenerator testNumberGenerator = new TestNumberGenerator(newArrayList(1,0,1,0,1,0,1));
+            TestNumberGenerator testNumberGenerator = new TestNumberGenerator(
+                    newArrayList(1, 0, 1, 0, 1, 0, 1));
             BridgeMaker bridgeMaker = new BridgeMaker(testNumberGenerator);
 
             final List<String> bridge = bridgeMaker.makeBridge(bridgeSize);

@@ -6,28 +6,21 @@ import camp.nextstep.edu.missionutils.Console;
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 public class InputView {
-    final static String NUMBER_RANGE_REGEX = "^[3-9]{1}$|^[1]{1}[0-9]{1}$|^[2]{1}[0]{1}$";
-    final static String MOVING_REGEX = "^[UD]$";
-    final static String GAME_COMMAND_REGEX = "^[RQ]$";
-    final static String NUMBER_RANGE_ERROR_MESSAGE = "[ERROR] 3~20 범위의 숫자를 입력해주세요.";
-    final static String MOVING_ERROR_MESSAGE = "[ERROR] U 혹은 D를 입력해주세요.";
-    final static String GAME_COMMAND_ERROR_MESSAGE = "[ERROR] R 혹은 Q를 입력해주세요.";
-    /**
-     * 다리의 길이를 입력받는다.
-     */
+    static final String NUMBER_RANGE_REGEX = "^[3-9]{1}$|^[1]{1}[0-9]{1}$|^[2]{1}[0]{1}$";
+    static final String MOVING_REGEX = "^[UD]$";
+    static final String GAME_COMMAND_REGEX = "^[RQ]$";
+    static final String NUMBER_RANGE_ERROR_MESSAGE = "[ERROR] 3~20 범위의 숫자를 입력해주세요.";
+    static final String MOVING_ERROR_MESSAGE = "[ERROR] U 혹은 D를 입력해주세요.";
+    static final String GAME_COMMAND_ERROR_MESSAGE = "[ERROR] R 혹은 Q를 입력해주세요.";
+
     public int readBridgeSize() {
         while (true) {
-            try {
-                String input = Console.readLine();
-                validate(input, NUMBER_RANGE_REGEX, NUMBER_RANGE_ERROR_MESSAGE);
+            String input = readInput(NUMBER_RANGE_REGEX, NUMBER_RANGE_ERROR_MESSAGE);
+            if (input != null) {
                 return Integer.parseInt(input);
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
             }
         }
     }
-
-
 
 
     /**
@@ -35,12 +28,9 @@ public class InputView {
      */
     public String readMoving() {
         while (true) {
-            try {
-                String input = Console.readLine();
-                validate(input, MOVING_REGEX, MOVING_ERROR_MESSAGE);
-                return input ;
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+            String input = readInput(MOVING_REGEX, MOVING_ERROR_MESSAGE);
+            if (input != null) {
+                return input;
             }
         }
     }
@@ -51,14 +41,22 @@ public class InputView {
      */
     public String readGameCommand() {
         while (true) {
-            try {
-                String input = Console.readLine();
-                validate(input, GAME_COMMAND_REGEX, GAME_COMMAND_ERROR_MESSAGE);
-                return input ;
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+            String input = readInput(GAME_COMMAND_REGEX, GAME_COMMAND_ERROR_MESSAGE);
+            if (input != null) {
+                return input;
             }
         }
+    }
+
+    private String readInput(String regex, String errorMessage) {
+        try {
+            String input = Console.readLine();
+            validate(input, regex, errorMessage);
+            return input;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 
     private void validate(String input, String regex, String errorMessage) {

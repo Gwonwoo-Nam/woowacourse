@@ -6,6 +6,7 @@ import java.util.List;
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 public class OutputView {
+
     static final String UPPER = "U";
     static final String LOWER = "D";
     static final String FAIL_FLAG = "F";
@@ -15,25 +16,26 @@ public class OutputView {
     static final String CORRECT_RESULT = "O";
     static final String WRONG_RESULT = "X";
 
-    public void printStartMessage () {
+    public void printStartMessage() {
         GameMessages startMessage = GameMessages.START_MESSAGE;
         startMessage.println();
     }
 
-    public void printInputBridgeLengthMessage () {
+    public void printInputBridgeLengthMessage() {
         GameMessages inputBridgeLengthMessage = GameMessages.DECIDE_BRIDGE_LENGTH_MESSAGE;
         inputBridgeLengthMessage.println();
     }
 
-    public void printInputMoveMessage () {
+    public void printInputMoveMessage() {
         GameMessages inputMoveMessage = GameMessages.CHOOSE_DIRECTION_MESSAGE;
         inputMoveMessage.println();
     }
 
-    public void printInputRetrialMessage () {
+    public void printInputRetrialMessage() {
         GameMessages inputRetrialMessage = GameMessages.INPUT_RETRIAL_MESSAGE;
         inputRetrialMessage.println();
     }
+
     private static void printEndMessage() {
         GameMessages endMessage = GameMessages.END_MESSAGE;
         endMessage.println();
@@ -54,23 +56,23 @@ public class OutputView {
     private void printBridge(List<String> userBridge, String upperLower) {
         System.out.print(LEFT_SKELETON);
         for (String bridgeType : userBridge.subList(0, userBridge.size() - 1)) {
-            hasBridge(bridgeType, upperLower);
+            printMark(bridgeType, upperLower);
             System.out.print(MID_SKELETON);
         }
-        hasBridge(userBridge.get(userBridge.size() - 1), upperLower);
+        printMark(userBridge.get(userBridge.size() - 1), upperLower);
         System.out.println(RIGHT_SKELETON);
     }
 
-    private void hasBridge(String bridgeType, String UpperLower) {
-        if (bridgeType.equals(UpperLower)) {
+    private void printMark(String bridgeType, String upperLower) {
+        if (bridgeType.equals(upperLower)) {
             System.out.print(CORRECT_RESULT);
-            return ;
         }
-        if (bridgeType.equals(UpperLower + FAIL_FLAG)) {
+        if (bridgeType.equals(upperLower + FAIL_FLAG)) {
             System.out.print(WRONG_RESULT);
-            return ;
         }
-        System.out.print(" ");
+        if (!bridgeType.equals(upperLower) && !bridgeType.equals(upperLower + FAIL_FLAG)) {
+            System.out.print(" ");
+        }
     }
 
     /**
@@ -78,7 +80,7 @@ public class OutputView {
      * <p>
      * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      */
-    public void printResult(int retrialNumber,boolean gameSuccess, List<String> userBridge) {
+    public void printResult(int retrialNumber, boolean gameSuccess, List<String> userBridge) {
         printEndMessage();
         printMap(userBridge);
         printGameSuccess(gameSuccess);

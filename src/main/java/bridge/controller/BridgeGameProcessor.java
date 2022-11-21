@@ -41,7 +41,11 @@ public class BridgeGameProcessor {
     private void moveFail() {
         outputView.printInputRetrialMessage();
         String gameCommand = inputView.readGameCommand();
-        bridgeGame.retry(gameCommand);
-        bridgeGame.giveUp(gameCommand);
+        if (gameCommand.equals("R")) {
+            bridgeGame.retry();
+        }
+        if (gameCommand.equals("Q")) {
+            bridgeGame.giveUp();
+        }
     }
 }

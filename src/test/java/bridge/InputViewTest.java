@@ -9,11 +9,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
-
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
-
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -22,6 +19,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 @DisplayName("InputView 클래스")
 @Nested
 class InputViewTest {
+
     static OutputStream out = new ByteArrayOutputStream();
 
     InputView inputView = new InputView();

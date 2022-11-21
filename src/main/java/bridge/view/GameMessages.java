@@ -18,6 +18,7 @@ public enum GameMessages {
     public void println() {
         System.out.println(this.message);
     }
+
     public void print() {
         System.out.print(this.message);
     }

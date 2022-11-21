@@ -5,7 +5,6 @@ import bridge.model.BridgeGame;
 import bridge.model.BridgeMaker;
 import bridge.view.InputView;
 import bridge.view.OutputView;
-
 import java.util.Collections;
 import java.util.List;
 

@@ -2,13 +2,13 @@ package bridge;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import bridge.model.BridgeGame;
+import java.util.List;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import bridge.model.BridgeGame;
-import java.util.List;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 
 
 @DisplayName("BridgeGame 클래스")
@@ -68,15 +68,16 @@ class BridgeGameTest {
         class Context_with_retry {
 
             BridgeGame bridgeGame = new BridgeGame(List.of("U"));
+
             @BeforeEach
             void setUserBridge() {
-                    bridgeGame.move("U");
+                bridgeGame.move("U");
             }
 
             @DisplayName("bridgeGame의 필드를 초기화한다.")
             @Test
             void retryTest() {
-                bridgeGame.retry("R");
+                bridgeGame.retry();
                 System.out.print(bridgeGame.getUserBridge().toString());
 
                 softAssertions.assertThat(bridgeGame.getUserBridge().size()).as("userBridge 초기화 확인")
@@ -86,36 +87,12 @@ class BridgeGameTest {
                 softAssertions.assertAll();
             }
         }
-
-        @DisplayName("재시도(R)를 인자로 받지 않으면")
-        @Nested
-        class Context_without_retry {
-
-            BridgeGame bridgeGame = new BridgeGame(List.of("U"));
-            @BeforeEach
-            void setUserBridge() {
-                bridgeGame.move("U");
-            }
-
-            @DisplayName("bridgeGame의 필드를 초기화한다.")
-            @Test
-            void retryTest() {
-                bridgeGame.retry("Q");
-                System.out.print(bridgeGame.getUserBridge().toString());
-
-                softAssertions.assertThat(bridgeGame.getUserBridge().size()).as("userBridge 미초기화 확인")
-                        .isEqualTo(1);
-                softAssertions.assertThat(bridgeGame.getRetrialNumber()).as("도전 횟수 증가 확인")
-                        .isEqualTo(1);
-                softAssertions.assertAll();
-            }
-        }
-
     }
 
     @DisplayName("giveUp 메소드는")
     @Nested
     class Describe_giveUp {
+
         @DisplayName("gameCommand를 입력받아 종료(Q)이면")
         @Nested
         class Context_with_quit {
@@ -126,23 +103,9 @@ class BridgeGameTest {
             @DisplayName("gameSuccess(게임 성공 여부)를 실패로 변경한다.")
             @Test
             void giveUpTest() {
-                bridgeGame.giveUp("Q");
+                bridgeGame.giveUp();
                 assertThat(bridgeGame.getGameSuccess()).as("gameSuccess 변경 확인")
                         .isEqualTo(false);
-            }
-        }
-        @DisplayName("gameCommand를 입력받아 종료(Q)가 아니면")
-        @Nested
-        class Context_with_retry {
-
-            BridgeGame bridgeGame = new BridgeGame(List.of("U"));
-
-            @DisplayName("gameSuccess(게임 성공 여부)를 변경하지 않는다.")
-            @Test
-            void giveUpTest() {
-                bridgeGame.giveUp("R");
-                assertThat(bridgeGame.getGameSuccess()).as("gameSuccess 변경 확인")
-                        .isEqualTo(true);
             }
         }
     }
@@ -156,6 +119,7 @@ class BridgeGameTest {
         class Context_with_complete_bridge {
 
             BridgeGame bridgeGame = new BridgeGame(List.of("U", "D", "D"));
+
             @BeforeEach
             void setUserBridge() {
                 bridgeGame.move("U");
@@ -175,17 +139,18 @@ class BridgeGameTest {
         class Context_with_giveUp {
 
             BridgeGame bridgeGame = new BridgeGame(List.of("U", "D", "D"));
+
             @BeforeEach
             void setUserBridge() {
                 bridgeGame.move("U");
                 bridgeGame.move("D");
                 bridgeGame.move("D");
-                bridgeGame.giveUp("Q");
+                bridgeGame.giveUp();
             }
 
             @DisplayName("false를 반환한다.")
             @Test
-            void IsNotOverTest() {
+            void isNotOverTest() {
                 assertThat(bridgeGame.isNotOver()).as("gameClear 확인")
                         .isEqualTo(false);
             }
