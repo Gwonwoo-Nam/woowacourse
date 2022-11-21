@@ -1,12 +1,19 @@
 package bridge;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import bridge.view.InputView;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
+
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -15,10 +22,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 @DisplayName("InputView 클래스")
 @Nested
 class InputViewTest {
+    static OutputStream out = new ByteArrayOutputStream();
+
     InputView inputView = new InputView();
+
     @DisplayName("readBridgeSize 메소드는")
     @Nested
     class Describe_readBridgeSize {
+
         @DisplayName("입력받은 Input이 적절한 경우")
         @Nested
         class Context_with_correctInput {
@@ -27,24 +38,26 @@ class InputViewTest {
             @CsvSource(value = {"3,3", "7,7", "10,10", "19,19", "20,20"})
             @ParameterizedTest
             void readBridgeSizeTest(String input, String expected) {
-
                 System.setIn(new ByteArrayInputStream(input.getBytes()));
                 assertThat(inputView.readBridgeSize()).as("입력 확인")
                         .isEqualTo(Integer.parseInt(expected));
             }
         }
+
         @DisplayName("입력받은 Input이 적절한 범위가 아닌 경우")
         @Nested
         class Context_with_wrongInput {
 
             @DisplayName("예외처리한다.")
-            @ValueSource(strings = {"0", " ", "-3", "21", "3a"})
+            @ValueSource(strings = {"0\n3", "2\n20", " \n 4\n4 \n7"})
             @ParameterizedTest
-            void readBridgeSizeErrorTest(String input) {
-                System.setIn(new ByteArrayInputStream(input.getBytes()));
-                assertThatThrownBy(() -> inputView.readBridgeSize()).as("입력 확인")
-                        .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessageContaining("[ERROR]");
+            void readBridgeSizeErrorTest(String input) throws IOException {
+                System.setOut(new PrintStream(out));
+                InputStream in = new ByteArrayInputStream((input.getBytes()));
+                System.setIn(in);
+                inputView.readBridgeSize();
+                assertThat(out.toString()).as("입력 확인")
+                        .contains("[ERROR]");
             }
         }
     }
@@ -72,13 +85,17 @@ class InputViewTest {
         class Context_with_wrongInput {
 
             @DisplayName("예외처리한다.")
-            @ValueSource(strings = {"0", " ", "u", "d", "UD", "UU"})
+            @ValueSource(strings = {"0\nD", " \nD", "u\nD", "d\nU", "UD\nd\nD", "UU\n \nU"})
             @ParameterizedTest
             void readMovingErrorTest(String input) {
-                System.setIn(new ByteArrayInputStream(input.getBytes()));
-                assertThatThrownBy(() -> inputView.readMoving()).as("입력 확인")
-                        .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessageContaining("[ERROR]");
+                System.setOut(new PrintStream(out));
+                InputStream in = new ByteArrayInputStream((input.getBytes()));
+                System.setIn(in);
+
+                inputView.readMoving();
+
+                assertThat(out.toString()).as("입력 확인")
+                        .contains("[ERROR]");
             }
         }
     }
@@ -96,6 +113,7 @@ class InputViewTest {
             @ParameterizedTest
             void readGameCommandTest(String input, String expected) {
                 System.setIn(new ByteArrayInputStream(input.getBytes()));
+
                 assertThat(inputView.readGameCommand()).as("입력 확인")
                         .isEqualTo(expected);
             }
@@ -106,13 +124,17 @@ class InputViewTest {
         class Context_with_wrongInput {
 
             @DisplayName("예외처리한다.")
-            @ValueSource(strings = {"Q ", " R", "r", "q", "RQ", "U"})
+            @ValueSource(strings = {" \nQ", "q\nQ", " R\nR", "r\nR", "q\nQ", "RQ\nQ", "U\nQ"})
             @ParameterizedTest
             void readGameCommandErrorTest(String input) {
-                System.setIn(new ByteArrayInputStream(input.getBytes()));
-                assertThatThrownBy(() -> inputView.readGameCommand()).as("입력 확인")
-                        .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessageContaining("[ERROR]");
+                System.setOut(new PrintStream(out));
+                InputStream in = new ByteArrayInputStream((input.getBytes()));
+                System.setIn(in);
+
+                inputView.readGameCommand();
+
+                assertThat(out.toString()).as("입력 확인")
+                        .contains("[ERROR]");
             }
         }
     }
