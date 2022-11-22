@@ -87,7 +87,7 @@ public class OutputView {
         printRetrialNumbers(retrialNumber);
     }
 
-    private static void printGameSuccess(boolean gameSuccess) {
+    private void printGameSuccess(boolean gameSuccess) {
         GameMessages isSuccessMessage = GameMessages.GAME_SUCCESS_MESSAGE;
         isSuccessMessage.print();
         if (gameSuccess == true) {
@@ -98,7 +98,7 @@ public class OutputView {
         }
     }
 
-    private static void printRetrialNumbers(int retrialNumber) {
+    private void printRetrialNumbers(int retrialNumber) {
         GameMessages retrialNumbersMessage = GameMessages.RETRIAL_NUMBERS_MESSAGE;
         retrialNumbersMessage.print();
         System.out.println(retrialNumber);

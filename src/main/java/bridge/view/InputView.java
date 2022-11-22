@@ -6,12 +6,12 @@ import camp.nextstep.edu.missionutils.Console;
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 public class InputView {
-    static final String NUMBER_RANGE_REGEX = "^[3-9]{1}$|^[1]{1}[0-9]{1}$|^[2]{1}[0]{1}$";
-    static final String MOVING_REGEX = "^[UD]$";
-    static final String GAME_COMMAND_REGEX = "^[RQ]$";
-    static final String NUMBER_RANGE_ERROR_MESSAGE = "[ERROR] 3~20 범위의 숫자를 입력해주세요.";
-    static final String MOVING_ERROR_MESSAGE = "[ERROR] U 혹은 D를 입력해주세요.";
-    static final String GAME_COMMAND_ERROR_MESSAGE = "[ERROR] R 혹은 Q를 입력해주세요.";
+    private static final String NUMBER_RANGE_REGEX = "^[3-9]{1}$|^[1]{1}[0-9]{1}$|^[2]{1}[0]{1}$";
+    private static final String MOVING_REGEX = "^[UD]$";
+    private static final String GAME_COMMAND_REGEX = "^[RQ]$";
+    private static final String NUMBER_RANGE_ERROR_MESSAGE = "[ERROR] 3~20 범위의 숫자를 입력해주세요.";
+    private static final String MOVING_ERROR_MESSAGE = "[ERROR] U 혹은 D를 입력해주세요.";
+    private static final String GAME_COMMAND_ERROR_MESSAGE = "[ERROR] R 혹은 Q를 입력해주세요.";
 
     public int readBridgeSize() {
         while (true) {
