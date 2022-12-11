@@ -7,6 +7,8 @@ import java.util.List;
 
 public class InputView {
     public List<String> readCarName() {
+
+
         String input = Console.readLine();
         validate(input);
 
