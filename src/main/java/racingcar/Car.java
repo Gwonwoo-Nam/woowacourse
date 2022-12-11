@@ -10,12 +10,23 @@ public class Car {
         this.name = name;
     }
 
-    public void move() {
-        int randomNumber = Randoms.pickNumberInRange(0,9);
+    public void drive(int trialNumber) {
+        for (int number = 0; number < trialNumber; number++) {
+            int randomNumber = pickRandomNumber();
+            move(randomNumber);
+        }
+    }
 
+    private void move(int randomNumber) {
         if (randomNumber >= 4) {
             position++;
         }
+    }
+
+    private int pickRandomNumber() {
+        int randomNumber = Randoms.pickNumberInRange(0,9);
+
+        return randomNumber;
     }
 
     public int getPosition() {
