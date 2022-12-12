@@ -1,33 +1,32 @@
 package racingcar.View;
 
+import racingcar.SystemMessages;
+
 public class OutputView {
-    private static final String INPUT_CAR_NAME_MESSAGE = "경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)";
-    private static final String INPUT_TRIAL_NUMBER_MESSAGE = "시도할 횟수는 몇 회인가요?";
-    private static final String CAR_POSITION_COUNT = "-";
-    private static final String RESULT_MESSAGE = "실행 결과";
-    public void askCarName() {
-        System.out.println(INPUT_CAR_NAME_MESSAGE);
+
+    public static void askCarName() {
+        System.out.println(SystemMessages.INPUT_CAR_NAME_MESSAGE.print());
     }
-    public void askTrialNumber() {
-        System.out.println(INPUT_TRIAL_NUMBER_MESSAGE);
+    public static void askTrialNumber() {
+        System.out.println(SystemMessages.INPUT_TRIAL_NUMBER_MESSAGE.print());
     }
-    public void printResult(String name, int position) {
+    public static void printResult(String name, int position) {
         printCarName(name);
         printPosition(position);
         System.out.println();
     }
-    public void printResultMessage() {
-        System.out.println(RESULT_MESSAGE);
+    public static void printResultMessage() {
+        System.out.println(SystemMessages.RESULT_MESSAGE.print());
     }
 
 
-    private void printCarName(String name) {
+    private static void printCarName(String name) {
         System.out.print(name + " : ");
     }
 
-    private void printPosition(int position) {
+    private static void printPosition(int position) {
         for (int number = 0; number < position; number++) {
-            System.out.print(CAR_POSITION_COUNT);
+            System.out.print(SystemMessages.CAR_POSITION_COUNT.print());
         }
     }
 

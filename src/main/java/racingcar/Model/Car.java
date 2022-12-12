@@ -1,6 +1,4 @@
-package racingcar;
-
-import camp.nextstep.edu.missionutils.Randoms;
+package racingcar.Model;
 
 public class Car {
     private final String name;
@@ -10,15 +8,11 @@ public class Car {
         this.name = name;
     }
 
-
-
     public void move(int randomNumber) {
         if (randomNumber >= 4) {
             position++;
         }
     }
-
-
 
     public int getPosition() {
         return position;
