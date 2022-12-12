@@ -14,7 +14,7 @@ public class CarGameController {
         outputView.askCarName();
 
         InputView inputView = new InputView();
-        List<String> carNameList = new ArrayList<>(inputView.readCarName());
+        List<String> carNameList = new ArrayList<>(inputView.readCarList());
 
         outputView.askTrialNumber();
 
