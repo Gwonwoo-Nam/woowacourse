@@ -7,7 +7,8 @@ import java.util.List;
 
 public class InputView {
 
-    private static final String INPUT_TRIAL_NUMBER_REGEX = "^[0-9]*$";
+    private static final String INPUT_TRIAL_NUMBER_REGEX = "^[0-9]+$";
+    private static final String INPUT_CAR_NAME_REGEX = "^.+$";
     private static final String INPUT_TRIAL_NUMBER_ERROR_MESSAGE = "[ERROR] 시도 횟수는 숫자여야 한다.";
 
     public List<String> readCarName() {

@@ -18,27 +18,29 @@ public class CarGameController {
 
         outputView.askTrialNumber();
 
-
         int trialNumber = inputView.readTrialNumber();
 
-
+        outputView.printResultMessage();
         List<Car> carList = new ArrayList<>();
         for(String carName : carNameList) {
             Car car = new Car(carName);
             carList.add(car);
         }
 
-        for (int i = 0; i < carList.size(); i++) {
-            drive(carList.get(i), trialNumber);
-            System.out.println(carList.get(i).getName()+"의 위치 : "+carList.get(i).getPosition());
+        for (int number = 0; number < trialNumber; number++) {
+            driveCars(carList);
         }
     }
 
-    public void drive(Car car, int trialNumber) {
-        for (int number = 0; number < trialNumber; number++) {
+    public void driveCars(List<Car> carList) {
+        OutputView outputView = new OutputView();
+
+        for (Car car : carList) {
             int randomNumber = pickRandomNumber();
             car.move(randomNumber);
+            outputView.printResult(car.getName(), car.getPosition());
         }
+        System.out.println();
     }
 
     public int pickRandomNumber() {
