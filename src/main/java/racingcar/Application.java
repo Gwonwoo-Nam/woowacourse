@@ -1,36 +1,10 @@
 package racingcar;
 
-import java.util.ArrayList;
-import java.util.List;
-import racingcar.View.InputView;
-import racingcar.View.OutputView;
+import racingcar.Controller.CarGameController;
 
 public class Application {
     public static void main(String[] args) {
-        OutputView outputView = new OutputView();
-        outputView.askCarName();
-
-        InputView inputView = new InputView();
-        List<String> carNameList = new ArrayList<>(inputView.readCarName());
-
-        outputView.askTrialNumber();
-
-
-        int trialNumber = inputView.readTrialNumber();
-
-
-        List<Car> carList = new ArrayList<>();
-        for(String carName : carNameList) {
-            Car car = new Car(carName);
-            carList.add(car);
-        }
-
-        for (int i = 0; i < carList.size(); i++) {
-            carList.get(i).drive(trialNumber);
-            System.out.println(carList.get(i).getName()+"의 위치 : "+carList.get(i).getPosition());
-        }
-
-
-
+        CarGameController carGameController = new CarGameController();
+        carGameController.play();
     }
 }
