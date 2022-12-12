@@ -12,7 +12,12 @@ public class Application {
 
         InputView inputView = new InputView();
         List<String> carNameList = new ArrayList<>(inputView.readCarName());
-        System.out.println(carNameList);
+
+        outputView.askTrialNumber();
+
+
+        int trialNumber = inputView.readTrialNumber();
+
 
         List<Car> carList = new ArrayList<>();
         for(String carName : carNameList) {
@@ -21,7 +26,7 @@ public class Application {
         }
 
         for (int i = 0; i < carList.size(); i++) {
-            carList.get(i).drive(3);
+            carList.get(i).drive(trialNumber);
             System.out.println(carList.get(i).getName()+"의 위치 : "+carList.get(i).getPosition());
         }
 
