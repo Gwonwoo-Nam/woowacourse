@@ -3,6 +3,7 @@ package racingcar.Model;
 public class Car {
     private final String name;
     private int position = 0;
+    private boolean winner = false;
 
     public Car(String name) {
         this.name = name;
@@ -12,6 +13,14 @@ public class Car {
         if (randomNumber >= 4) {
             position++;
         }
+    }
+
+    public void setWinner() {
+        winner = true;
+    }
+
+    public boolean getWinner() {
+        return winner;
     }
 
     public int getPosition() {

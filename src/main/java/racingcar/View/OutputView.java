@@ -30,4 +30,8 @@ public class OutputView {
         }
     }
 
+    public static void printWinner(String winners) {
+        System.out.println(SystemMessages.WINNER_MESSAGE.print() + winners);
+    }
+
 }

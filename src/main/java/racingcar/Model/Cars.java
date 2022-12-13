@@ -32,10 +32,24 @@ public class Cars {
             ErrorMessages.CAR_NAME_LENGTH_ERROR_MESSAGE.print());
     }
 
+    public void findWinner() {
+        int maxPosition = findMaxPosition();
+        for (Car car : carList.getCarList()) {
+            if (car.getPosition() >= maxPosition) {
+                car.setWinner();
+            }
+        }
+    }
 
-
-
-
+    private int findMaxPosition() {
+        int maxPosition = 0;
+        for (Car car : carList.getCarList()) {
+            if (car.getPosition() >= maxPosition) {
+                 maxPosition = car.getPosition();
+            }
+        }
+        return maxPosition;
+    }
 
 
 }
