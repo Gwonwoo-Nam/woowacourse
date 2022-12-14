@@ -1,2 +1,5 @@
-package subway.View;public class OutputView {
+package subway.View;
+
+public class OutputView {
+
 }
