@@ -24,4 +24,8 @@ public enum RequestMessages {
     public String getMessage() {
         return Message;
     }
+
+    public void println() {
+        System.out.println(Message);
+    }
 }

@@ -6,7 +6,7 @@ public enum InfoMessages {
         + "2. 노선 관리\n"
         + "3. 구간 관리\n"
         + "4. 지하철 노선도 출력\n"
-        + "Q. 종료"),
+        + "Q. 종료\n"),
     STATION_MANAGEMENT("1. 역 등록\n"
         + "2. 역 삭제\n"
         + "3. 역 조회\n"
@@ -15,16 +15,18 @@ public enum InfoMessages {
         + "1. 노선 등록\n"
         + "2. 노선 삭제\n"
         + "3. 노선 조회\n"
-        + "B. 돌아가기"),
+        + "B. 돌아가기\n"),
     SECTION_MANAGEMENT("## 구간 관리 화면\n"
         + "1. 구간 등록\n"
         + "2. 구간 삭제\n"
-        + "B. 돌아가기"),
+        + "B. 돌아가기\n"),
 
     STATION_REGISTRATION("[INFO] 지하철 노선이 등록되었습니다."),
     STATION_DELETION("[INFO] 지하철 노선이 삭제되었습니다."),
     SECTION_REGISTRATION("[INFO] 구간이 등록되었습니다."),
-    SECTION_DELETION("[INFO] 구간이 삭제되었습니다.");
+    SECTION_DELETION("[INFO] 구간이 삭제되었습니다."),
+
+    ERROR_FEATURE("\n[ERROR] 선택할 수 없는 기능입니다.\n");
 
 
 
@@ -36,6 +38,9 @@ public enum InfoMessages {
 
     public String getMessage() {
         return Message;
+    }
+    public void println() {
+        System.out.println(Message);
     }
 
 }
