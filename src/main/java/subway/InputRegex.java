@@ -4,7 +4,9 @@ public enum InputRegex {
     MAIN("^[1234Qq]$"),
     STATION_MANAGEMENT("^[123Bb]$"),
     LINE_MANAGEMENT("^[123Bb]$"),
-    SECTION_MANAGEMENT("^[12Bb]$");
+    SECTION_MANAGEMENT("^[12Bb]$"),
+
+    STATION_NAME("^.{2}*$");
 
 
     private String regex;

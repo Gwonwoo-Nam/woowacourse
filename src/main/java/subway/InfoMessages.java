@@ -7,7 +7,8 @@ public enum InfoMessages {
         + "3. 구간 관리\n"
         + "4. 지하철 노선도 출력\n"
         + "Q. 종료\n"),
-    STATION_MANAGEMENT("1. 역 등록\n"
+    STATION_MANAGEMENT("## 역 관리 화면\n"
+        + "1. 역 등록\n"
         + "2. 역 삭제\n"
         + "3. 역 조회\n"
         + "B. 돌아가기\n"),
@@ -26,12 +27,18 @@ public enum InfoMessages {
     SECTION_REGISTRATION("[INFO] 구간이 등록되었습니다."),
     SECTION_DELETION("[INFO] 구간이 삭제되었습니다."),
 
-    ERROR_FEATURE("\n[ERROR] 선택할 수 없는 기능입니다.\n");
+    INFO("[INFO] "),
 
+    STATION_LIST("## 역 목록"),
 
+    ERROR_FEATURE("[ERROR] 선택할 수 없는 기능입니다."),
+    ERROR_STATION_NAME_LENGTH("[ERROR] 2글자 이상의 역 이름을 입력하세요."),
+    ERROR_STATION_NAME_REPETITION("[ERROR] 중복되는 역 이름입니다."),
+    ERROR_STATION_DELETION("[ERROR] 삭제할 역 이름이 존재하지 않습니다.");
 
 
     private String Message;
+
     InfoMessages(String Message) {
         this.Message = Message;
     }
@@ -39,6 +46,7 @@ public enum InfoMessages {
     public String getMessage() {
         return Message;
     }
+
     public void println() {
         System.out.println(Message);
     }
