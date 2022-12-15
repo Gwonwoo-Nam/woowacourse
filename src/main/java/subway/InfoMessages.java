@@ -40,9 +40,8 @@ public enum InfoMessages {
     ERROR_STATION_NAME_REPETITION("[ERROR] 중복되는 역 이름입니다."),
     ERROR_STATION_LINE_REPETITION("[ERROR] 중복되는 노선 이름입니다."),
     ERROR_STATION_DELETION("[ERROR] 삭제할 역 이름이 존재하지 않습니다."),
-    ERROR_LINE_DELETION("[ERROR] 삭제할 노선 이름이 존재하지 않습니다."),
+    ERROR_LINE_DELETION("[ERROR] 삭제할 노선 이름이 존재하지 않습니다.");
 
-    ERROR_STATION_EXIST("[ERROR] 역 이름이 이미 있습니다.");
 
 
     private String Message;
