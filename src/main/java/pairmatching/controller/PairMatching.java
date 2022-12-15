@@ -35,6 +35,7 @@ public class PairMatching {
             return ;
         }
         match(course, level, mission);
+        PairLookup.print(course,level,mission);
     }
     private static void rematch(String course, String level, Mission mission) throws IOException {
         InfoMessages.REMATCH.println();
