@@ -22,19 +22,27 @@ public enum InfoMessages {
         + "2. 구간 삭제\n"
         + "B. 돌아가기\n"),
 
-    STATION_REGISTRATION("[INFO] 지하철 노선이 등록되었습니다."),
-    STATION_DELETION("[INFO] 지하철 노선이 삭제되었습니다."),
+    STATION_REGISTRATION("[INFO] 지하철 역이 등록되었습니다."),
+    LINE_REGISTRATION("[INFO] 지하철 노선이 등록되었습니다."),
+    STATION_DELETION("[INFO] 지하철 역이 삭제되었습니다."),
+    LINE_DELETION("[INFO] 지하철 노선이 삭제되었습니다."),
     SECTION_REGISTRATION("[INFO] 구간이 등록되었습니다."),
     SECTION_DELETION("[INFO] 구간이 삭제되었습니다."),
 
     INFO("[INFO] "),
-
+    INFO_SEPERATOR("[INFO] ---"),
     STATION_LIST("## 역 목록"),
+    LINE_LIST("## 노선 목록"),
 
     ERROR_FEATURE("[ERROR] 선택할 수 없는 기능입니다."),
     ERROR_STATION_NAME_LENGTH("[ERROR] 2글자 이상의 역 이름을 입력하세요."),
+    ERROR_LINE_NAME_LENGTH("[ERROR] 2글자 이상의 노선 이름을 입력하세요."),
     ERROR_STATION_NAME_REPETITION("[ERROR] 중복되는 역 이름입니다."),
-    ERROR_STATION_DELETION("[ERROR] 삭제할 역 이름이 존재하지 않습니다.");
+    ERROR_STATION_LINE_REPETITION("[ERROR] 중복되는 노선 이름입니다."),
+    ERROR_STATION_DELETION("[ERROR] 삭제할 역 이름이 존재하지 않습니다."),
+    ERROR_LINE_DELETION("[ERROR] 삭제할 노선 이름이 존재하지 않습니다."),
+
+    ERROR_STATION_EXIST("[ERROR] 역 이름이 이미 있습니다.");
 
 
     private String Message;
