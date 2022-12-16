@@ -6,6 +6,13 @@ import java.util.List;
 import java.util.Objects;
 
 public class StationRepository {
+
+    public void initialize() {
+        for (String stationName : StationInitializer.STATION_LIST.getStations()) {
+            addStation(new Station(stationName));
+        }
+    }
+
     private static final List<Station> stations = new ArrayList<>();
 
     public static List<Station> stations() {
