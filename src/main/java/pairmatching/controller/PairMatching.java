@@ -71,7 +71,7 @@ public class PairMatching {
         int rematchCounter = 0;
         while (rematchCounter < 3) {
             CrewRepository.shuffle();
-            PairRepository.match(level, mission);
+            PairRepository.match(level, mission, course);
             try {
                 PairRepository.validateMatching();
                 return;
@@ -99,7 +99,7 @@ public class PairMatching {
         if (courseName.equals(course.getName())) {
             List<String> crewMembers = InputView.readFile(course.getPath());
             for (String name : crewMembers) {
-                CrewRepository.add(course, name);
+                CrewRepository.add(name);
             }
             return true;
         }

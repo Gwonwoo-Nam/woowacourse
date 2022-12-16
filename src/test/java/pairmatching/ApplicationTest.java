@@ -23,7 +23,7 @@ class ApplicationTest extends NsTest {
             Arrays.asList("태웅", "백호", "치수", "태섭")
         );
     }
-/*
+
     @Test
     void 없는_미션에_대한_예외_처리() {
         assertSimpleTest(
@@ -31,8 +31,8 @@ class ApplicationTest extends NsTest {
                 runException("1", "백엔드, 레벨1, 오징어게임");
                 assertThat(output()).contains(ERROR_MESSAGE);
             }
-        );;
-    }*/
+        );
+    }
 
     @Override
     public void runMain() {

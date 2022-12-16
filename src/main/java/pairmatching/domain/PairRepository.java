@@ -21,15 +21,14 @@ public class PairRepository {
     }
 
 
-    public static void match(String level, Mission mission) {
-        List<Crew> crewList = CrewRepository.getCrewList();
-        int index = 0;
+    public static void match(String level, Mission mission, Course course) {
+        List<String> crewList = CrewRepository.getCrewList();
 
         if (crewList.size() % 2 == 0) {
-            matchIfEven(crewList, index, level, mission);
+            matchIfEven(level, mission, course);
         }
         if (crewList.size() % 2 == 1) {
-            matchIfOdd(crewList, index, level, mission);
+            matchIfOdd(level, mission, course);
         }
 
 
@@ -40,32 +39,36 @@ public class PairRepository {
             Pair pair = iterator.next();
             if (pair.getLevel().equals(level) &&
                 pair.getMission().getName().equals(mission.getName()) &&
-                pair.getCrewList().get(0).getCourse().getName().equals(course)) {
+                pair.getCourse().getName().equals(course)) {
                 iterator.remove();
             }
         }
     }
 
-    private static void matchIfEven(List<Crew> crewList, int index, String level, Mission mission) {
-        while (index < crewList.size() - 2) { //예외처리, 사이즈가 2보다 작을 때.
+    private static void matchIfEven(String level, Mission mission, Course course) {
+        int index = 0;
+        List<String> crewList = CrewRepository.getCrewList();
+        while (index <= crewList.size() - 2) { //예외처리, 사이즈가 2보다 작을 때.
             pairList.add(
                 new Pair(Arrays.asList(crewList.get(index), crewList.get(index + 1)), level,
-                    mission));
+                    mission, course));
             index = index + 2;
         }
 
     }
 
-    private static void matchIfOdd(List<Crew> crewList, int index, String level, Mission mission) {
+    private static void matchIfOdd(String level, Mission mission, Course course) {
+        int index = 0 ;
+        List<String> crewList = CrewRepository.getCrewList();
         while (index < crewList.size() - 3) { //예외처리, 사이즈가 3보다 작을 때.
             pairList.add(
                 new Pair(Arrays.asList(crewList.get(index), crewList.get(index + 1)), level,
-                    mission));
+                    mission, course));
             index = index + 2;
         }
         pairList.add(new Pair(Arrays.asList(
             crewList.get(index), crewList.get(index + 1), crewList.get(index + 2)), level,
-            mission));
+            mission,course));
     }
 
     public static void clear() {

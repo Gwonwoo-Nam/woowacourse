@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CrewRepository {
-    private static List<Crew> crewList = new ArrayList<>();
-    public static void add(Course course, String name) {
-        crewList.add(new Crew(course, name));
+    private static List<String> crewList = new ArrayList<>();
+    public static void add(String name) {
+        crewList.add(name);
     }
 
     public static void shuffle() {
@@ -19,7 +19,7 @@ public class CrewRepository {
         crewList.clear();
     }
 
-    public static List<Crew> getCrewList() {
+    public static List<String> getCrewList() {
         return crewList;
     }
 

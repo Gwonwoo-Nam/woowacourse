@@ -5,22 +5,24 @@ import java.util.List;
 
 public class Pair {
 
-    private List<Crew> crewList;
+    private List<String> crewList;
     private String level;
     private Mission mission;
+    private Course course;
 
-    public Pair(List<Crew> crewList, String level, Mission mission) {
+    public Pair(List<String> crewList, String level, Mission mission, Course course) {
         this.crewList = crewList;
         this.level = level;
         this.mission = mission;
+        this.course = course;
     }
 
     public boolean equalsPair(Pair destPair) {
         int count = 0;
-        List<Crew> destCrewList = destPair.getCrewList();
-        for (Crew srcCrew : crewList) {
-            for (Crew destCrew : destCrewList) {
-                if (srcCrew.getName().equals(destCrew.getName())) {
+        List<String> destCrewList = destPair.getCrewList();
+        for (String srcCrew : crewList) {
+            for (String destCrew : destCrewList) {
+                if (srcCrew.equals(destCrew)) {
                     count++;
                 }
             }
@@ -33,14 +35,14 @@ public class Pair {
 
     public List<String> getCrewNameList() {
         List<String> crewString = new ArrayList<>();
-        for (Crew crew : crewList) {
-            crewString.add(crew.getName());
+        for (String crew : crewList) {
+            crewString.add(crew);
         }
 
         return crewString;
     }
 
-    public List<Crew> getCrewList() {
+    public List<String> getCrewList() {
 
         return crewList;
     }
@@ -61,10 +63,11 @@ public class Pair {
         return mission.getName().equals(input.getName());
     }
 
-    public boolean getCourseMatching(Course course) {
-        String courseName = crewList.get(0).getCourse().getName();
-        String inputCourseName = course.getName();
-        return courseName.equals(inputCourseName);
+    public boolean getCourseMatching(Course inputCourse) {
+        return course.getName().equals(inputCourse.getName());
     }
 
+    public Course getCourse() {
+        return course;
+    }
 }
