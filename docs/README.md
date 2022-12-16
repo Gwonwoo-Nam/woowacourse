@@ -1,5 +1,7 @@
 ### 기능 요구 사항
 
+#### 테스트 케이스 통과(완료)
+
 #### 파일 입출력
 페어 매칭에 필요한 크루들의 이름을 파일 입출력을 통해 불러온다.
 src/main/resources/backend-crew.md과 src/main/resources/frontend-crew.md 파일을 이용한다.
