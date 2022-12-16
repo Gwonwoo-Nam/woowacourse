@@ -35,7 +35,7 @@ public class PairRepository {
 
     }
 
-    public static void removeIf(String course, String level, Mission mission) {
+    public static void removeIf(Course course, String level, Mission mission) {
         for (Iterator<Pair> iterator = pairList.iterator(); iterator.hasNext();) {
             Pair pair = iterator.next();
             if (pair.getLevel().equals(level) &&

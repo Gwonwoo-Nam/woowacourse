@@ -31,7 +31,7 @@ class ApplicationTest extends NsTest {
                 runException("1", "백엔드, 레벨1, 오징어게임");
                 assertThat(output()).contains(ERROR_MESSAGE);
             }
-        );
+        );;
     }*/
 
     @Override

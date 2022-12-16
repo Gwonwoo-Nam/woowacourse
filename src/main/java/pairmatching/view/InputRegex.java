@@ -13,7 +13,4 @@ public enum InputRegex {
         return message;
     }
 
-    public void println() {
-        System.out.println(message);
-    }
 }

@@ -11,6 +11,9 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
 
+    public static final String USER_YES = "네";
+    public static final String USER_NO = "아니오";
+
     public static List<String> readFile(String pathname) throws IOException {
         File file = new File(pathname);
         List<String> contents = new ArrayList<>();

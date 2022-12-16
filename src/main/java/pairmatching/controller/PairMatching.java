@@ -12,46 +12,62 @@ import pairmatching.view.InfoMessages;
 import pairmatching.view.InputView;
 
 public class PairMatching {
-    private static final String BACKEND_CREW_PATH_NAME = "src/main/resources/backend-crew.md";
-    private static final String FRONTEND_CREW_PATH_NAME = "src/main/resources/frontend-crew.md";
 
     public static void chooseOptions() throws IOException {
         InfoMessages.CHOOSE_OPTIONS.println();
         List<String> options = InputView.readOptions();
 
-        String course = options.get(0);
+        Course course = Course.matchCourse(options.get(0));
         String level = options.get(1);
         Mission mission = new Mission(options.get(2));
-        try {
-            Validator.isValid(level,mission);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            chooseOptions();
-            return ;
+        if (catchIllegalOption(level, mission)) {
+            return;
         }
 
         if (hasHistory(course, level, mission) == true) {
             rematch(course, level, mission);
-            return ;
+            PairLookup.print(course, level, mission);
+            return;
         }
+        readCrew(course);
         match(course, level, mission);
-        PairLookup.print(course,level,mission);
+        PairLookup.print(course, level, mission);
     }
-    private static void rematch(String course, String level, Mission mission) throws IOException {
+
+    private static boolean catchIllegalOption(String level, Mission mission) throws IOException {
+        try {
+            Validator.isValid(level, mission);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            chooseOptions();
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean hasHistory(Course course, String level, Mission mission) {
+        for (Pair pair : PairRepository.getPairList()) {
+            if (pair.getLevelMatching(level) &&
+                pair.getMissionMatching(mission) &&
+                pair.getCourseMatching(course)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static void rematch(Course course, String level, Mission mission) throws IOException {
         InfoMessages.REMATCH.println();
         String input = InputView.readLine();
-        if (input.equals("네")) {
+        if (input.equals(InputView.USER_YES)) {
             PairRepository.removeIf(course, level, mission);
             match(course, level, mission);
         }
-        if (input.equals("아니오")) {
+        if (input.equals(InputView.USER_NO)) {
         }
     }
 
-    private static void match(String course, String level, Mission mission) throws IOException {
-        CrewRepository.clear();
-        readCourseMember(course);
-
+    private static void match(Course course, String level, Mission mission) throws IOException {
         int rematchCounter = 0;
         while (rematchCounter < 3) {
             CrewRepository.shuffle();
@@ -60,40 +76,32 @@ public class PairMatching {
                 PairRepository.validateMatching();
                 return;
             } catch (IllegalArgumentException e) {
-                PairRepository.removeIf(course,level,mission);
-                System.out.println(rematchCounter + "카운터 증가");
+                PairRepository.removeIf(course, level, mission);
                 rematchCounter++;
             }
         }
         InfoMessages.ERROR_MATCHING_ERROR.println();
     }
 
-    private static void readCourseMember(String course) throws IOException {
-        if (course.equals(Course.BACKEND.getName())) {
-            List<String> crewMembers = InputView.readFile(BACKEND_CREW_PATH_NAME);
-            for (String name : crewMembers) {
-                CrewRepository.add(Course.BACKEND, name);
+    private static void readCrew(Course courseInput) throws IOException {
+        CrewRepository.clear();
+        for (Course course : Course.values()) {
+            if (readByCourse(courseInput, course)) {
+                return;
             }
-            return ;
-        }
-        if (course.equals(Course.FRONTEND.getName())) {
-            List<String> crewMembers = InputView.readFile(FRONTEND_CREW_PATH_NAME);
-            for (String name : crewMembers) {
-                CrewRepository.add(Course.FRONTEND, name);
-            }
-            return ;
         }
         InfoMessages.ERROR_NON_EXIST_OPTION.println();
         chooseOptions();
     }
 
-    public static boolean hasHistory(String course, String level, Mission mission) {
-        for (Pair pair : PairRepository.getPairList()) {
-            if (pair.getLevel().equals(level) &&
-                pair.getMission().getName().equals(mission.getName()) &&
-                pair.getCrewList().get(0).getCourse().getName().equals(course)) {
-                return true;
+    private static boolean readByCourse(Course courseInput, Course course) throws IOException {
+        String courseName = courseInput.getName();
+        if (courseName.equals(course.getName())) {
+            List<String> crewMembers = InputView.readFile(course.getPath());
+            for (String name : crewMembers) {
+                CrewRepository.add(course, name);
             }
+            return true;
         }
         return false;
     }

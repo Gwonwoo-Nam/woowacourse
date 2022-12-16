@@ -25,7 +25,12 @@ public enum InfoMessages {
 
     ERROR_FEATURE("[ERROR] 유효하지 않은 기능 입력 값입니다."),
     ERROR_NON_EXIST_OPTION("[ERROR] 일치하는 값이 존재하지 않습니다."),
-    ERROR_MATCHING_ERROR("[ERROR] 매칭에 실패하였습니다.");
+    ERROR_MATCHING_ERROR("[ERROR] 매칭에 실패하였습니다."),
+
+    ERROR_NO_HISTORY("[ERROR] 매칭 이력이 없습니다."),
+    ERROR_IO("[ERROR] 파일 입출력 오류"),
+
+    DELIMITER(" : ");
 
     private final String message;
     InfoMessages(String message) {
