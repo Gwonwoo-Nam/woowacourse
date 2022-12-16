@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class LineRepository {
-    public void initialize() {
+    public static void initialize() {
         for (LineInitializer initializer : LineInitializer.values()) {
-            Line line = new Line(initializer.getLineName())
+            Line line = new Line(initializer.getLineName());
             for (String stationName : initializer.getStations()) {
                 line.addStation(stationName);
             }

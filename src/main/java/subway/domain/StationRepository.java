@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class StationRepository {
 
-    public void initialize() {
+    public static void initialize() {
         for (String stationName : StationInitializer.STATION_LIST.getStations()) {
             addStation(new Station(stationName));
         }
