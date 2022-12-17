@@ -14,6 +14,15 @@ public class MenuRepository {
 
     }
 
+    public static boolean validateMenu(String menuName) {
+        for (Menu menu : menuList) {
+            if (menu.getMenus().contains(menuName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static List<Menu> getMenuList() {
         return menuList;
     }

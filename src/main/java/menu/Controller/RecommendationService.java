@@ -1,5 +1,6 @@
 package menu.Controller;
 
+import menu.Domain.Coach;
 import menu.Domain.CoachRepository;
 import menu.Domain.Menu;
 import menu.Domain.MenuRepository;
@@ -32,21 +33,26 @@ public class RecommendationService {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             readCoachList();
-            return ;
+            return;
         }
         CoachRepository.addCoaches(coachNames);
     }
 
     private static void readUnfavorMenuList() {
-        List<String> coachNames = new ArrayList<>();
-        InfoMessages.START.println();
-        try {
-            coachNames = InputView.readCoachNames();
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            readCoachList();
-            return ;
+        List<String> unfavorMenuList = new ArrayList<>();
+        for (Coach coach : CoachRepository.getCoachList()) {
+            System.out.print(coach.getName());
+            InfoMessages.INPUT_EXCLUDE_MENUS.println();
+            try {
+                unfavorMenuList = InputView.readUnfavorMenuList();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+                readUnfavorMenuList();
+                return;
+            }
+            if (!unfavorMenuList.isEmpty()) {
+                CoachRepository.addUnfavorMenuList(coach, unfavorMenuList);
+            }
         }
-        CoachRepository.addCoaches(coachNames);
     }
 }
