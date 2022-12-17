@@ -21,5 +21,20 @@ public class SectionRepository {
         return Collections.unmodifiableList(sections);
     }
 
+    public static int getDistanceByName(String pointFrom, String pointTo) {
+        for (Section section : sections) {
+            if (section.getPoints().contains(pointFrom) && section.getPoints().contains(pointTo))
+                return section.getDistance();
+        }
+        return 0;
+    }
+
+    public static int getTimeByName(String pointFrom, String pointTo) {
+        for (Section section : sections) {
+            if (section.getPoints().contains(pointFrom) && section.getPoints().contains(pointTo))
+                return section.getTime();
+        }
+        return 0;
+    }
 
 }

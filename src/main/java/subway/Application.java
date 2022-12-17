@@ -2,6 +2,7 @@ package subway;
 
 import java.util.Scanner;
 
+import subway.Controller.PathFinder;
 import subway.domain.Line;
 import subway.domain.LineRepository;
 import subway.domain.Section;
@@ -15,16 +16,8 @@ public class Application {
         StationRepository.initialize();
         LineRepository.initialize();
         SectionRepository.initialize();
-        /*for(Station station : StationRepository.stations()) {
-            System.out.println(station.getName());
-        }
-        for(Line line : LineRepository.lines()) {
-            System.out.println(line.getName());
-        }
-        for(Section section : SectionRepository.sections()) {
-            System.out.println(section.getTime());
-            System.out.println(section.getDistance());
-            System.out.println(section.getPoints());
-        }*/
+
+        PathFinder pathFinder = new PathFinder(scanner);
+        pathFinder.mainRun();
     }
 }
