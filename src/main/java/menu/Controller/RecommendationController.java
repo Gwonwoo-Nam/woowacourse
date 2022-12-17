@@ -6,29 +6,47 @@ import menu.Domain.Category;
 import menu.Domain.Coach;
 import menu.Domain.CoachRepository;
 import menu.Domain.MenuRepository;
-import menu.View.OutputView;
 
 public class RecommendationController {
     public static void run() {
-        recommendCategory();
+        runCategoryRecommendation();
+        runMenuRecommendation();
+    }
+
+    private static void runCategoryRecommendation() {
+        for (int i = 0; i < 5; i++) {
+            String category = Category.get(Randoms.pickNumberInRange(1, 5));
+            Categories.addCategory(category);
+        }
+        if (!Categories.validateCategory()) {
+            Categories.clear();
+            runCategoryRecommendation();
+        }
+    }
+
+    private static void runMenuRecommendation() {
         for (String category : Categories.getCategories()) { //요일
             recommendMenu(category);
         }
-    }
-
-    public static void recommendCategory() {
-        for (int i = 0; i<5 ; i++) {
-            String category = Category.get(Randoms.pickNumberInRange(1,5));
-            Categories.addCategory(category);
-            //카테고리 예외처리
+        if (!validateMenus()) {
+            runMenuRecommendation();
         }
-        OutputView.printCategories();
     }
 
-    public static void recommendMenu(String category) {
+    private static void recommendMenu(String category) {
         for (Coach coach : CoachRepository.getCoachList()) {//코치 반복
             String randomMenu = Randoms.shuffle(MenuRepository.getMenuListByCategory(category)).get(0);
             coach.addMenu(randomMenu);
         }
+    }
+
+    private static boolean validateMenus() {
+        for (Coach coach : CoachRepository.getCoachList()) {//코치 반복
+            if (coach.hasUnfavoredMenu() || coach.hasSameMenu()) {
+                //System.out.println("싫어하는것 포함");
+                return false;
+            }
+        }
+        return true;
     }
 }

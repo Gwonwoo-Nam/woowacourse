@@ -2,6 +2,7 @@ package menu.Domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Coach {
     private String name;
@@ -17,10 +18,26 @@ public class Coach {
         return name;
     }
 
-    public void addUnfavorMenus(List<String> menuList) {
+    public void addUnfavoredMenus(List<String> menuList) {
         for (String menu : menuList) {
             unfavorMenus.add(menu);
         }
+    }
+
+    public boolean hasSameMenu() {
+        if (Set.copyOf(menus).size() != menus.size()) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean hasUnfavoredMenu() {
+        for (String unfavoredMenu : unfavorMenus) {
+            if (menus.contains(unfavoredMenu)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void addMenu(String menu) {
@@ -30,4 +47,5 @@ public class Coach {
     public List<String> getMenus() {
         return menus;
     }
+
 }

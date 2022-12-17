@@ -15,7 +15,7 @@ public class CoachRepository {
     public static void addUnfavorMenuList(Coach setCoach, List<String> unfavorMenuList) {
         for (Coach coach : coachList) {
             if (coach.getName().equals(setCoach.getName())) {
-                coach.addUnfavorMenus(unfavorMenuList);
+                coach.addUnfavoredMenus(unfavorMenuList);
             }
         }
 

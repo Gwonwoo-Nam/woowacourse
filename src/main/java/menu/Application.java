@@ -1,9 +1,9 @@
 package menu;
 
-import menu.Controller.RecommendationService;
+import menu.Controller.ServiceController;
 
 public class Application {
     public static void main(String[] args) {
-        RecommendationService.run();
+        ServiceController.run();
     }
 }

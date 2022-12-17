@@ -10,6 +10,29 @@ public class Categories {
         categories.add(category);
     }
 
+    public static void clear() {
+        categories.clear();
+    }
+
+    public static boolean validateCategory() {
+        for (String category : categories) {
+            if (compareRepetition(category) > 2) {
+                    return false;
+            }
+        }
+        return true;
+    }
+
+    private static int compareRepetition(String category) {
+        int repetitionCounter = 0;
+        for (String categoryTo : categories) {
+            if (category.equals(categoryTo)) {
+                repetitionCounter++;
+            }
+        }
+        return repetitionCounter;
+    }
+
     public static List<String> getCategories() {
         return categories;
     }

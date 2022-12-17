@@ -2,9 +2,9 @@ package menu.View;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import camp.nextstep.edu.missionutils.Console;
-import menu.Domain.Coach;
 import menu.Domain.MenuRepository;
 
 public class InputView {
@@ -20,6 +20,9 @@ public class InputView {
         }
         if (inputList.size() < 2 || inputList.size() > 5) {
             throw new IllegalArgumentException(InfoMessages.ERROR_COACH_NUMBER.getMessage());
+        }
+        if (Set.copyOf(inputList).size() != inputList.size()) {
+            throw new IllegalArgumentException(InfoMessages.ERROR_SAME_NAME.getMessage());
         }
         return inputList;
     }
@@ -40,6 +43,9 @@ public class InputView {
         }
         if (inputList.size() > 2) {
             throw new IllegalArgumentException(InfoMessages.ERROR_MENU_NUMBER.getMessage());
+        }
+        if (Set.copyOf(inputList).size() != inputList.size()) {
+            throw new IllegalArgumentException(InfoMessages.ERROR_SAME_NAME.getMessage());
         }
         return inputList;
     }
