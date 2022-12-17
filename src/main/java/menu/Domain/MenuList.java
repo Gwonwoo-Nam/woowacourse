@@ -18,6 +18,8 @@ public enum MenuList {
     private String category;
     private String menus;
 
+    private final String COMMA_REGEX = ", ";
+
     MenuList(String category, String menus) {
         this.category = category;
         this.menus = menus;
@@ -25,7 +27,7 @@ public enum MenuList {
 
     public List<String> getMenuList() {
         List<String> menuList = new ArrayList<>();
-        for (String menu : menus.split(", ")) {
+        for (String menu : menus.split(COMMA_REGEX)) {
             menuList.add(menu);
         }
         return menuList;

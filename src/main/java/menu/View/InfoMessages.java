@@ -6,7 +6,7 @@ public enum InfoMessages {
     INPUT_COACH_NAMES("코치의 이름을 입력해 주세요. (, 로 구분)"),
     INPUT_EXCLUDE_MENUS("(이)가 못 먹는 메뉴를 입력해 주세요."),
     RESULT("메뉴 추천 결과입니다."),
-    FINISH("추천을 완료했습니다."),
+    FINISH("\n추천을 완료했습니다."),
     CATEGORIES_START("[ 카테고리 | "),
     CATEGORIES_END(" ]"),
     MENU_START("[ "),
