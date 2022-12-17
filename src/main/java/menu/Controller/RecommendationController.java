@@ -8,13 +8,16 @@ import menu.Domain.CoachRepository;
 import menu.Domain.MenuRepository;
 
 public class RecommendationController {
+
+    private static final int MONDAY = 0;
+    private static final int FRIDAY = 4;
     public static void run() {
         runCategoryRecommendation();
         runMenuRecommendation();
     }
 
     private static void runCategoryRecommendation() {
-        for (int i = 0; i < 5; i++) {
+        for (int day = MONDAY; day <= FRIDAY; day++) {
             String category = Category.get(Randoms.pickNumberInRange(1, 5));
             Categories.addCategory(category);
         }
@@ -29,6 +32,7 @@ public class RecommendationController {
             recommendMenu(category);
         }
         if (!validateMenus()) {
+            CoachRepository.clearMenuList();
             runMenuRecommendation();
         }
     }

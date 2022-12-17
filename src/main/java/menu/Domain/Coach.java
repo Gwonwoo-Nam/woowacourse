@@ -44,6 +44,10 @@ public class Coach {
         menus.add(menu);
     }
 
+    public void clearMenu() {
+        menus.clear();
+    }
+
     public List<String> getMenus() {
         return menus;
     }

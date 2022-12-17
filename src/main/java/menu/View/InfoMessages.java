@@ -18,7 +18,6 @@ public enum InfoMessages {
     ERROR_MENU_NUMBER("[ERROR] 각 코치는 최소 0개, 최대 2개의 못 먹는 메뉴가 있습니다."),
     ERROR_SAME_NAME("[ERROR] 중복되는 이름이 있습니다.");
 
-
     private String message;
 
     InfoMessages(String message) {

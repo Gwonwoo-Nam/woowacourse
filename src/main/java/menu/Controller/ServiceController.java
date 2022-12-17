@@ -7,14 +7,12 @@ import menu.View.InfoMessages;
 import menu.View.InputView;
 import menu.View.OutputView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceController {
 
     public static void run() {
-        InfoMessages.START.println();
-        MenuRepository.addMenuList();
+        initiate();
 
         readCoachList();
         readUnfavoredMenuList();
@@ -23,6 +21,11 @@ public class ServiceController {
 
         OutputView.printCategories();
         OutputView.printRecommendedMenus();
+    }
+
+    private static void initiate() {
+        InfoMessages.START.println();
+        MenuRepository.addInitialMenuList();
     }
 
     private static void readCoachList() {

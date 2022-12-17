@@ -6,7 +6,7 @@ import java.util.List;
 public class MenuRepository {
     private static List<Menu> menuList = new ArrayList<>();
 
-    public static void addMenuList() {
+    public static void addInitialMenuList() {
         for (MenuList menus : MenuList.values()) {
             menuList.add(new Menu(menus.getCategory(), menus.getMenuList()));
         }

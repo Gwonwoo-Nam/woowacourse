@@ -21,6 +21,12 @@ public class CoachRepository {
 
     }
 
+    public static void clearMenuList() {
+        for (Coach coach : coachList) {
+            coach.clearMenu();
+        }
+    }
+
     public static List<Coach> getCoachList() {
         return coachList;
     }
