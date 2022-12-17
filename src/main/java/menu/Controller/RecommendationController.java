@@ -25,7 +25,7 @@ public class RecommendationController {
     }
 
     private static void runMenuRecommendation() {
-        for (String category : Categories.getCategories()) { //요일
+        for (String category : Categories.getCategories()) {
             recommendMenu(category);
         }
         if (!validateMenus()) {
@@ -34,16 +34,15 @@ public class RecommendationController {
     }
 
     private static void recommendMenu(String category) {
-        for (Coach coach : CoachRepository.getCoachList()) {//코치 반복
+        for (Coach coach : CoachRepository.getCoachList()) {
             String randomMenu = Randoms.shuffle(MenuRepository.getMenuListByCategory(category)).get(0);
             coach.addMenu(randomMenu);
         }
     }
 
     private static boolean validateMenus() {
-        for (Coach coach : CoachRepository.getCoachList()) {//코치 반복
+        for (Coach coach : CoachRepository.getCoachList()) {
             if (coach.hasUnfavoredMenu() || coach.hasSameMenu()) {
-                //System.out.println("싫어하는것 포함");
                 return false;
             }
         }

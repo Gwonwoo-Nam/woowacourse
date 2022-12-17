@@ -44,7 +44,7 @@ public class ServiceController {
     }
 
     private static void readFromCoach(Coach coach) {
-        List<String> unfavorMenuList = new ArrayList<>();
+        List<String> unfavorMenuList;
         System.out.print(coach.getName());
         InfoMessages.INPUT_EXCLUDE_MENUS.println();
         try {

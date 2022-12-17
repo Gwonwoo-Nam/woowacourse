@@ -3,8 +3,6 @@ package menu.Domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import camp.nextstep.edu.missionutils.Randoms;
-
 public class MenuRepository {
     private static List<Menu> menuList = new ArrayList<>();
 
@@ -12,7 +10,6 @@ public class MenuRepository {
         for (MenuList menus : MenuList.values()) {
             menuList.add(new Menu(menus.getCategory(), menus.getMenuList()));
         }
-
     }
 
     public static boolean validateMenu(String menuName) {
@@ -22,10 +19,6 @@ public class MenuRepository {
             }
         }
         return false;
-    }
-
-    public static List<Menu> getMenuList() {
-        return menuList;
     }
 
     public static List<String> getMenuListByCategory(String category) {

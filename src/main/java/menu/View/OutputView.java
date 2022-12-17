@@ -7,7 +7,6 @@ import menu.Domain.CoachRepository;
 public class OutputView {
 
     public static void printCategories() {
-
         InfoMessages.RESULT.println();
         InfoMessages.WEEKEND.println();
         InfoMessages.CATEGORIES_START.print();
