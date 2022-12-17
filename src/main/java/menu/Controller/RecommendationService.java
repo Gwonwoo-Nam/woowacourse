@@ -2,7 +2,6 @@ package menu.Controller;
 
 import menu.Domain.Coach;
 import menu.Domain.CoachRepository;
-import menu.Domain.Menu;
 import menu.Domain.MenuRepository;
 import menu.View.InfoMessages;
 import menu.View.InputView;
@@ -17,6 +16,8 @@ public class RecommendationService {
 
         readCoachList();
         readUnfavorMenuList();
+
+        RecommendationController.run();
 
         /*for(Menu menu : MenuRepository.getMenuList()) {
             System.out.println(menu.getCategory());

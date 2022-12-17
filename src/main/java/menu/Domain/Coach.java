@@ -1,12 +1,13 @@
 package menu.Domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Coach {
     private String name;
-    private Menu menu;
+    private List<String> menus = new ArrayList<>();
 
-    private List<String> unfavorMenus;
+    private List<String> unfavorMenus = new ArrayList<>();
 
     public Coach(String name) {
         this.name = name;
@@ -20,5 +21,9 @@ public class Coach {
         for (String menu : menuList) {
             unfavorMenus.add(menu);
         }
+    }
+
+    public void addMenu(String menu) {
+        menus.add(menu);
     }
 }
