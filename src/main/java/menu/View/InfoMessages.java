@@ -9,6 +9,8 @@ public enum InfoMessages {
     FINISH("추천을 완료했습니다."),
     CATEGORIES_START("[ 카테고리 | "),
     CATEGORIES_END(" ]"),
+    MENU_START("[ "),
+    SEPERATOR(" | "),
     WEEKEND("[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]"),
     ERROR_COACH_NUMBER("[ERROR] 코치는 최소 2명 이상 입력해야 합니다."),
     ERROR_COACH_NAME_LENGTH("[ERROR] 코치의 이름은 최소 2글자, 최대 4글자입니다."),

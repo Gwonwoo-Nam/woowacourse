@@ -5,6 +5,7 @@ import menu.Domain.CoachRepository;
 import menu.Domain.MenuRepository;
 import menu.View.InfoMessages;
 import menu.View.InputView;
+import menu.View.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,8 @@ public class RecommendationService {
         readUnfavorMenuList();
 
         RecommendationController.run();
+
+        OutputView.printRecommendedMenus();
 
         /*for(Menu menu : MenuRepository.getMenuList()) {
             System.out.println(menu.getCategory());
